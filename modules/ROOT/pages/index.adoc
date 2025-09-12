@@ -6,7 +6,7 @@ UC Builder creates connectors by using LinkWeave, which is a connectivity langua
 
 == Key Advantages
 
-Some keyadvantages of using UC Builder are:
+Some key advantages of using UC Builder are:
 
 * *Customization*
 +
