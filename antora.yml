@@ -1,5 +1,5 @@
 name: universal-connectivity
-title: Universal Connectivity
+title: Universal Connectivity Builder
 version: 'master'
 nav:
 - modules/ROOT/nav.adoc
