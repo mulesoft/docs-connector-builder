@@ -43,11 +43,11 @@ Use UC Builder to create connectors that support:
 * Triggers
 * Value Providers
 
-After you build your connector, you can test, package, release, and run your connector. 
+After you create your connector, you can test, package, release, and run your connector. 
 
 == Use Cases
 
-Use UC Builder to build a wide range of connectors. Some use cases include:
+Use UC Builder to create a wide range of connectors. Some use cases include:
 
 * *CRM*
 +
