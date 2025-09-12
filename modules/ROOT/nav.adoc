@@ -1,2 +1,2 @@
 .xref:index.adoc[Universal Connectivity Builder]
-* xref:index.adoc[Universal Connectivity Builder Overview]
+* xref:index.adoc[Overview]
