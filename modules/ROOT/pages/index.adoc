@@ -80,3 +80,7 @@ Publish content, track analytics, and enable social engagement.
 * *Payment Gateways*
 +
 Process payments, manage transactions, and handle financial data.
+
+== Next Steps
+
+For information about prerequisites, installations, and upgrades, refer to xref:getting-started.adoc[Getting Started].
