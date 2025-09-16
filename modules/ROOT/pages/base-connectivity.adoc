@@ -1,6 +1,6 @@
 = Base Connectivity
 
-Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
+Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
 
 The base connectivity includes:
 
@@ -11,6 +11,8 @@ This package contains the code that directly reflects the structure of the API s
 * `{projectname}-{platformname}-connector-model` 
 +
 This package includes platform-specific code, such as for Anypoint Platform, that incorporates customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
+
+You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
 
 == Generate Base Connectivity from an API Specification
 
@@ -46,7 +48,9 @@ This package includes platform-specific code, such as for Anypoint Platform, tha
 . Click *Submit*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
 . Open the Cursor chat window (if not already open) and paste the copied prompt.
 . (Optional, but recommended) Copy your provided URLs from the `apiDocs` section of the prompt and paste them just before the final line. Be sure to add an `@` symbol in front of each URL so that Cursor recognizes them as resources. When done correctly, the URLs are highlighted in blue.
-. Ensure you are in Agent mode. You can optionally choose which LLM that Cursor sends your prompt to. Auto-select is typically fine.
+. Ensure you are in Agent mode. You can optionally choose which LLM that Cursor sends your prompt to. 
++
+NOTE: UC Builder has been tested with `claude-sonnet-4`. Performance and accuracy with other models is not guaranteed.
 . Click *Send*.
 . Wait for the agent to complete its work. AI by nature is non-deterministic, so running the same prompt multiple times might yield different results each time. The expected outcome is:
 +
