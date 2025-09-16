@@ -1,0 +1,24 @@
+= Base Connectivity
+
+Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
+
+You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
+
+== Generate Base Connectivity from an API Specification
+
+. Open the UC Builder extension in VS Code or Cursor.
+. Select *New Project* in VS Code, or select *New Project from API Spec* in Cursor.
+. In *Project Details*:
+.. In *Name*, enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
+.. In *Description*, enter a description for your project.
+.. Optionally, click *Select Icon* to upload an icon for your project.
+. In *Connectivity Platforms*, select the *Anypoint Platform* checkbox.
+. Click *Next*.
+. Click *Select API Spec file* and then select the API specification (OAS 3.0 and later) to upload to create your connector.
+. Click *Open Spec*.
+. Select the API endpoints that you want your project to include.
+. Click *Next*.
+. Select the folder where your project is contained. A subfolder is automatically created within this folder.
+. Click *Select containing folder*. Your project is created, and VS Code opens the newly created project. 
+
+== Generate Base Connectivity with AI Assistance (Cursor only)
