@@ -1,17 +1,26 @@
 = Base Connectivity
 
-Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
+Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
 
-You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
+The base connectivity includes:
+
+* `{projectname}-connectivity-model` 
++
+This package contains the code that directly reflects the structure of the API specification or AI assistance from which a connector is generated. The generated connector is written in LinkWeave, which is interpreted at runtime to deliver the specified behavior.
+
+* `{projectname}-{platformname}-connector-model` 
++
+This package includes platform-specific code, such as for Anypoint Platform, that incorporates customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
 
 == Generate Base Connectivity from an API Specification
 
 . Open the UC Builder extension in VS Code or Cursor.
 . Select *New Project* in VS Code, or select *New Project from API Spec* in Cursor.
-. In *Project Details*:
-.. In *Name*, enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
-.. In *Description*, enter a description for your project.
-.. Optionally, click *Select Icon* to upload an icon for your project.
+. Enter the required information in *Project Details*:
++
+* *Name*: Enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
+* *Description*: Enter a description for your project.
+* Optionally, click *Select Icon* to upload an icon for your project.
 . In *Connectivity Platforms*, select the *Anypoint Platform* checkbox.
 . Click *Next*.
 . Click *Select API Spec file* and then select the API specification (OAS 3.0 and later) to upload to create your connector.
@@ -22,3 +31,26 @@ You can generate base connectivity either from an API specification (OAS 3.0 and
 . Click *Select containing folder*. Your project is created, and VS Code opens the newly created project. 
 
 == Generate Base Connectivity with AI Assistance (Cursor only)
+
+. Open the UC Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Ai Assisted Workflows* is enabled.
+. Select *New Project with AI*. 
+. Enter the required information in *AI Project Details*:
++
+* *Name of SaaS Platform*: Enter the name of the SaaS platform you want to create a connector for.
+* *Name of ISV*: Enter the name of the ISV you want to create a connector for.
+* *Website of ISV*: Enter the website of the ISV you want to create a connector for.
+* *Top Use Cases*: Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD behavior (Create, Read, Update, Delete), you must explicitly mention each one.
+* *Official API Documentation or Reference Sources*: Enter the URLs of the official API documentation or reference sources for the connector.
+* *Project Folder*: Select the folder where your project is contained. A subfolder is automatically created within this folder.
+. Click *Submit*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
+. Open the Cursor chat window (if not already open) and paste the copied prompt.
+. (Optional, but recommended) Copy your provided URLs from the `apiDocs` section of the prompt and paste them just before the final line. Be sure to add an `@` symbol in front of each URL so that Cursor recognizes them as resources. When done correctly, the URLs are highlighted in blue.
+. Ensure you are in Agent mode. You can optionally choose which LLM that Cursor sends your prompt to. Auto-select is typically fine.
+. Click *Send*.
+. Wait for the agent to complete its work. AI by nature is non-deterministic, so running the same prompt multiple times might yield different results each time. The expected outcome is:
++
+* `{projectroot}/discovery/discovery.json` is generated, capturing the LLM’s recommendations for implementing the requested use cases.
+* `{projectroot}/discovery/{saasname}.yaml` is created, containing the discovered endpoints, required schemas, and related details.
+* The extension detects the new API specification and automatically generates a UC project based on it. This process may take several seconds.
+* Cursor closes and reopens in the root directory of the newly created project.
