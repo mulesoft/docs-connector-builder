@@ -18,7 +18,7 @@ You can generate base connectivity either from an API specification (OAS 3.0 and
 
 . Open the UC Builder extension in VS Code or Cursor.
 . Select *New Project* in VS Code, or select *New Project from API Spec* in Cursor.
-. Enter the required information in *Project Details*:
+. Enter the required information in *Project Details*.
 +
 * *Name*: Enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
 * *Description*: Enter a description for your project.
@@ -37,7 +37,7 @@ You can generate base connectivity either from an API specification (OAS 3.0 and
 . Open the UC Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Ai Assisted Workflows* is enabled.
 . Select *New Project with AI*. 
-. Enter the required information in *AI Project Details*:
+. Enter the required information in *AI Project Details*.
 +
 * *Name of SaaS Platform*: Enter the name of the SaaS platform you want to create a connector for.
 * *Name of ISV*: Enter the name of the ISV you want to create a connector for.

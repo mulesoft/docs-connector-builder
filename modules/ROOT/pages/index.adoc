@@ -34,7 +34,7 @@ Maximize consistency and reliability by reducing manual input and enforcing reus
 
 == Supported Features
 
-Connectors built with UC Builder can include these components.
+Connectors built with UC Builder can support:
 
 * xref:base-connectivity.adoc[Base Connectivity]
 * xref:connections.adoc[Connections]
