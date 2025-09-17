@@ -1,9 +1,7 @@
 = Connections
 :connector-component-name: connections
 
-Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector cannot perform operations, triggers, or other components. UC Builder 
-supports creating connectors that integrate with SaaS applications that use 
-HTTP-based connectivity.
+Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector can't perform operations, triggers, or other components. UC Builder supports creating connectors that integrate with SaaS applications that use HTTP-based connectivity.
 
 Each connection uses an authentication type. An authentication type is a specific method or protocol used to verify and authorize access to the external system. UC Builder supports these authentication types for connections.
 
@@ -35,6 +33,11 @@ When you xref:base-connectivity.adoc[generate base connectivity], if the authent
 
 == Define Connections Using LinkWeave
 
+* <<connectionstructure,Connection Structure>>
+* <<authenticationtypes,Authentication Types>>
+
+=== Connection Structure
+
 In LinkWeave, connections are functions that transform requests into responses:
 
 [source]
@@ -49,14 +52,12 @@ For HTTP-based connections, this becomes:
 (HttpRequester) -> HttpResponse
 ----
 
-=== Connection Structure
+These types form the structure of connections.
 
-These types form the foundation of LinkWeave connections.
-
-* <<connection,`Connection`>>: Basic connection function
-* <<connectionprovider,`ConnectionProvider`>>: Connection creation and configuration 
-* <<httpconnection,`HttpConnection`>>: Specialized connection for HTTP requests
-* <<httpconnectionprovider,`HttpConnectionProvider`>>: HTTP-specific connection provider
+* <<connection>>: Connection function
+* <<connectionprovider>>: Connection creation and configuration 
+* <<httpconnection>>: Specialized connection for HTTP requests
+* <<httpconnectionprovider>>: HTTP-specific connection provider
 
 [[connection]]
 ==== Connection
@@ -86,7 +87,7 @@ Parameters:
 * `InputType`: Input parameters required to create the connection
 * `AuthenticationType`: Authentication schema
 
-The connection provider returns an object with these properties:
+`ConnectionProvider` returns an object with these properties:
 
 [source]
 ----
@@ -211,7 +212,7 @@ type HttpConnectionProviderSchema = {
 
 * `attributes`: `ApiKeyAuthAttributesSchema`
 +
-`attributes` is an object that defines the API key metadata.
+`attributes` returns `ApiKeyAuthAttributesSchema`.
 +
 [source]
 ----
