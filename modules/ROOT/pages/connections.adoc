@@ -5,4 +5,289 @@ Learn how to define connections for your connector. Connections enable your conn
 supports creating connectors that integrate with SaaS applications that use 
 HTTP-based connectivity.
 
+Each connection uses an authentication type. An authentication type is a specific method or protocol used to verify and authorize access to the external system. UC Builder supports these authentication types for connections.
+
+* *ApiKey*
++
+ApiKey authentication connects to applications without explicitly defining a user. You must add this key to all requests, and the cloud application identifies the origin of the request and completes the authorization.
+
+* *Basic*
++
+Basic authentication enables the user to provide a username and password when logging in to an external system.
+
+* *Bearer*
++
+Bearer authentication sends a header named Authorization with a value of Bearer and a token with every request.
+
+* *OAuth2BrowserFlow*
++
+OAuth2BrowserFlow authentication includes add-on authentication features that provide additional functionality and security to the OAuth 2.0 protocol.
+
+* *OAuth2ClientCredentials*
++
+OAuth2ClientCredentials authentication obtains an access token from a user-defined path.
+
 include::partial$ui-versus-linkweave.adoc[]
+
+== Define Connections Using the UI
+
+When you xref:base-connectivity.adoc[generate base connectivity], if the authentication type specified in the API specification or by AI assistance is supported by UC Builder, the authentication type and a connection for each endpoint are automatically defined for you.
+
+== Define Connections Using LinkWeave
+
+In LinkWeave, connections are functions that transform requests into responses:
+
+[source]
+----
+(ConnectionRequest) -> ConnectionResponse
+----
+
+For HTTP-based connections, this becomes:
+
+[source]
+----
+(HttpRequester) -> HttpResponse
+----
+
+=== Connection Structure
+
+These types form the foundation of LinkWeave connections.
+
+* <<connection,`Connection`>>: Basic connection function
+* <<connectionprovider,`ConnectionProvider`>>: Connection creation and configuration 
+* <<httpconnectionandprovider,`HttpConnection`>>: Specialized connection for HTTP requests
+* <<httpconnectionandprovider,`HttpConnectionProvider`>>: HTTP-specific connection provider
+
+[[connection]]
+==== Connection
+
+[source]
+----
+Connection<ConnectionRequest <: Object, ConnectionResponse <: Object> =
+  (ConnectionRequest) -> ConnectionResponse
+----
+
+Parameters:
+
+* `ConnectionRequest`: Object sent to the target system
+* `ConnectionResponse`: Object returned from the target system
+
+[[connectionprovider]]
+==== ConnectionProvider
+
+[source]
+----
+ConnectionProvider<ConnectionType <: Connection, InputType <: Object, AuthenticationType <: Object>
+----
+
+Parameters:
+
+* `ConnectionType`: Connection function itself
+* `InputType`: Input parameters required to create the connection
+* `AuthenticationType`: Authentication schema
+
+The connection provider returns an object with these properties:
+
+[source]
+----
+{
+  connect: (InputType) -> ConnectionType,
+  authenticationType: AuthenticationType,
+  validate?: (ConnectionType) -> ConnectionValidationResult
+}
+----
+
+Properties:
+
+* `connect`: Creates a connection from input parameters
+* `authenticationType`: Defines the authentication schema
+* `validate`: (Optional) Tests the connection and returns validation results
+
+[[httpconnectionandprovider]]
+==== HTTPConnection and HttpConnectionProvider
+
+For HTTP connections, LinkWeave provides specialized types:
+
+[source]
+----
+HttpConnection = Connection<HttpRequester, HttpResponse>
+HttpConnectionProvider<InputType <: Object, HttpAuthenticationType> =
+  ConnectionProvider<HttpConnection, InputType, HttpAuthenticationType>
+----
+
+=== Connection Extensions
+
+Use connection extensions to add custom headers, query parameters, or other modifications to requests. For example, if your SaaS application requires a specific header like `X-Custom-Header`, you can define it as an extension.
+
+HTTP connection providers support an optional `extensions` attribute for customizing connection behavior:
+
+[source]
+----
+extensions?: (InputType) -> Array<ConnectionProviderExtensions | ConnectionProviderOAuthExtensions>
+----
+
+The definitions for extension types are:
+
+[source]
+----
+type ConnectionProviderExtensions = {
+  in: "query" | "header" | "body" | "path",
+  name: String,
+  value: String
+}
+
+type ConnectionProviderOAuthExtensions = {
+  inDance: true | false,
+} & ConnectionProviderExtensions
+----
+
+=== Authentication Implementation Examples
+
+LinkWeave provides utility functions to simplify connection creation for each authentication type.
+
+==== Basic Authentication
+
+[source]
+----
+@ConnectionElement()
+var basicAuth = defineBasicHttpConnectionProvider<BasicAuthSchema & { baseUri: String }>(
+  (schema) -> {
+    username: schema.username,
+    password: schema.password
+  },
+  (schema) -> {
+    baseUri: schema.baseUri
+  }
+)
+----
+
+Schema definition:
+
+[source]
+----
+type BasicAuthSchema = {
+  username: @SemanticTerms(value = ["username"]) String,
+  password: @SemanticTerms(value = ["password"]) String
+}
+----
+
+==== Bearer Token Authentication
+
+[source]
+----
+@ConnectionElement()
+var bearerAuth = defineBearerHttpConnectionProvider<BearerAuthSchema & { baseUri: String }>(
+  (schema) -> {
+    token: schema.token
+  },
+  (schema) -> {
+    baseUri: schema.baseUri
+  }
+)
+----
+
+Schema definition:
+
+[source]
+----
+type BearerAuthSchema = {
+  token: @SemanticTerms(value = ["secretToken"]) String
+}
+----
+
+==== API Key Authentication
+
+[source]
+----
+@ConnectionElement()
+var apiKeyAuth = defineApiKeyHttpConnectionProvider<ApiKeyAuthSchema & { baseUri: String }>(
+  (schema) -> {
+    apiKey: schema.apiKey
+  },
+  (schema) -> {
+    baseUri: schema.baseUri
+  },
+  {
+    in: "header",
+    name: "X-ApiKey"
+  }
+)
+----
+
+Schema definition:
+
+[source]
+----
+type ApiKeyAuthSchema = {
+  apiKey: @SemanticTerms(value = ["apiKey"]) String
+}
+----
+
+The third parameter specifies how and where the API key is transmitted in requests.
+
+NOTE: LinkWeave currently supports a single API key per connection. Support for multiple API keys is under development.
+
+==== OAuth2 Authentication
+
+[source]
+----
+@ConnectionElement()
+type OAuthAuthDefinition = {
+  baseUri: String,
+  accessToken: @SemanticTerms(value = ["password"]) String
+}
+
+var oAuth = defineOAuth2Connection<OAuthAuthDefinition>(
+  (parameter) -> { accessToken: parameter.accessToken },
+  (parameter) -> { baseUri: parameter.baseUri },
+  {
+    grantType: 'authorizationCode',
+    authorizationUrl: "http://localhost/authorize",
+    tokenUrl: "http://localhost/token",
+    scopes: ["test"]
+  }
+)
+----
+
+OAuth2 supports these grant types:
+
+* `authorizationCode`
+* `clientCredentials` 
+* `password`
+* `implicit`
+
+Each grant type has specific configuration requirements. For example, authorization code:
+
+[source]
+----
+type AuthorizationCodeGrantType = {
+  grantType: 'authorizationCode',
+  authorizationUrl: String,
+  tokenUrl: String,
+  scopes: Array<String>,
+  refreshUrl?: String
+}
+----
+
+=== Adding Custom Extensions
+
+You can enhance any connection type with custom extensions. This example adds a static header to a basic authentication connection:
+
+[source]
+----
+@ConnectionElement()
+var basicAuth = defineBasicHttpConnectionProvider<BasicAuthSchema & { baseUri: String }>(
+  (schema) -> {
+    username: schema.username,
+    password: schema.password
+  },
+  (schema) -> {
+    baseUri: schema.baseUri
+  },
+  (schema) -> [
+    { in: "header", name: "customHeaderStatic", value: "myValue" }
+  ]
+)
+----
+
+The extensions parameter is optional and allows you to inject additional request modifications as needed.
