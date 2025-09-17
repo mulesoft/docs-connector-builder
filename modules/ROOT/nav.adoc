@@ -3,7 +3,7 @@
 * xref:getting-started.adoc[Getting Started]
 * xref:creating-a-connector.adoc[Creating a Connector]
 ** xref:base-connectivity.adoc[Base Connectivity]
-** xref:authentication-types.adoc[Authentication Types]
+** xref:connections.adoc[Connections]
 ** xref:operations.adoc[Operations]
 ** xref:pagination.adoc[Pagination]
 ** xref:triggers.adoc[Triggers]

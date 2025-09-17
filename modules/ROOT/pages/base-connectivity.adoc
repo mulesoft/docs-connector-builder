@@ -1,6 +1,6 @@
 = Base Connectivity
 
-Generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
+Learn how to generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
 
 The base connectivity includes:
 

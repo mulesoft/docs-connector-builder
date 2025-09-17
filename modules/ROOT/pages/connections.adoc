@@ -1,0 +1,8 @@
+= Connections
+:connector-component-name: connections
+
+Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector cannot perform operations, triggers, or other components. UC Builder 
+supports creating connectors that integrate with SaaS applications that use 
+HTTP-based connectivity.
+
+include::partial$ui-versus-linkweave.adoc[]

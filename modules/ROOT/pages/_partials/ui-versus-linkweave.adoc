@@ -1,0 +1,1 @@
+You can define {connector-component-name} using either the UI or LinkWeave. We recommend using the UI as your primary approach, as it significantly reduces manual development effort. Reserve LinkWeave for advanced scenarios that require custom logic. With UC Builder, the goal is to focus on reviewing and validating the generated process, rather than writing custom code.
