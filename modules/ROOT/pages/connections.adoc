@@ -188,7 +188,7 @@ The APIKey connection is defined and created using `ApiKeyAuthSchema`, which is 
 
 The `defineApiKeyHttpConnectionProvider` function requires three parameters.
 
-* `schemaMapper`: (`InputType`) -> `ApiKeyAuthSchema`
+* `schemaMapper`
 +
 From an input, `schemaMapper` returns `ApiKeyAuthSchema`.
 +
@@ -199,7 +199,7 @@ type ApiKeyAuthSchema = {|
   |}
 ----
 
-* `connectionProviderSchemaMapper`: (`InputType`) -> `HttpConnectionProviderSchema`  
+* `connectionProviderSchemaMapper`
 +
 From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
 +
@@ -210,7 +210,7 @@ type HttpConnectionProviderSchema = {
 }
 ----
 
-* `attributes`: `ApiKeyAuthAttributesSchema`
+* `attributes`
 +
 `attributes` returns `ApiKeyAuthAttributesSchema`.
 +
@@ -242,7 +242,7 @@ The Basic connection is defined and created using `BasicAuthDefinition`, which i
 
 The `defineBasicHttpConnectionProvider` function requires two parameters.
 
-* `schemaMapper`: (`InputType`) -> `BasicAuthSchema`
+* `schemaMapper`
 +
 From an input, `schemaMapper` returns `BasicAuthSchema`.
 +
@@ -254,7 +254,7 @@ type BasicAuthSchema = {
 }
 ----
 
-* `connectionProviderSchemaMapper`: (`InputType`) -> `HttpConnectionProviderSchema`
+* `connectionProviderSchemaMapper`
 +
 From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
 +
@@ -282,7 +282,7 @@ The Bearer connection is defined and created using `BearerAuthSchema`, which is 
 
 The `defineBearerHttpConnectionProvider` function requires two parameters.
 
-* `schemaMapper`: (`InputType`) -> `BearerAuthSchema`
+* `schemaMapper`
 +
 From an input, `schemaMapper` returns `BearerAuthSchema`.
 +
@@ -293,7 +293,7 @@ type BearerAuthSchema = {
 }
 ----
 
-* `connectionProviderSchemaMapper`: (`InputType`) -> `HttpConnectionProviderSchema`
+* `connectionProviderSchemaMapper`
 +
 From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
 +
@@ -331,7 +331,7 @@ The OAuth2 connection is defined and created using `OAuthAuthDefinition`, which 
 
 The `defineOAuth2Connection` function requires three parameters.
 
-* `schemaMapper`: (`InputType`) -> `OAuth2AuthSchema`
+* `schemaMapper`
 +
 From an input, `schemaMapper` returns `OAuth2AuthSchema`.
 +
@@ -342,7 +342,7 @@ type OAuth2AuthSchema = {|
 |}
 ----
 
-* `connectionSchemaMapper`: (`InputType`) -> `HttpConnectionProviderSchema`
+* `connectionSchemaMapper`
 +
 From an input, `connectionSchemaMapper` returns `HttpConnectionProviderSchema`.
 +
@@ -353,7 +353,7 @@ type HttpConnectionProviderSchema = {|
 |}
 ----
 
-* `attributes`: `OAuth2Schema`
+* `attributes`
 +
 `attributes` returns `OAuth2Schema`.
 +
