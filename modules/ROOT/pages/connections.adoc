@@ -33,10 +33,11 @@ When you xref:base-connectivity.adoc[generate base connectivity], if the authent
 
 == Define Connections Using LinkWeave
 
-* <<connectionstructure,Connection Structure>>
-* <<authenticationtypes,Authentication Types>>
+* <<connection-structure>>
+* <<authentication-types>>
 
-=== Connection Structure
+[[connection-structure]]
+==== Connection Structure
 
 In LinkWeave, connections are functions that transform requests into responses:
 
@@ -55,9 +56,10 @@ For HTTP-based connections, this becomes:
 These types form the structure of connections.
 
 * <<connection>>: Connection function
-* <<connectionprovider>>: Connection creation and configuration 
-* <<httpconnection>>: Specialized connection for HTTP requests
-* <<httpconnectionprovider>>: HTTP-specific connection provider
+* <<connection-provider>>: Connection creation and configuration 
+* <<http-connection>>: Specialized connection for HTTP requests
+* <<http-connection-provider>>: HTTP-specific connection provider
+
 
 [[connection]]
 ==== Connection
@@ -73,7 +75,7 @@ Parameters:
 * `ConnectionRequest`: Object sent to the target system
 * `ConnectionResponse`: Object returned from the target system
 
-[[connectionprovider]]
+[[connection-provider]]
 ==== ConnectionProvider
 
 [source]
@@ -104,7 +106,7 @@ Properties:
 * `authenticationType`: Defines the authentication schema
 * `validate`: (Optional) Tests the connection and returns validation results
 
-[[httpconnection]]
+[[http-connection]]
 ==== HTTPConnection
 
 [source]
@@ -112,7 +114,7 @@ Properties:
 HttpConnection = Connection<HttpRequester, HttpResponse>
 ----
 
-[[httpconnectionprovider]]
+[[http-connection-provider]]
 ==== HTTPConnectionProvider
 
 [source]

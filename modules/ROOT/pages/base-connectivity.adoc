@@ -42,7 +42,7 @@ You can generate base connectivity either from an API specification (OAS 3.0 and
 * *Name of SaaS Platform*: Enter the name of the SaaS platform you want to create a connector for.
 * *Name of ISV*: Enter the name of the ISV you want to create a connector for.
 * *Website of ISV*: Enter the website of the ISV you want to create a connector for.
-* *Top Use Cases*: Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD behavior (Create, Read, Update, Delete), you must explicitly mention each one.
+* *Top Use Cases*: Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD (Create, Read, Update, Delete) behavior, you must explicitly mention each one.
 * *Official API Documentation or Reference Sources*: Enter the URLs of the official API documentation or reference sources for the connector.
 * *Project Folder*: Select the folder where your project is contained. A subfolder is automatically created within this folder.
 . Click *Submit*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
