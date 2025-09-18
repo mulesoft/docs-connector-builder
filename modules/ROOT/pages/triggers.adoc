@@ -1,0 +1,181 @@
+= Triggers
+:connector-component-name: triggers
+
+Learn how to define triggers for your connector. A trigger is a function that is automatically executed in response to specific events. For example, when a new contact is created, you can trigger an operation to send an email to the contact. Triggers help automate business processes by eliminating manual intervention.
+
+include::partial$ui-versus-linkweave.adoc[]
+
+== Define Triggers Using the UI
+
+. Under *Operations Explorer*, select the operation.
+. Under *Operation Components*, select *Triggers*.
+. Enter the required information for your trigger. 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Name* |The variable name for the trigger, used as its identifier in your code.
+|*Display Name* |The user-friendly name shown in the UI.
+|*Operation Output Type* |The data type returned by the operation, typically an array or collection.
+|*Operation Result Item Type* |The type of each item in the operation output.
+|*Trigger Result Item Type* |The type of each item the trigger emits. This is usually the same as the Operation Result Item Type unless you transform the data.
+|*Order* |The order in which items are processed or emitted, such as Ascending (oldest to newest) or Descending (newest to oldest).
+|*Input Records* |The path to the array of items in the operation response.
+|*Item* |The path to a single item within the array. Leave blank if items are at the root of the array.
+|*Identity Field* |The unique identifier for each item.
+|*Watermark Field* |The field used to track the last processed item, often for incremental sync.
+|*Watermark Type* |The data type of the watermark field.
+|*Initial Watermark* |The starting value for the watermark, such as the earliest date to start processing from. Leave blank to process all records.
+|===
++
+For example, let's say you want to create a trigger for when a new contact is created. Suppose your operation response looks like this:
++
+[source]
+----
+type OperationResponse = {
+  value: {
+    contacts: Array<Contact>
+    // ... other fields
+  }
+  // ... other fields
+}
+----
++
+And the `Contact` type is defined as:
++
+[source]
+----
+type Contact = {
+  id: String
+  name: String
+  lastModifiedDate: DateTime
+  // ... other fields
+}
+----
++
+The required information for your trigger looks like this: 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Name* |`newContactCreatedTrigger`
+|*Display Name* |`New Contact Created Trigger`
+|*Operation Output Type* |`Contact[]` (if your operation returns a list of contacts)
+|*Operation Result Item Type* |`Contact`
+|*Trigger Result Item Type* |`Contact`
+|*Order* |Ascending (oldest to newest) or Descending (newest to oldest)
+|*Input Records* |`value.contacts`
+|*Item* |(Leave blank if items are at the root of the array)
+|*Identity Field* |`id`
+|*Watermark Field* |`lastModifiedDate`
+|*Watermark Type* |`DateTime`
+|*Initial Watermark* |`2023-01-01T00:00:00Z`
+|===
+
+. Optionally, you can add parameters to your trigger to further customize its behavior. Enter the required information for your parameters. 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Trigger Input Param Type* |The parameter type of the trigger input.
+|*Parameter Name* |The parameter name.
+|*Type* |The parameter type.
+|===
++
+These parameters are used to generate the trigger’s `inputMapper`. Depending on your parameter choices, the generated `inputMapper` code will look like one of the following:
++
+[%header%autowidth.spread]
+|===
+|Parameter Scenario |Example `inputMapper` Code
+
+|*No parameters defined*
+a|
+[source]
+----
+inputMapper: (
+    param: {}, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+
+|*Simple parameters defined*
+a|
+[source]
+----
+inputMapper: (
+    param: { param1: String, param2: Number }, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+
+|*Only a complex type parameter defined*
+a|
+[source]
+----
+inputMapper: (ti: T_Complex, w) -> ti
+----
+
+|*Complex type with additional parameters*
+a|
+[source]
+----
+inputMapper: (
+    param: { param1: String, param2: Number } && T_Complex, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+|===
+
+. Click *Create Trigger*. 
++
+This generates a new `.dwl` file in the `triggers` directory, containing both the trigger and its corresponding trigger strategy. The generated code follows this template:
++
+[source]
+----
+var <%= trigger.triggerStrategy.name %>: TriggerStrategy<<%- trigger.triggerStrategy.operationOutputType %>, <%- trigger.triggerStrategy.triggerResultItemType %>, <%- trigger.triggerStrategy.operationResultItemType %>, <%- trigger.watermarkType %>> = {
+items: (result) -> result<%- trigger.triggerStrategy.result === '' ? '' : `.${trigger.triggerStrategy.result}` %>!,
+item: (item) -> item<%- trigger.triggerStrategy.item === '' ? '' : `.${trigger.triggerStrategy.item}` %>,
+watermark: (result, item) -> item.<%- trigger.triggerStrategy.watermarkField %>! as <%- trigger.watermarkType %>,
+identity: (item) -> item.<%- trigger.triggerStrategy.identityField %>! as String,
+watermarkCompareTo: DefaultWatermarkComparison
+}
+
+var <%= trigger.name %>Trigger  = {
+name: "<%= trigger.name %>",
+displayName: "<%= trigger.displayName %>",
+metadata: {
+  order: "<%= trigger.order %>",
+  paginated: <%= trigger.isPaginated %>,
+},
+strategy: <%= trigger.triggerStrategy.name %>,
+operation: <%= srcModuleName %>,
+inputMapper: <%- trigger.inputMapper %>,
+initialWatermark: (triggerInput, connection) -> <%- trigger.initialWatermark || 'Null' %>
+}
+----
+
+. Import your trigger and add it to the `triggers` section of your `Connector.dwl` file:
++
+[source]
+----
+@FlowConnectorElement()
+var connector = {
+...,
+triggers: {
+  myTrigger: myTrigger,
+},
+...
+}
+----

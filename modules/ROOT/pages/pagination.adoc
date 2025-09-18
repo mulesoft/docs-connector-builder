@@ -50,7 +50,7 @@ UC Builder supports these pagination strategies.
 
 Page number pagination is a strategy for APIs that use a query parameter to specify the page number, for example, `?page=2`.
 
-Suppose your API endpoint is: `\http://www.mulesoft.com/users?page=X`.
+Suppose your API endpoint is `\http://www.mulesoft.com/users?page=X`.
 
 Define the operation:
 
@@ -88,7 +88,7 @@ var getUsersPaginated = pageNumberPaginated(
 
 Offset pagination is a strategy for APIs that use an offset parameter to indicate the starting point of results, for example, `?offset=10&limit=20`.
 
-Suppose your API endpoint is: `\http://www.mulesoft.com/users?offset=X&limit=Y`.
+Suppose your API endpoint is `\http://www.mulesoft.com/users?offset=X&limit=Y`.
 
 Define the operation:
 
@@ -126,7 +126,7 @@ var getUsersPaginated = offsetPaginated(
 
 Marker pagination is a strategy for APIs that use a marker or token to indicate the position in the dataset, for example, `?markerToken=abc123&limit=20`.
 
-Suppose your API endpoint is: `\http://www.mulesoft.com/users?markerToken=X&limit=Y`.
+Suppose your API endpoint is `\http://www.mulesoft.com/users?markerToken=X&limit=Y`.
 
 Define the operation:
 
@@ -177,7 +177,7 @@ Hypermedia pagination is a strategy for APIs that provide the URL for the next p
 
 ==== Same Endpoint for All Pages
 
-Suppose your API endpoint is: `\http://www.mulesoft.com/users?pageMarker=X&limit=Y` and the response body contains a `nextUrl` field.
+Suppose your API endpoint is `\http://www.mulesoft.com/users?pageMarker=X&limit=Y` and the response body contains a `nextUrl` field.
 
 Define the operation:
 
@@ -227,7 +227,7 @@ var getUsersPaginated = hypermediaPaginated(
 
 ==== Different Endpoint for Next Page
 
-Suppose your API uses two endpoints and the response body contains a `nextUrl` field:  
+Suppose your API uses two endpoints and the response body contains a `nextUrl` field.  
 
 * First page: `\http://www.mulesoft.com/users`  
 * Next pages: `\http://www.mulesoft.com/more/{queryLocator}`  
@@ -283,4 +283,3 @@ var getUsersPaginated = paginatedWithNextPageOp(getUsers, getMorePaginated, (par
     }) if (!isEmpty(page.body.items) and !isEmpty(page.body.nextUrl))
 })
 ----
-
