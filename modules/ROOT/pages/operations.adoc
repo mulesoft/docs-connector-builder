@@ -181,7 +181,7 @@ queryParams: parameter.query update {
 }
 ----
 
-* *URI parameter encoding*
+* *URI/path parameter encoding*
 +
 To encode URI parameters, call the `serializeUriParam` function for each parameter, passing the parameter and its encoding configuration.
 +

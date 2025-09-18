@@ -82,7 +82,7 @@ The required information for your trigger looks like this:
 |*Type* |The parameter type.
 |===
 +
-These parameters are used to generate the trigger’s `inputMapper`. Depending on your parameter choices, the generated `inputMapper` code will look like one of the following:
+These parameters are used to generate the trigger’s `inputMapper`. Depending on your parameter choices, the generated `inputMapper` code will look like one of these:
 +
 [%header%autowidth.spread]
 |===
@@ -145,24 +145,24 @@ This generates a new `.dwl` file in the `triggers` directory, containing both th
 [source]
 ----
 var <%= trigger.triggerStrategy.name %>: TriggerStrategy<<%- trigger.triggerStrategy.operationOutputType %>, <%- trigger.triggerStrategy.triggerResultItemType %>, <%- trigger.triggerStrategy.operationResultItemType %>, <%- trigger.watermarkType %>> = {
-items: (result) -> result<%- trigger.triggerStrategy.result === '' ? '' : `.${trigger.triggerStrategy.result}` %>!,
-item: (item) -> item<%- trigger.triggerStrategy.item === '' ? '' : `.${trigger.triggerStrategy.item}` %>,
-watermark: (result, item) -> item.<%- trigger.triggerStrategy.watermarkField %>! as <%- trigger.watermarkType %>,
-identity: (item) -> item.<%- trigger.triggerStrategy.identityField %>! as String,
-watermarkCompareTo: DefaultWatermarkComparison
+  items: (result) -> result<%- trigger.triggerStrategy.result === '' ? '' : `.${trigger.triggerStrategy.result}` %>!,
+  item: (item) -> item<%- trigger.triggerStrategy.item === '' ? '' : `.${trigger.triggerStrategy.item}` %>,
+  watermark: (result, item) -> item.<%- trigger.triggerStrategy.watermarkField %>! as <%- trigger.watermarkType %>,
+  identity: (item) -> item.<%- trigger.triggerStrategy.identityField %>! as String,
+  watermarkCompareTo: DefaultWatermarkComparison
 }
 
 var <%= trigger.name %>Trigger  = {
-name: "<%= trigger.name %>",
-displayName: "<%= trigger.displayName %>",
-metadata: {
-  order: "<%= trigger.order %>",
-  paginated: <%= trigger.isPaginated %>,
-},
-strategy: <%= trigger.triggerStrategy.name %>,
-operation: <%= srcModuleName %>,
-inputMapper: <%- trigger.inputMapper %>,
-initialWatermark: (triggerInput, connection) -> <%- trigger.initialWatermark || 'Null' %>
+  name: "<%= trigger.name %>",
+  displayName: "<%= trigger.displayName %>",
+  metadata: {
+    order: "<%= trigger.order %>",
+    paginated: <%= trigger.isPaginated %>,
+  },
+  strategy: <%= trigger.triggerStrategy.name %>,
+  operation: <%= srcModuleName %>,
+  inputMapper: <%- trigger.inputMapper %>,
+  initialWatermark: (triggerInput, connection) -> <%- trigger.initialWatermark || 'Null' %>
 }
 ----
 
@@ -229,7 +229,7 @@ There are four attributes specific to triggers that are different from operation
 
 
 [[strategy]]
-=== `strategy`
+=== strategy
 
 The trigger extraction strategy determines how to obtain each event from the operation’s response. This includes how to extract the list of events, determine if each event must be transformed before it is returned, retrieve the watermark from each event, determine each event’s unique identity, and compare watermarks between events (in almost all cases, this is a simple comparison such as A > B). For example, here's the definition of the trigger extraction strategy for this trigger:
 
@@ -271,7 +271,7 @@ var onNewCategoryTriggerStrategy = {
 ----
 
 [[operation]]
-=== `operation`
+=== operation
 
 A trigger always executes an operation. The operation it is based on becomes an attribute of the trigger. For example, here's the definition of the operation for this trigger:
 
@@ -319,7 +319,7 @@ Triggers can be based on operations that return either paginated or non-paginate
 From the user's perspective, a trigger exposes a single event type as its output metadata. However, the actual result of a poll is more complex, typically returning a `Page` type along with information for the next poll cycle.
 
 [[inputmapper]]
-=== `inputMapper`
+=== inputMapper
 
 The `inputMapper` function maps the trigger's input and the current watermark to the operation's input type. For example, here's the definition of `inputMapper` for this trigger:
 
@@ -431,7 +431,7 @@ A related pattern is to allow the user to optionally specify a starting point, f
 In this case, the trigger input includes an optional `startDate`. If the user does not provide a value, the mapper uses the watermark. This approach is often combined with annotations to hide the parameter in certain platforms, so the watermark is used automatically. In platforms that do not recognize the annotation, the parameter remains visible and can be set by the user.
 
 [[initialwatermark]]
-=== `initialWatermark`
+=== initialWatermark
 
 The `initialWatermark` function determines the starting watermark for the polling cycle. This can be a fixed value, a dynamic value (such as `now()`), or calculated by executing an operation. For example, here's the definition of `initialWatermark` for this trigger:
 
