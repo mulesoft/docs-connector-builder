@@ -14,6 +14,7 @@ This package includes platform-specific code, such as for Anypoint Platform, tha
 
 You can generate base connectivity either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor).
 
+[[generate-base-connectivity-from-an-api-specification]]
 == Generate Base Connectivity from an API Specification
 
 . Open the UC Builder extension in VS Code or Cursor.
@@ -32,7 +33,8 @@ You can generate base connectivity either from an API specification (OAS 3.0 and
 . Select the folder where your project is contained. A subfolder is automatically created within this folder.
 . Click *Select containing folder*. Your project is created, and VS Code opens the newly created project. 
 
-== Generate Base Connectivity with AI Assistance (Cursor only)
+[[generate-base-connectivity-with-ai-assistance]]
+== Generate Base Connectivity with AI Assistance (Cursor)
 
 . Open the UC Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Ai Assisted Workflows* is enabled.
