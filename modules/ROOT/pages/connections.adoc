@@ -33,6 +33,8 @@ When you xref:base-connectivity.adoc[generate base connectivity], if the authent
 
 == Define Connections Using LinkWeave
 
+You can define connections using LinkWeave.  
+
 * <<connection-structure>>
 * <<authentication-types>>
 
