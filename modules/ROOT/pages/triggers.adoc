@@ -201,7 +201,7 @@ var connector = {
 }
 ----
 
-Defining a trigger in LinkWeave is similar to defining an operation. Here is an example of a trigger definition:
+Defining a trigger in LinkWeave is similar to defining an operation. Here's an example of a trigger definition:
 
 [source]
 ----
@@ -231,7 +231,7 @@ There are four attributes specific to triggers that are different from operation
 [[strategy]]
 === strategy
 
-The trigger extraction strategy determines how to obtain each event from the operation’s response. This includes how to extract the list of events, determine if each event must be transformed before it is returned, retrieve the watermark from each event, determine each event’s unique identity, and compare watermarks between events (in almost all cases, this is a simple comparison such as A > B). For example, here's the definition of the trigger extraction strategy for this trigger:
+The trigger extraction strategy determines how to obtain each event from the operation's response. This includes how to extract the list of events, determine if each event must be transformed before it's returned, retrieve the watermark from each event, determine each event's unique identity, and compare watermarks between events (in almost all cases, this is a simple comparison such as A > B). For example, here's the definition of the trigger extraction strategy for this trigger:
 
 [source]
 ----
@@ -252,10 +252,10 @@ var onNewCategoryTriggerStrategy: TriggerStrategy<HttpResponse<findCategorySucce
 
 The `TriggerStrategy` type parameters are:
 
-* `OperationOutputType`: The operation output type that the trigger is based on. In this example, it is `HttpResponse<findCategorySuccessResponse>`.   
-* `TriggerResultItemType`: The final item or event type to show as a result of the trigger. In this example, it is `Types.Category`. It is the same as `OperationResultItemType`, which means no transformation. 
-* `OperationResultItemType`: The item or event type that the operation execution returns. In this example, it is `Types.Category`.  
-* `Watermark`: The item or event watermark type. In this example, it is `Number`.  
+* `OperationOutputType`: The operation output type that the trigger is based on. In this example, it's `HttpResponse<findCategorySuccessResponse>`.   
+* `TriggerResultItemType`: The final item or event type to show as a result of the trigger. In this example, it's `Types.Category`. It's the same as `OperationResultItemType`, which means no transformation. 
+* `OperationResultItemType`: The item or event type that the operation execution returns. In this example, it's `Types.Category`.  
+* `Watermark`: The item or event watermark type. In this example, it's `Number`.  
 
 You can also define a non-typed strategy as long as the trigger is typed:
 
@@ -273,7 +273,7 @@ var onNewCategoryTriggerStrategy = {
 [[operation]]
 === operation
 
-A trigger always executes an operation. The operation it is based on becomes an attribute of the trigger. For example, here's the definition of the operation for this trigger:
+A trigger always executes an operation. The operation it's based on becomes an attribute of the trigger. For example, here's the definition of the operation for this trigger:
 
 [source]
 ----
@@ -358,11 +358,11 @@ Suppose the `company` value is fixed for the connector, and the trigger itself d
   }
 ----
 
-The `inputMapper` is a lambda that takes the trigger’s input type and the watermark, and returns the operation’s input type (`findCategoryRequest`). In this case, the trigger input is not used, but in other scenarios, it might be necessary. Common use cases for `inputMapper` include:
+The `inputMapper` is a lambda that takes the trigger's input type and the watermark, and returns the operation's input type (`findCategoryRequest`). In this case, the trigger input isn't used, but in other scenarios, it might be necessary. Common use cases for `inputMapper` include:
 
 * *Reshaping the input*  
 +
-Sometimes, the operation’s input type (such as `HttpRequestType`) is not ideal for the trigger’s user experience. You can define a new, simpler input type for the trigger and use `inputMapper` to convert it to the operation’s expected input:
+Sometimes, the operation's input type (such as `HttpRequestType`) isn't ideal for the trigger's user experience. You can define a new, simpler input type for the trigger and use `inputMapper` to convert it to the operation's expected input:
 +
 [source]
 ----
@@ -428,7 +428,7 @@ A related pattern is to allow the user to optionally specify a starting point, f
   (ti: CustomGetUsersRequestPaginated, w: Number) -> { since: ti.startDate default w }
 ----
 +
-In this case, the trigger input includes an optional `startDate`. If the user does not provide a value, the mapper uses the watermark. This approach is often combined with annotations to hide the parameter in certain platforms, so the watermark is used automatically. In platforms that do not recognize the annotation, the parameter remains visible and can be set by the user.
+In this case, the trigger input includes an optional `startDate`. If the user doesn't provide a value, the mapper uses the watermark. This approach is often combined with annotations to hide the parameter in certain platforms, so the watermark is used automatically. In platforms that don't recognize the annotation, the parameter remains visible and can be set by the user.
 
 [[initialwatermark]]
 === initialWatermark

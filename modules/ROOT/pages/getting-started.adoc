@@ -35,7 +35,7 @@ Cursor offers several advantages, specifically using AI to generate xref:base-co
 +
 You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio.
 +
-NOTE: If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension, so manual installation is not required. If you use Cursor, install these extensions first, then install the UC Builder extension. For more information, see <<install-uc-builder>>.
+NOTE: If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension, so manual installation isn't required. If you use Cursor, install these extensions first, then install the UC Builder extension. For more information, see <<install-uc-builder>>.
 +
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] version 5.7.2 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
@@ -74,4 +74,4 @@ Install UC Builder in VS Code or Cursor.
 
 == Upgrade UC Builder
 
-To ensure you are using the latest version of UC Builder, select the UC Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.
+To ensure you're using the latest version of UC Builder, select the UC Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.

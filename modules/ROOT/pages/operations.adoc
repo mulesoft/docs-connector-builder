@@ -11,7 +11,7 @@ When you xref:base-connectivity.adoc[generate base connectivity], the operations
 
 If you have already generated base connectivity and want to modify the set of operations included from your API specification or AI assistance, select *Generate* > *Regenerate Connector* and choose which operations to add or remove.
 
-If you have already generated base connectivity and want to add operations that are not present in the API specification or AI assistance, update the API specification or AI input with the new operations, and then regenerate base connectivity.
+If you have already generated base connectivity and want to add operations that aren't present in the API specification or AI assistance, update the API specification or AI input with the new operations, and then regenerate base connectivity.
 
 == Define Operations Using LinkWeave
 
@@ -31,7 +31,7 @@ Each operation consists of:
 * `displayName`: The user-facing name shown in the UI.
 * `executor`: The function that implements the operation logic.
 
-Operation invocations can either succeed or fail. A successful invocation returns `ResultSuccess`, while a failure returns `ResultFailure`. The meaning of "failure" depends on the external service you are integrating with.
+Operation invocations can either succeed or fail. A successful invocation returns `ResultSuccess`, while a failure returns `ResultFailure`. The meaning of "failure" depends on the external service you're integrating with.
 
 [NOTE]
 ====
@@ -45,7 +45,7 @@ Operations have the `Operation<ArgsT, OkT, ErrorT <: ResultFailure, ConnT>` type
 * `ErrorT`: The type of the failure result (`ResultFailure<ErrorValueType, ErrorType>`), in which `ErrorValueType` is the error payload and `ErrorType` describes the error kind and categories.
 * `ConnT`: The connection type, which is an `Object` type that describes the context required to invoke the operation.
 
-Here is an example of an operation:
+Here's an example of an operation:
 
 [source]
 ----
@@ -76,7 +76,7 @@ The `com::mulesoft::connectivity::decorator::Operation` module provide decorator
 [[http-operations]]
 === HTTP Operations
 
-HTTP operations are the most common type of operation, so they have the `com::mulesoft::connectivity::transport::Http` dedicated module. This module standardizes HTTP operation shapes and provides utilities for parameter encoding and request execution. Here is a summary of the module.
+HTTP operations are the most common type of operation, so they have the `com::mulesoft::connectivity::transport::Http` dedicated module. This module standardizes HTTP operation shapes and provides utilities for parameter encoding and request execution. Here's a summary of the module.
 
 * `HttpRequestBuilder`: The base type for HTTP connection instances.
 * `HttpResponse<T>`: The type representing an HTTP response with a body of type `T`.
@@ -108,7 +108,7 @@ The `HttpRequestType` object defines these parameters for all HTTP operations.
 * Cookie parameters (required, can be empty)
 * Body (optional)
 
-Here is an example of an HTTP operation with the `\http://www.mulesoft.com/user/{userId}` endpoint:
+Here's an example of an HTTP operation with the `\http://www.mulesoft.com/user/{userId}` endpoint:
 
 [source]
 ----
@@ -136,7 +136,7 @@ To perform HTTP requests, use the `request` function from `dw::io::http::Client`
 
 Before sending parameters in an HTTP request, they often need to be converted into an appropriate string format. Specify the encoding configuration for each parameter that requires it. For example, array query parameters must be encoded into a string when constructing the final URI, as arrays can't be transmitted directly. The same principle applies to URI, header, and cookie parameters, though each type might have different encoding options. For more information about the available encoding configurations for each parameter type, refer to https://spec.openapis.org/oas/latest.html#style-values[Style Values].
 
-Here is an example of encoding parameters in an HTTP operation:
+Here's an example of encoding parameters in an HTTP operation:
 
 [source]
 ----
