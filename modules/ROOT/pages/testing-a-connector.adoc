@@ -1,0 +1,11 @@
+= Testing a Connector
+ 
+Learn how to test your connector. Testing is an important part of the development process, and it helps you ensure that your connector works as expected.
+
+== Generate Tests 
+
+To generate tests for your connector: 
+
+. Click *Generate* > *Generate Tests*.
+
+This generates a set of tests for your existing CCM operations, using sample data for endpoints that require payloads. Some test cases might require you to adjust the sample data to better fit your use case. You can also use a prompt to enhance the generated sample data.

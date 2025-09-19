@@ -74,7 +74,4 @@ Install UC Builder in VS Code or Cursor.
 
 == Upgrade UC Builder
 
-To upgrade to the latest version of UC Builder, you can either:
-
-* Select the UC Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.
-* Select the UC Builder extension in VS Code or Cursor and then click *Check for updates*.
+To ensure you are using the latest version of UC Builder, select the UC Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.

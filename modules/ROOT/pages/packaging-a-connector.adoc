@@ -1,0 +1,47 @@
+= Packaging a Connector
+
+Learn how to package your connector. Packaging is the process of compiling andpreparing your connector for release. 
+
+You can package your connector via the UI or the terminal. 
+
+== Package a Connector via the UI
+
+. Open your IDE and go to *Connectivity Builder - Editor*.
+. Click *Build Project*.
+
+If the build completes successfully, a success message appears. If the build doesn't complete successfully, an error message appears and you can click *View output* to review the errors.
+
+== Package a Connector via the Terminal
+
+. Open your IDE and ensure that you have opened the root folder of your connector project.
++
+If necessary, go to *File* > *Open Folder* and select the appropriate folder. The Explorer view should display top-level items. Make sure you aren't inside the `connectivity-model` or `anypoint-connector-model` subfolders.
+. Go to *Terminal* > *New Terminal*.
+. Optionally, install Homebrew (macOS only).
++
+To simplify the installation of additional tools, consider installing the https://brew.sh/[Homebrew] package manager. Homebrew allows you to install other programs easily with a single command.
+. In the terminal, run this command:
++
+----
+mvn clean package
+----
+. Wait for the build process to complete. If the build completes successfully, an output similar to this appears:
++
+----
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for <your-connector-name> <version>:
+[INFO] 
+[INFO] <your-connector-name> .............................. SUCCESS [  x.xxx s]
+[INFO] <your-connector-name>-connectivity-model ........... SUCCESS [  x.xxx s]
+[INFO] <your-connector-name>-flow-connector-model ......... SUCCESS [  x.xxx s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  x.xxx s
+[INFO] Finished at: <timestamp>
+[INFO] ------------------------------------------------------------------------
+----
++
+NOTE: The names, numbers, and timestamps in the output will vary. The key indicator of a successful build is the line: `BUILD SUCCESS`.
++
+If you don't see `BUILD SUCCESS`, the build didn't complete successfully. In this case, review the errors in the terminal output.

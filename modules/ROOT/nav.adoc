@@ -8,3 +8,7 @@
 ** xref:pagination.adoc[Pagination]
 ** xref:triggers.adoc[Triggers]
 ** xref:value-providers.adoc[Value Providers]
+* xref:testing-a-connector.adoc[Testing a Connector]
+* xref:packaging-a-connector.adoc[Packaging a Connector]
+* xref:releasing-a-connector.adoc[Releasing a Connector]
+* xref:running-a-connector.adoc[Running a Connector]

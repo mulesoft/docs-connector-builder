@@ -43,7 +43,7 @@ Connectors built with UC Builder can support:
 * xref:triggers.adoc[Triggers]
 * xref:value-providers.adoc[Value Providers]
 
-After you create your connector, you can test, package, release, and run your connector. 
+After you create your connector, you can xref:testing-a-connector.adoc[test], xref:packaging-a-connector.adoc[package], xref:releasing-a-connector.adoc[release], and xref:running-a-connector.adoc[run] your connector. 
 
 == Use Cases
 
