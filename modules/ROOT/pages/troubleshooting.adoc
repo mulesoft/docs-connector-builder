@@ -1,0 +1,4 @@
+= Troubleshooting
+
+Learn how to troubleshoot issues with UC Builder. 
+

@@ -190,7 +190,7 @@ You can define the connections for authentication types.
 
 The APIKey connection is defined and created using `ApiKeyAuthSchema`, which is the input connection type definition and the connection parameters.
 
-The `defineApiKeyHttpConnectionProvider` function requires three parameters.
+The `defineApiKeyHttpConnectionProvider` function requires these parameters.
 
 * `schemaMapper`
 +
@@ -244,7 +244,7 @@ NOTE: LinkWeave supports a schema based on a single API key.
 
 The Basic connection is defined and created using `BasicAuthDefinition`, which is the input connection type definition and the connection parameters.
 
-The `defineBasicHttpConnectionProvider` function requires two parameters.
+The `defineBasicHttpConnectionProvider` function requires these parameters.
 
 * `schemaMapper`
 +
@@ -284,7 +284,7 @@ type HttpConnectionProviderSchema = {
 
 The Bearer connection is defined and created using `BearerAuthSchema`, which is the input connection type definition and the connection parameters.
 
-The `defineBearerHttpConnectionProvider` function requires two parameters.
+The `defineBearerHttpConnectionProvider` function requires these parameters.
 
 * `schemaMapper`
 +
@@ -333,7 +333,7 @@ var oAuth: defineOAuth2Connection<OAuthAuthDefinition>(
 
 The OAuth2 connection is defined and created using `OAuthAuthDefinition`, which is the input connection type definition and the connection parameters.
 
-The `defineOAuth2Connection` function requires three parameters.
+The `defineOAuth2Connection` function requires these parameters.
 
 * `schemaMapper`
 +

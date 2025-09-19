@@ -13,3 +13,4 @@
 * xref:packaging-a-connector.adoc[Packaging a Connector]
 * xref:releasing-a-connector.adoc[Releasing a Connector]
 * xref:running-a-connector.adoc[Running a Connector]
+* xref:troubleshooting.adoc[Troubleshooting]
