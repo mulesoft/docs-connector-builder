@@ -1,5 +1,6 @@
 .xref:index.adoc[Universal Connectivity Builder]
 * xref:index.adoc[Overview]
+* xref:universal-connectivity-builder-release-notes.adoc[Release Notes]
 * xref:getting-started.adoc[Getting Started]
 * xref:creating-a-connector.adoc[Creating a Connector]
 ** xref:base-connectivity.adoc[Base Connectivity]
