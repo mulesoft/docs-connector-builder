@@ -51,26 +51,26 @@ Install UC Builder in VS Code or Cursor.
 
 === Install UC Builder in VS Code
 
-. Install https://code.visualstudio.com/download[VS Code].
-. Download the UC Builder extension (`.vsix` file).
 . In VS Code, select the Extensions icon in the Activity Bar.
-. Click the *More actions (...)* menu and then select *Install from VSIX*.
-. Select the downloaded UC Builder extension (`.vsix` file).
-. Click *Install*.
-. A notification might appear to reload VS Code to start using the UC Builder extension. If it appears, click *Reload Now*.
+. Search for `Universal Connectivity Builder` in the marketplace.
+. Click *Install* on the extension.
 
 === Install UC Builder in Cursor
 
-. Install https://docs.cursor.com/en/get-started/installation[Cursor].
-. Install the dependent extensions:
+. Go to *View* > *Command Palette*.
+. Enter `Preferences: Open User Settings`.
+. Go to *Extensions > Gallery: Service Url*.
+. Enter `\https://marketplace.visualstudio.com/_apis/public/gallery`.
+. Restart Cursor. 
+. Go to *View* > *Extensions*.
+. Install the dependent extensions by searching for these extensions in the marketplace and clicking *Install*.
 +
 * https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] 
 * https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension]
 * https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension]
 * (Optional) https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
-. Download the UC Builder extension (`.vsix` file).
-. In Cursor, select *View* and then select *Extensions*.
-. Drag the downloaded UC Builder extension (`.vsix` file) onto the extensions list.
+. Search for `Universal Connectivity Builder` in the marketplace.
+. Click *Install* on the extension.
 
 == Upgrade UC Builder
 
