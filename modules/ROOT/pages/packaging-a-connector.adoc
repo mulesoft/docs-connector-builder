@@ -1,6 +1,6 @@
 = Packaging a Connector
 
-Learn how to package your connector. Packaging is the process of compiling andpreparing your connector for release. 
+Learn how to package your connector. Packaging is the process of compiling and preparing your connector for release. 
 
 You can package your connector via the UI or the terminal. 
 

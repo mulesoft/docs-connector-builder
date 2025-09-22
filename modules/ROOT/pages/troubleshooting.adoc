@@ -26,7 +26,7 @@ If the LLM asks for input, provide the input or restart the conversation in a ne
 
 == LLM Doesn't Create Files
 
-If the LLM doesnt create the files, ensure that you approve the changes proposed by the LLM, both for `discovery.json` and the API specification.
+If the LLM doesn't create the files, ensure that you approve the changes proposed by the LLM, both for `discovery.json` and the API specification.
 
 == LLM Indicates Completion, but Files Are Missing
 
