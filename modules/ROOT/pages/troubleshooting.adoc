@@ -2,3 +2,34 @@
 
 Learn how to troubleshoot issues with UC Builder. 
 
+== Coerce Failures
+
+Coerce failures happen at runtime when the connector interprets the response from the API as a type of the connector. 
+
+NEEDS SOLUTION
+
+== Maven Configuration Problems 
+
+In `settings.xml`, you might encounter missing repos or issues with `JAVA_HOME`.
+
+NEEDS SOLUTION
+
+== Multiple Java Versions Installed in the System
+
+If you have multiple Java versions installed in the system, you might encounter issues with the connector.
+
+NEEDS SOLUTION
+
+== LLM Asks for Input 
+
+If the LLM asks for input, provide the input or restart the conversation in a new chat window.
+
+== LLM Doesn't Create Files
+
+If the LLM doesnt create the files, ensure that you approve the changes proposed by the LLM, both for `discovery.json` and the API specification.
+
+== LLM Indicates Completion, but Files Are Missing
+
+Occasionally, the LLM might incorrectly state that it has created the API specification when it has not. In such cases, you can manually copy the API specification content provided by the LLM, save it as a YAML file in the project root, and the extension should automatically detect the file and begin the generation process.
+
+ 

@@ -1,0 +1,8 @@
+= Limitations
+
+Learn about the limitations of using UC Builder.
+
+== Limitations of Using UC Builder
+
+* Requesting more than six use cases might cause hallucinations.
+* Large API specifications might cause scope dilution.
