@@ -29,7 +29,7 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 * Required software:
 ** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
 +
-Cursor offers several advantages, specifically using AI to generate xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity] and xref:pagination.adoc#define-pagination-with-ai-assistance[pagination].
+Cursor offers several advantages, specifically using AI to generate xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], and xref:testing-a-connector.adoc#run-tests-with-ai-assistance[tests].
 ** UC Builder extension 
 ** Dependent extensions
 +
