@@ -33,9 +33,7 @@ Cursor offers several advantages, specifically using AI for xref:base-connectivi
 ** UC Builder extension 
 ** Dependent extensions
 +
-You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio.
-+
-NOTE: If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension, so manual installation isn't required. If you use Cursor, install these extensions first, then install the UC Builder extension. For more information, see <<install-uc-builder>>.
+You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension. If you use Cursor, you must update your user settings, and then install the UC Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
 +
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] version 5.7.2 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
@@ -59,16 +57,12 @@ Install UC Builder in VS Code or Cursor.
 
 . Go to *View* > *Command Palette*.
 . Enter `Preferences: Open User Settings`.
-. Go to *Extensions > Gallery: Service Url*.
+. Go to *Features* > *Extensions* > *Gallery: Service Url*.
 . Enter `\https://marketplace.visualstudio.com/_apis/public/gallery`.
++
+NOTE: If you skip this step, you must install the dependent extensions manually.
 . Restart Cursor. 
 . Go to *View* > *Extensions*.
-. Install the dependent extensions by searching for these extensions in the marketplace and clicking *Install*.
-+
-* https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] 
-* https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension]
-* https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension]
-* (Optional) https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
 . Search for `Universal Connectivity Builder` in the marketplace.
 . Click *Install* on the extension.
 

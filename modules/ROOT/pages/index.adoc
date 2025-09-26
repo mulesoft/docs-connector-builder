@@ -1,6 +1,6 @@
 = Universal Connectivity Builder Overview
 
-Use Universal Connectivity (UC) Builder to create your own Anypoint Connectors easily. UC Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0 and later) or with AI assistance (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
+Use Universal Connectivity (UC) Builder to create your own Anypoint Connectors easily. UC Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
 
 UC Builder creates connectors by using LinkWeave, which is a connectivity language built on top of DataWeave. UC Builder is UI-first, so you don't need LinkWeave knowledge to create connectors. However, for advanced use cases, you can use LinkWeave to extend and enhance functionality by adding custom capabilities.
 
