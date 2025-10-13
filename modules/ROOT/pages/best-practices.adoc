@@ -2,7 +2,7 @@
 
 Learn about the best practices for using Connector Builder.
 
-== Best Practices for Using Connector Builder
+== Best Practices
 
 * Keep conversations concise and use `@Conversation`. After about 10 interactions, most models begin to lose context and might start hallucinating.
 * Make use of `@Docs`.

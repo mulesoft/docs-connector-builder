@@ -2,7 +2,7 @@
 
 Learn about the limitations of using Connector Builder.
 
-== Limitations of Using Connector Builder
+== Limitations
 
 * Requesting more than six use cases might cause hallucinations.
 * Large API specifications might cause scope dilution.
