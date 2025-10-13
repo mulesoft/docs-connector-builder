@@ -4,7 +4,7 @@ Learn about UC Builder prerequisites, installations, and upgrades.
 
 == Prerequisites
 
-To create connectors with UC Builder, meet these prerequisites.
+To create connectors with UC Builder, your system must meet these prerequisites.
 
 === OS Platforms
 
@@ -17,10 +17,10 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 
 === Hardware
 
-* Required hardware: 
+* Minimum system requirements: 
 ** 10 GB of free storage space
 ** 8 GB of RAM
-* Recommended hardware:
+* Recommended system requirements:
 ** 20 GB of free storage space
 ** 16 GB of RAM
 
@@ -30,17 +30,17 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 ** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
 +
 Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], and xref:testing-a-connector.adoc#run-tests-with-ai-assistance[tests].
-** UC Builder extension 
-** Dependent extensions
+** UC Builder VS Code extension 
+** Dependent VS Code extensions
 +
 You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension. If you use Cursor, you must update your user settings, and then install the UC Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
 +
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] version 5.7.2 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension] version 1.6.0 and later
-** Anypoint Studio or Anypoint Code Builder
 * Recommended software:
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
+** Anypoint Studio or Anypoint Code Builder
 
 [[install-uc-builder]]
 == Install UC Builder

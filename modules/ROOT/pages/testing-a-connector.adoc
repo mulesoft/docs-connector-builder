@@ -7,7 +7,7 @@ Learn how to test your connector. Testing is an important part of the developmen
 To generate tests for your connector: 
 
 . Open your IDE and go to *Connectivity Builder - Editor*.
-. Click *Generate* > *Generate Anypoint Connector*. 
+. If you haven't generated your connector yet, click *Generate* > *Generate Anypoint Connector*. 
 . Click *Generate* > *Generate Tests*.
 
 This generates connectivity model tests, which are split into data files and actual test files, creating a structured project. These tests include:
@@ -164,7 +164,8 @@ var V_calendars__calendarId__acl_get_response = log(O_calendars__calendarId__acl
 === Run Tests With AI Assistance (Cursor)
 
 . Ensure *Enable Ai Assisted Workflows* is enabled.
-. A rule file is generated to assist you in creating test data. Refer to this rule file in your prompt and use SaaS documentation to generate relevant test data.
+. A rule file is generated to assist you in creating test data, at `<project root>/.cursor/rules/test-data-generation-rules`.
+. Open the Cursor chat window and ask the agent to create sample test data according to the generated rule file, referring to SaaS documentation as needed.
 . To resolve failed tests, log the response to debug issues, for example:
 +
 ----

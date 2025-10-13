@@ -9,7 +9,7 @@ You can package your connector via the UI or the terminal.
 . Open your IDE and go to *Connectivity Builder - Editor*.
 . Click *Build Project*.
 
-If the build completes successfully, a success message appears. If the build doesn't complete successfully, an error message appears and you can click *View output* to review the errors.
+If the build completes successfully, a success message appears. If the build doesn't complete successfully, an error message appears. In either case, you can click *View output* to review the output.
 
 == Package a Connector via the Terminal
 

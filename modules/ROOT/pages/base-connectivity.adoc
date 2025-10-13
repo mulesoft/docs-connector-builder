@@ -6,11 +6,11 @@ The base connectivity includes:
 
 * `{projectname}-connectivity-model` 
 +
-This package contains the code that directly reflects the structure of the API specification or AI assistance from which a connector is generated. The generated connector is written in LinkWeave, which is interpreted at runtime to deliver the specified behavior.
+This package contains the code that directly reflects the structure of the API specification from which a project is generated. This is written in LinkWeave, and is the base from which all connectors will be built.
 
 * `{projectname}-{platformname}-connector-model` 
 +
-This package includes platform-specific code, such as for Anypoint Platform, that incorporates customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
+This package represents a platform-specific connector, such as for Anypoint Platform, which takes the connectivity model as a base and adds customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
 
 You can generate base connectivity either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor).
 
@@ -18,7 +18,7 @@ You can generate base connectivity either from an API specification (OAS 3.0) or
 == Generate Base Connectivity from an API Specification
 
 . Open the UC Builder extension in VS Code or Cursor.
-. Select *New Project* in VS Code, or select *New Project from API Spec* in Cursor.
+. Select *New Project from API Spec*.
 . Enter the required information in *Project Details*.
 +
 [%header%autowidth.spread]
@@ -49,8 +49,6 @@ You can generate base connectivity either from an API specification (OAS 3.0) or
 |===
 |Field|Description
 |*Name of SaaS Platform* |Enter the name of the SaaS platform you want to create a connector for.
-|*Name of ISV* |Enter the name of the ISV you want to create a connector for.
-|*Website of ISV* |Enter the website of the ISV you want to create a connector for.
 |*Top Use Cases* |Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD (Create, Read, Update, Delete) behavior, you must explicitly mention each one.
 |*Official API Documentation or Reference Sources* |Enter the URLs of the official API documentation or reference sources for the connector.
 |*Project Folder* |Select the folder where your project is contained. A subfolder is automatically created within this folder.
