@@ -1,1 +1,1 @@
-include::release-notes::partial$universal-connectivity/universal-connectivity-builder-rn-landing-page.adoc[]
+include::release-notes::partial$connector-builder/connector-builder-rn-landing-page.adoc[]

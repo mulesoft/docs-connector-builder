@@ -2,7 +2,7 @@
 
 Learn how to run your connector. Running a connector involves configuring and deploying the connector.
 
-UC Builder supports running your connector in Anypoint Platform.
+Connector Builder supports running your connector in Anypoint Platform.
 
 == Run a Connector in Anypoint Platform
 

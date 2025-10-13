@@ -1,6 +1,6 @@
 = Creating a Connector
 
-Learn how to create a connector with UC Builder. UC Builder supports these components for your connector.
+Learn how to create a connector with Connector Builder. Connector Builder supports these components for your connector.
 
 * xref:base-connectivity.adoc[Base Connectivity]
 * xref:connections.adoc[Connections]

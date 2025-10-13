@@ -1,10 +1,10 @@
 = Getting Started
 
-Learn about UC Builder prerequisites, installations, and upgrades. 
+Learn about Connector Builder prerequisites, installations, and upgrades. 
 
 == Prerequisites
 
-To create connectors with UC Builder, your system must meet these prerequisites.
+To create connectors with Connector Builder, your system must meet these prerequisites.
 
 === OS Platforms
 
@@ -30,10 +30,10 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 ** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
 +
 Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], and xref:testing-a-connector.adoc#run-tests-with-ai-assistance[tests].
-** UC Builder VS Code extension 
+** Connector Builder VS Code extension 
 ** Dependent VS Code extensions
 +
-You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the UC Builder extension. If you use Cursor, you must update your user settings, and then install the UC Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
+You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the Connector Builder extension. If you use Cursor, you must update your user settings, and then install the Connector Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
 +
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] version 5.7.2 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
@@ -44,17 +44,17 @@ You must have these dependent extensions if you use your connector in Anypoint C
 ** Anypoint Studio or Anypoint Code Builder
 
 [[install-uc-builder]]
-== Install UC Builder
+== Install Connector Builder
 
-Install UC Builder in VS Code or Cursor.
+Install Connector Builder in VS Code or Cursor.
 
-=== Install UC Builder in VS Code
+=== Install Connector Builder in VS Code
 
 . In VS Code, select the Extensions icon in the Activity Bar.
-. Search for `Universal Connectivity Builder` in the marketplace.
+. Search for `Connector Builder` in the marketplace.
 . Click *Install* on the extension.
 
-=== Install UC Builder in Cursor
+=== Install Connector Builder in Cursor
 
 . Go to *View* > *Command Palette*.
 . Enter `Preferences: Open User Settings`.
@@ -64,9 +64,9 @@ Install UC Builder in VS Code or Cursor.
 NOTE: If you skip this step, you must install the dependent extensions manually.
 . Restart Cursor. 
 . Go to *View* > *Extensions*.
-. Search for `Universal Connectivity Builder` in the marketplace.
+. Search for `Connector Builder` in the marketplace.
 . Click *Install* on the extension.
 
-== Upgrade UC Builder
+== Upgrade Connector Builder
 
-To ensure you're using the latest version of UC Builder, select the UC Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.
+To ensure you're using the latest version of Connector Builder, select the Connector Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.

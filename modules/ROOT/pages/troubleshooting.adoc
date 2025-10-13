@@ -1,6 +1,6 @@
 = Troubleshooting
 
-Learn how to troubleshoot issues with UC Builder. 
+Learn how to troubleshoot issues with Connector Builder. 
 
 == Access Error Logs
 

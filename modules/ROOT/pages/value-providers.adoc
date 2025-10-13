@@ -2,7 +2,7 @@
 
 Learn how to define value providers for your connector. Value providers are functions that show a list of valid options for a given field. This enhances the user experience by presenting selectable choices instead of requiring users to remember or manually enter valid values. For example, you can define a value provider to show a list of ISO country codes.
 
-UC Builder supports:
+Connector Builder supports:
 
 * Static value providers (String enums, Numeric enums)
 * Dynamic value providers

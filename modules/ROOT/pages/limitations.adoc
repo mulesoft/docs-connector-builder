@@ -1,8 +1,8 @@
 = Limitations
 
-Learn about the limitations of using UC Builder.
+Learn about the limitations of using Connector Builder.
 
-== Limitations of Using UC Builder
+== Limitations of Using Connector Builder
 
 * Requesting more than six use cases might cause hallucinations.
 * Large API specifications might cause scope dilution.

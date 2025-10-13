@@ -32,13 +32,13 @@ To define pagination for multiple operations:
 +
 The agent analyzes the provided resources, suggests a pagination strategy, and recommends parameters.
 . Review the suggested pagination strategy and fill in the parameters as recommended.
-. Click *Apply*. UC Builder generates a paginated operation.
+. Click *Apply*. Connector Builder generates a paginated operation.
 
 == Define Pagination Using LinkWeave
 
 You can define pagination for an operation by decorating it with a pagination strategy. The decorated operation returns results of type `Page`.
 
-UC Builder supports these pagination strategies.
+Connector Builder supports these pagination strategies.
 
 * <<page-number-pagination>>
 * <<offset-pagination>>

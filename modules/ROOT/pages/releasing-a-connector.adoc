@@ -2,10 +2,10 @@
 
 Learn how to release your connector. Releasing is the process of making your connector available to others.
 
-UC Builder supports releasing your connector to Anypoint Platform.
+Connector Builder supports releasing your connector to Anypoint Platform.
 
 == Release a Connector to Anypoint Platform 
 
-To make your connector available on Anypoint Platform, release it to Anypoint Exchange. UC Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. To release a connector to Anypoint Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
+To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. To release a connector to Anypoint Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
 
 After you release your connector, you should see your published connector in Anypoint Exchange. If you're unable to see the published connector, click *Back to legacy search* to switch the search mode. 

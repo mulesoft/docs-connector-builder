@@ -1,9 +1,9 @@
 = Connections
 :connector-component-name: connections
 
-Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector can't perform operations, triggers, or other components. UC Builder supports creating connectors that integrate with SaaS applications that use HTTP-based connectivity.
+Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector can't perform operations, triggers, or other components. Connector Builder supports creating connectors that integrate with SaaS applications that use HTTP-based connectivity.
 
-Each connection uses an authentication type. An authentication type is a specific method or protocol used to verify and authorize access to the external system. UC Builder supports these authentication types for connections.
+Each connection uses an authentication type. An authentication type is a specific method or protocol used to verify and authorize access to the external system. Connector Builder supports these authentication types for connections.
 
 * *ApiKey*
 +
@@ -29,7 +29,7 @@ include::partial$ui-versus-linkweave.adoc[]
 
 == Define Connections Using the UI
 
-When you xref:base-connectivity.adoc[generate base connectivity], if the authentication type specified in the API specification or by AI assistance is supported by UC Builder, the authentication type and a connection for each endpoint are automatically defined for you.
+When you xref:base-connectivity.adoc[generate base connectivity], if the authentication type specified in the API specification or by AI assistance is supported by Connector Builder, the authentication type and a connection for each endpoint are automatically defined for you.
 
 == Define Connections Using LinkWeave
 

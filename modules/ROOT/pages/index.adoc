@@ -1,12 +1,12 @@
-= Universal Connectivity Builder Overview
+= Connector Builder Overview
 
-Use Universal Connectivity (UC) Builder to create your own Anypoint Connectors easily. UC Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
+Use Connector Builder to create your own Anypoint Connectors easily. Connector Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
 
-UC Builder creates connectors by using LinkWeave, which is a connectivity language built on top of DataWeave. UC Builder is UI-first, so you don't need LinkWeave knowledge to create connectors. However, for advanced use cases, you can use LinkWeave to extend and enhance functionality by adding custom capabilities.
+Connector Builder creates connectors by using LinkWeave, which is a connectivity language built on top of DataWeave. Connector Builder is UI-first, so you don't need LinkWeave knowledge to create connectors. However, for advanced use cases, you can use LinkWeave to extend and enhance functionality by adding custom capabilities.
 
 == Key Advantages
 
-Some key advantages of using UC Builder are:
+Some key advantages of using Connector Builder are:
 
 * *Customization*
 +
@@ -34,7 +34,7 @@ Maximize consistency and reliability by reducing manual input and enforcing reus
 
 == Supported Features
 
-Connectors built with UC Builder can support:
+Connectors built with Connector Builder can support:
 
 * xref:base-connectivity.adoc[Base Connectivity]
 * xref:connections.adoc[Connections]
@@ -47,7 +47,7 @@ After you create your connector, you can xref:testing-a-connector.adoc[test], xr
 
 == Use Cases
 
-Use UC Builder to create a wide range of connectors. Some use cases include:
+Use Connector Builder to create a wide range of connectors. Some use cases include:
 
 * *CRM*
 +
