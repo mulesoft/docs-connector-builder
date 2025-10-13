@@ -1,6 +1,6 @@
-= Creating a Connector
+= Creating Connectors
 
-Learn how to create a connector with Connector Builder. Connector Builder supports these components for your connector.
+Learn how to create connectors with Connector Builder. Connector Builder supports these components for your connectors.
 
 * xref:base-connectivity.adoc[Base Connectivity]
 * xref:connections.adoc[Connections]

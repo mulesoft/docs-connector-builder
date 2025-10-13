@@ -1,10 +1,10 @@
-= Releasing a Connector
+= Releasing Connector
 
-Learn how to release your connector. Releasing is the process of making your connector available to others.
+Learn how to release your connectors. Releasing is the process of making your connectors available to others.
 
 Connector Builder supports releasing your connector to Anypoint Platform.
 
-== Release a Connector to Anypoint Platform 
+== Release Connectors to Anypoint Platform 
 
 To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. To release a connector to Anypoint Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
 
