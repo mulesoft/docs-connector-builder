@@ -40,6 +40,7 @@ You must have these dependent extensions if you use your connector in Anypoint C
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension] version 1.6.0 and later
 * Recommended software:
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
+*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-api-component[Anypoint Code Builder - API Extension]
 ** Anypoint Studio or Anypoint Code Builder
 
 [[install-uc-builder]]

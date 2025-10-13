@@ -2,6 +2,61 @@
 
 Learn how to troubleshoot issues with UC Builder. 
 
+== Access Error Logs
+
+To access error logs in Connector Builder:
+
+. Click *View* > *Output*.
+. In the dropdown menu, select *Connector Builder*.
+
+To modify the output log level, in the Connector Builder extension, go to *Settings* and find *Linkweave › Logging: Level*.
+
+== Connector Generation Using an API Spec
+
+Connector Builder supports only OAS 3.0 API specifications. If you encounter issues, you can use https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-api-component[Anypoint Code Builder - API Extension] to validate the API Spec.
+
+== Connector Generation Using AI Assistance
+
+Even when given well-crafted prompts, AI might sometimes hallucinate. This can be influenced by factors such as the specific model in use and the quality of the API documentation it processes.
+
+When creating a project using AI assistance, it's important to recognize that the initial output is a starting point rather than a finalized solution. You should thoroughly review and validate the AI-generated results, as AI might occasionally misinterpret, omit, or misunderstand aspects of a service’s documentation.
+
+If you encounter issues with a connector generated using AI assistance, ensure you review and compare the AI-generated API specification against the official service documentation. This review should focus on, but not be limited to, these areas:
+
+* *Endpoints*: Ensure all required API endpoints are present and accurately defined.
+* *HTTP Methods*: Verify that each endpoint uses the correct HTTP methods (`GET`, `POST`, `PUT`, `DELETE`, and so on.).
+* *Parameters*: Confirm that all necessary parameters, including their data types, formats, locations (path, query, header, body), and validation rules, are correctly specified.
+* *Request and Response Schemas*: Check that the structures and data types of both request and response bodies are correct, including complex data types like nested objects, arrays, and enums.
+* *Authentication and Authorization*: Make sure the specification accurately describes authentication and authorization mechanisms (such as API keys or OAuth 2.0) required by the service.
+* *Error Handling*: Ensure that typical error responses and their corresponding status codes are properly documented.
+
+== Unable to Locate Operation for TestConnection Element
+
+This error typically occurs during the initial generation of a connector. To ensure a successful connection test, the system requires a simple `GET` operation without any required parameters. This operation automatically gets included by the code generator.
+If no such operation is found in the API specification, you will encounter the `Could not find an operation for the TestConnection element` error.
+
+If you encounter this error, you have two options:
+
+* *Skip and continue generating the connector*: This allows you to proceed with connector generation, but you will need to manually define a custom operation for testing the connection.
+* *Cancel generation and modify the API specification*: You can halt the generation process, update your API specification to include a `GET` operation that meets the criteria (no required parameters), and then restart the connector generation.
+
+== Deletion of Custom Operations and Types when Regenerating a Connector
+
+To safeguard any custom operations or types you've added to prevent their accidental deletion, organize your custom elements within dedicated folders:
+
+* *Custom Operations*: Create a customizations folder inside the operations folder and place all your custom operation definitions within it.
+* *Custom Types*: Similarly, for custom types, create a customizations folder within the types folder and add your custom type definitions there.
+
+By following this structure, the regeneration process recognizes these dedicated folders and preserves your custom work.
+
+== Operations Missing from a Connector
+
+Some operations might be missing from a connector if they were removed as part of our mitigation strategies to ensure out-of-the-box compatibility with the target platform.
+
+Details of these removals can be found in the mitigation report that appears upon connector generation or regeneration.
+
+If you want to turn off these mitigations, go to *Settings* and disable *Linkweave › Features › Mitigations*.
+
 == Coerce Failures
 
 Coerce failures happen at runtime when the connector interprets the response from the API as a type of the connector. 
