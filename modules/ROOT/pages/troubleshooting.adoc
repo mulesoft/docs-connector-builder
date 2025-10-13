@@ -1,4 +1,4 @@
-= Troubleshooting
+= Troubleshooting Connector Builder
 
 Learn how to troubleshoot issues with Connector Builder. 
 

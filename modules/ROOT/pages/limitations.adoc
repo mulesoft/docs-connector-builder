@@ -1,4 +1,4 @@
-= Limitations
+= Limitations of Connector Builder
 
 Learn about the limitations of using Connector Builder.
 
