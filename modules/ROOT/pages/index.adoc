@@ -8,17 +8,9 @@ Connector Builder creates connectors by using LinkWeave, which is a connectivity
 
 Some key advantages of using Connector Builder are:
 
-* *Customization*
-+
-Create your own connectors if they don't already exist, and tailor them to your requirements.
-
 * *Speed*
 +
 Reduce development time from months to days or even minutes.
-
-* *Usability*
-+
-Get a unified, intuitive design experience for both developers and non-developers.
 
 * *Simplicity*
 +
@@ -31,6 +23,14 @@ Build scalable connectivity that handles thousands of APIs with unique implement
 * *Quality*
 +
 Maximize consistency and reliability by reducing manual input and enforcing reusable design patterns.
+
+* *Usability*
++
+Get a unified, intuitive design experience for both developers and non-developers.
+
+* *Customization*
++
+Create your own connectors if they don't already exist, and tailor them to your requirements.
 
 == Supported Features
 

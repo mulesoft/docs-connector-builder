@@ -64,7 +64,7 @@ var myOperation: Operation<DuplicateParams, Number, ResultFailure<Nothing, Error
 [[operation-decorators]]
 === Operation Decorators
 
-The `com::mulesoft::connectivity::decorator::Operation` module provide decorators to append additional code before or after an operation invocation. These decorators include:
+The `com::mulesoft::connectivity::decorator::Operation` module provides decorators to append additional code before or after an operation invocation. These decorators include:
 
 * `mapInputOperation(operation, mapper)`: Transforms the input before invoking the operation, adapting it to the type expected by the operation.
 * `mapInputPaginatedOperation(operation, mapper)`: Transforms the input before invoking a paginated operation, adapting it to the type expected by the operation.

@@ -29,7 +29,7 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 * Required software:
 ** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
 +
-Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], and xref:testing-a-connector.adoc#run-tests-with-ai-assistance[tests].
+Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], and xref:testing-connectors.adoc#run-tests-with-ai-assistance[tests].
 ** Connector Builder VS Code extension 
 ** Dependent VS Code extensions
 +
@@ -39,8 +39,8 @@ You must have these dependent extensions if you use your connector in Anypoint C
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
 *** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension] version 1.6.0 and later
 * Recommended software:
-*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
-*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-api-component[Anypoint Code Builder - API Extension]
+** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
+** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-api-component[Anypoint Code Builder - API Extension]
 ** Anypoint Studio or Anypoint Code Builder
 
 [[install-uc-builder]]
