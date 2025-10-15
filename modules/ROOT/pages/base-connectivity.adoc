@@ -64,5 +64,5 @@ NOTE: Connector Builder has been tested with `claude-sonnet-4`. Performance and 
 +
 * `{projectroot}/discovery/discovery.json` is generated, capturing the LLM’s recommendations for implementing the requested use cases.
 * `{projectroot}/discovery/{saasname}.yaml` is created, containing the discovered endpoints, required schemas, and related details.
-* The extension detects the new API specification and automatically generates a UC project based on it. This process may take several seconds.
+* The extension detects the new API specification and automatically generates a project based on it. This process may take several seconds.
 * Cursor closes and reopens in the root directory of the newly created project.
