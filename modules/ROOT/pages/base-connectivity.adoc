@@ -51,14 +51,14 @@ You can generate base connectivity either from an API specification (OAS 3.0) or
 |*Name of SaaS Platform* |Enter the name of the SaaS platform you want to create a connector for.
 |*Top Use Cases* |Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD (Create, Read, Update, Delete) behavior, you must explicitly mention each one.
 |*Official API Documentation or Reference Sources* |Enter the URLs of the official API documentation or reference sources for the connector.
-|*Project Folder* |Select the folder where your project is contained. A subfolder is automatically created within this folder.
+|*Project Folder* |Select the root directory of your project. All project files will be created here (a subfolder will not be created in this case).
 |===
 . Click *Submit*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
 . Open the Cursor chat window (if not already open) and paste the copied prompt.
 . Optionally (but recommended), copy your provided URLs from the `apiDocs` section of the prompt and paste them just before the final line. Be sure to add an `@` symbol in front of each URL so that Cursor recognizes them as resources. When done correctly, the URLs are highlighted in blue.
 . Ensure you're in Agent mode. You can optionally choose which LLM that Cursor sends your prompt to. 
 +
-NOTE: Connector Builder has been tested with `claude-sonnet-4`. Performance and accuracy with other models isn't guaranteed.
+NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model performs differently and might yield different results.
 . Click *Send*.
 . Wait for the agent to complete its work. AI by nature is non-deterministic, so running the same prompt multiple times might yield different results each time. The expected outcome is:
 +

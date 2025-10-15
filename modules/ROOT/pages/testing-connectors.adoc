@@ -6,7 +6,7 @@ Learn how to test your connectors. Testing is an important part of the developme
 
 To generate tests for your connector: 
 
-. Open your IDE and go to *Connectivity Builder - Editor*.
+. Open your IDE and go to *Connector Builder - Editor*.
 . If you haven't generated your connector yet, click *Generate* > *Generate Anypoint Connector*. 
 . Click *Generate* > *Generate Tests*.
 

@@ -1,4 +1,4 @@
-= Releasing Connector
+= Releasing Connectors
 
 Learn how to release your connectors. Releasing is the process of making your connectors available to others.
 

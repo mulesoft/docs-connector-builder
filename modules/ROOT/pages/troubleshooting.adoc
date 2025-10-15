@@ -69,12 +69,6 @@ In `settings.xml`, you might encounter missing repos or issues with `JAVA_HOME`.
 
 NEEDS SOLUTION
 
-== Multiple Java Versions Installed in the System
-
-If you have multiple Java versions installed in the system, you might encounter issues with the connector.
-
-NEEDS SOLUTION
-
 == LLM Asks for Input 
 
 If the LLM asks for input, provide the input or restart the conversation in a new chat window.
