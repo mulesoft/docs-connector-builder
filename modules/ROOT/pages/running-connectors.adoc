@@ -1,8 +1,8 @@
 = Running Connectors
 
-Learn how to run your connectors. Running a connector involves configuring and deploying the connector.
+Learn how to run your connector. Running a connector involves configuring and deploying the connector.
 
-Connector Builder supports running your connectors in Anypoint Platform.
+Connector Builder supports running your connector in Anypoint Platform.
 
 == Run Connectors in Anypoint Platform
 

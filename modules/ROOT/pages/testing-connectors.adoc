@@ -1,6 +1,6 @@
 = Testing Connectors
  
-Learn how to test your connectors. Testing is an important part of the development process, and it helps you ensure that your connectors work as expected. Testing your connectors involves generating tests and running tests.
+Learn how to test your connector. Testing is an important part of the development process, and it helps you ensure that your connector works as expected. Testing your connector involves generating tests and running tests.
 
 == Generate Tests 
 

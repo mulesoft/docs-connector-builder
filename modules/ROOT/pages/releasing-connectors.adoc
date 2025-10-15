@@ -1,6 +1,6 @@
 = Releasing Connectors
 
-Learn how to release your connectors. Releasing is the process of making your connectors available to others.
+Learn how to release your connector. Releasing is the process of making your connector available to others.
 
 Connector Builder supports releasing your connector to Anypoint Platform.
 
