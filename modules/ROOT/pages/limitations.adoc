@@ -32,7 +32,7 @@ var anypoint_O_projects_api_v3_projects_updates_json_get = O_projects_api_v3_pro
 }
 ----
 +
-This code translates into an Anypoint Connector operation with all fields as parameters of the underlying operation. None of the field values can be of union type. In the example, `O_projects_api_v3_projects_updates_json_get_Type.request.query.updatedAfter` can't be a union type.
+This code translates into an Anypoint Connector operation with all fields as parameters of the underlying operation. None of the field values can be of union type. In the example, `O_projects_api_v3_projects_updates_json_get_Type.request.query.updatedAfter` can't be a union type. To determine this manually, you must navigate to the definition of this type in the connectivity model to see if it is a union type.
 +
 In Anypoint Studio, the parameter doesn't appear in the operation UI. In Anypoint Code Builder, the parameter is shown but produces an error when you try to view its details. An example of an unsupported type is `type unionParameter = Type1 | Type2`.
 +
