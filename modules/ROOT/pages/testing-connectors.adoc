@@ -142,14 +142,18 @@ calendar.events.instances     SUCCESS          Complete test generated
 [[generate-tests-without-ai-assistance]]
 === Generate Tests Without AI Assistance
 
+If you generate tests without AI assistance, the test data will have placeholder data. 
+
 . Open your IDE and go to *Connector Builder - Editor*.
 . If you haven't generated your connector yet, click *Generate* > *Generate Anypoint Connector*. 
 . Click *Generate* > *Generate Tests*.
 . Fill out the required fields for your authentication type.
 . Click *Generate Tests*.
 
-[[generate-test-data-with-ai-assistance]]
-=== Generate Test Data With AI Assistance (Cursor)
+[[generate-tests-with-ai-assistance]]
+=== Generate Tests With AI Assistance (Cursor)
+
+If you generate tests with AI assistance, AI helps generate test data.
 
 . Ensure *Enable Ai Assisted Workflows* is enabled.
 . Open your IDE and go to *Connector Builder - Editor*.
