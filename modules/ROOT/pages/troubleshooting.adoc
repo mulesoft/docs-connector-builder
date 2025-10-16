@@ -63,12 +63,6 @@ Coerce failures happen at runtime when the connector interprets the response fro
 
 NEEDS SOLUTION
 
-== Maven Configuration Problems 
-
-In `settings.xml`, you might encounter missing repos or issues with `JAVA_HOME`.
-
-NEEDS SOLUTION
-
 == LLM Asks for Input 
 
 If the LLM asks for input, provide the input or restart the conversation in a new chat window.
