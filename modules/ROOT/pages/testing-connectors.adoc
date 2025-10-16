@@ -4,7 +4,7 @@ Learn how to test your connector. Testing is an important part of the developmen
 
 == Generate Tests 
 
-Generating tests is a pilot or beta service that is subject to the Beta Services Terms at https://www.salesforce.com/company/legal/Agreements[Agreements - Salesforce.com] or a written Unified Pilot Agreement if executed by Customer, and applicable terms in the https://ptd.salesforce.com/?_ga=2.247987783.1372150065.1709219475-629000709.1639001992[Product Terms Directory]. Use of this pilot or beta service is at the Customer's sole discretion.
+NOTE: Generating tests is a pilot or beta service that is subject to the Beta Services Terms at https://www.salesforce.com/company/legal/Agreements[Agreements - Salesforce.com] or a written Unified Pilot Agreement if executed by Customer, and applicable terms in the https://ptd.salesforce.com/?_ga=2.247987783.1372150065.1709219475-629000709.1639001992[Product Terms Directory]. Use of this pilot or beta service is at the Customer's sole discretion.
 
 You can generate tests without or with AI assistance (available when using Cursor). The tests are connectivity model tests, which are split into data files and actual test files, creating a structured project. These tests include:
 
