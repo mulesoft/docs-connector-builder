@@ -17,8 +17,6 @@ This generates connectivity model tests, which are split into data files and act
 * *Reusable test data*: Test data is stored in separate files for easy reuse.
 * *Self-contained tests for connector operations*: These tests function independently. For example, if a connector has `POST`, `GET`, `PATCH`, and `DELETE` operations for `/invoices`, a self-contained test case can be generated, and the report reflects this.
 
-NOTE: Connector Builder generates tests for all connection types. You must manually delete unwanted connections from `ConnectionOperations.dwl`.
-
 Here's an example of a generated test file for `/calendars/{calendarId}/acl/{ruleId} - PATCH` in a Google Calendar connector, which demonstrates the generation of parent operations, rule creation, and resource deletion:
 
 [source]

@@ -81,4 +81,10 @@ If the LLM doesn't create the files, ensure that you approve the changes propose
 
 Occasionally, the LLM might incorrectly state that it has created the API specification when it has not. In such cases, you can manually copy the API specification content provided by the LLM, save it as a YAML file in the project root, and the extension should automatically detect the file and begin the generation process.
 
+== See Also
+
+include::partial$release-notes/rn-known-issues.adoc[tag=knownIssuesSeeAlsoLink]
+
+
+
  
