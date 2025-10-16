@@ -6,3 +6,38 @@ Learn about the limitations of using Connector Builder.
 
 * Requesting more than six use cases might cause hallucinations.
 * Large API specifications might cause scope dilution.
+* Anypoint Connectors don't allow for any of the parameters to be defined as a union type.
++
+Anypoint Connector operations are defined as transformations of the underlying operations. For example:
++
+[source]
+----
+type anypoint_O_projects_api_v3_projects_updates_json_get_request = {
+  updatedAfter?: O_projects_api_v3_projects_updates_json_get_Type.request.query.updatedAfter,
+  // ... other fields
+}
+
+var anypoint_O_projects_api_v3_projects_updates_json_get_mapping = [
+  "updatedAfter" mapsTo "query.updatedAfter",
+  // ... other mappings
+  {} defaultOf "query",
+  {} alwaysMapsTo "headers",
+  {} alwaysMapsTo "cookie"
+]
+
+@OperationElement()
+var anypoint_O_projects_api_v3_projects_updates_json_get = O_projects_api_v3_projects_updates_json_get withTransformer {
+  in: fromMapping<anypoint_O_projects_api_v3_projects_updates_json_get_request, O_projects_api_v3_projects_updates_json_get_Type.request>(anypoint_O_projects_api_v3_projects_updates_json_get_mapping),
+  out: extractRequestBody
+}
+----
++
+This code translates into an Anypoint Connector operation with all fields as parameters of the underlying operation. None of the field values can be of union type. In the example, `O_projects_api_v3_projects_updates_json_get_Type.request.query.updatedAfter` can't be a union type.
++
+In Anypoint Studio, the parameter doesn't appear in the operation UI. In Anypoint Code Builder, the parameter is shown but produces an error when you try to view its details. An example of an unsupported type is `type unionParameter = Type1 | Type2`.
++
+You can either:
++
+** Omit the operation.
+** Remove the parameter from the operation.
+** Change the parameter's type to Object or another appropriate type.
