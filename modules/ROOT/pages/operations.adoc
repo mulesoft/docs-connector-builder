@@ -9,7 +9,7 @@ include::partial$ui-versus-linkweave.adoc[]
 
 When you xref:base-connectivity.adoc[generate base connectivity], the operations defined in your API specification or AI assistance are automatically displayed as API endpoints. You can choose which operations to include in your connector by selecting or deselecting them.
 
-If you have already generated base connectivity and want to modify the set of operations included from your API specification or AI assistance, select *Generate* > *Regenerate Connector* and choose which operations to add or remove.
+If you have already generated base connectivity and want to modify the set of operations included from your API specification or AI assistance, select *Generate* > *Regenerate Project* and choose which operations to add or remove.
 
 If you have already generated base connectivity and want to add operations that aren't present in the API specification or AI assistance, update the API specification or AI input with the new operations, and then regenerate base connectivity.
 
