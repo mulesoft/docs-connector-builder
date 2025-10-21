@@ -2,7 +2,7 @@
  
 Learn how to test your connector. Testing is an important part of the development process, and it helps you ensure that your connector works as expected. Testing your connector involves generating tests, running tests, and validating the connector within the platform.
 
-== Generate Tests 
+== Generate Tests (Beta)
 
 NOTE: Generating tests is a pilot or beta service that is subject to the Beta Services Terms at https://www.salesforce.com/company/legal/Agreements[Agreements - Salesforce.com] or a written Unified Pilot Agreement if executed by Customer, and applicable terms in the https://ptd.salesforce.com/?_ga=2.247987783.1372150065.1709219475-629000709.1639001992[Product Terms Directory]. Use of this pilot or beta service is at the Customer's sole discretion.
 
