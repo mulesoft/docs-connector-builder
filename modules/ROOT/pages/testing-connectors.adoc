@@ -1,6 +1,6 @@
 = Testing Connectors
  
-Learn how to test your connector. Testing is an important part of the development process, and it helps you ensure that your connector works as expected. Testing your connector involves generating tests and running tests.
+Learn how to test your connector. Testing is an important part of the development process, and it helps you ensure that your connector works as expected. Testing your connector involves generating tests, running tests, and validating the connector within the platform.
 
 == Generate Tests 
 
@@ -193,3 +193,27 @@ var V_calendars__calendarId__acl_get_response = log(O_calendars__calendarId__acl
 var V_calendars__calendarId__acl_get_response = log(O_calendars__calendarId__acl_get.executor(V_calendars__calendarId__acl_get_request(CALENDARID), connection))
 ----
 . Run tests by using the `mvn test` command.
+
+== Validate the Connector 
+
+Before you release your connector, you can install the connector in the platform to make sure it works as expected.
+
+=== Validate the Connector in Anypoint Platform
+
+To validate the connector in Anypoint Platform, you can install the connector in Anypoint Studio or Anypoint Code Builder.
+
+. In the `pom.xml` file, ensure `mule-maven-plugin-version` is 4.6.0 or later.
+. In the `pom.xml` file, add your connector dependency, for example:
++
+----
+<dependencies>
+ <dependency>
+  <groupId>com.mulesoft.connectivity.flights</groupId>
+  <artifactId>flights-anypoint-connector-model</artifactId>
+  <version>0.0.3-SNAPSHOT</version>
+  <classifier>mule-plugin</classifier>
+ </dependency>
+</dependencies>
+----
+
+Now, your connector appears in Anypoint Studio or Anypoint Code Builder and you can test the connector functionality.

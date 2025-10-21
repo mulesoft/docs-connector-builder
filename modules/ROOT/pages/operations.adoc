@@ -1,7 +1,7 @@
 = Operations
 :connector-component-name: operations
 
-Learn how to define operations for your connector. Operations are the actions that your connector can perform, for example, CRUD (Create, Read, Update, Delete) operations.
+Learn how to define operations for your connector. Operations are the actions that your connector can perform, for example, CRUD (Create, Read, Update, Delete) operations. Platform-specific operations are defined as transformations of the canonical connectivity model (CCM) operations.
 
 include::partial$ui-versus-linkweave.adoc[]
 

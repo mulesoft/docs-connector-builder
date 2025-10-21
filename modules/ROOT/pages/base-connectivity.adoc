@@ -6,7 +6,7 @@ The base connectivity includes:
 
 * `{projectname}-connectivity-model` 
 +
-This package contains the code that directly reflects the structure of the API specification from which a project is generated. This is written in LinkWeave, and is the base from which all connectors will be built.
+This is the canonical connectivity model (CCM). This package contains the code that directly reflects the structure of the API specification from which a project is generated. This is written in LinkWeave, and is the base from which all connectors will be built.
 
 * `{projectname}-{platformname}-connector-model` 
 +
