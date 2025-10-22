@@ -30,7 +30,7 @@ NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/wi
 ** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
 +
 Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], xref:testing-connectors.adoc#generate-tests-with-ai-assistance[generating tests], and xref:testing-connectors.adoc#run-tests-with-ai-assistance[running tests].
-** Connector Builder VS Code extension 
+** https://marketplace.visualstudio.com/items?itemName=salesforce.connectivity-tooling-ic-vscode-extension[Connector Builder VS Code extension] 
 ** Dependent VS Code extensions
 +
 You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the Connector Builder extension. If you use Cursor, you must update your user settings, and then install the Connector Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
