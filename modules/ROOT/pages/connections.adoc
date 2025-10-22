@@ -19,7 +19,7 @@ Bearer authentication sends a header named Authorization with a value of Bearer 
 
 * *OAuth2BrowserFlow* 
 +
-OAuth2BrowserFlow authentication includes the authorization code grant type, which is used to obtain both access tokens and refresh tokens and is optimized for confidential clients. Since this is a redirection-based flow, the client must be capable of interacting with the resource owner's user-agent (typically a web browser) and capable of receiving incoming requests (via redirection) from the authorization server. 
+OAuth2BrowserFlow authentication is the authorization code grant type, which is used to obtain both access tokens and refresh tokens and is optimized for confidential clients. Since this is a redirection-based flow, the client must be capable of interacting with the resource owner's user-agent (typically a web browser) and capable of receiving incoming requests (via redirection) from the authorization server. 
 
 * *OAuth2ClientCredentials*
 +
