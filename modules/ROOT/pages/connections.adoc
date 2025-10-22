@@ -39,7 +39,7 @@ You can define connections using LinkWeave.
 * <<authentication-types>>
 
 [[connection-structure]]
-==== Connection Structure
+=== Connection Structure
 
 In LinkWeave, connections are functions that transform requests into responses:
 
