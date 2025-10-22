@@ -17,9 +17,9 @@ Basic authentication enables the user to provide a username and password when lo
 +
 Bearer authentication sends a header named Authorization with a value of Bearer and a token with every request.
 
-* *OAuth2BrowserFlow*
+* *OAuth2BrowserFlow* 
 +
-OAuth2BrowserFlow authentication includes add-on authentication features that provide additional functionality and security to the OAuth 2.0 protocol.
+OAuth2BrowserFlow authentication includes the authorization code grant type, which is used to obtain both access tokens and refresh tokens and is optimized for confidential clients. Since this is a redirection-based flow, the client must be capable of interacting with the resource owner's user-agent (typically a web browser) and capable of receiving incoming requests (via redirection) from the authorization server. 
 
 * *OAuth2ClientCredentials*
 +
@@ -370,8 +370,6 @@ OAuth2 supports these grant types.
 
 * `authorizationCode`
 * `clientCredentials` 
-* `password`
-* `implicit`
 
 Each grant type has specific configuration requirements. For example, for `authorizationCode`:
 
