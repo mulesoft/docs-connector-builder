@@ -1,0 +1,390 @@
+= Connections
+:connector-component-name: connections
+
+Learn how to define connections for your connector. Connections enable your connector to communicate with external systems. Without a connection, your connector can't perform operations, triggers, or other components. Connector Builder supports creating connectors that integrate with SaaS applications that use HTTP-based connectivity.
+
+Each connection uses an authentication type. An authentication type is a specific method or protocol used to verify and authorize access to the external system. Connector Builder supports these authentication types for connections.
+
+* *ApiKey*
++
+ApiKey authentication connects to applications without explicitly defining a user. You must add this key to all requests, and the cloud application identifies the origin of the request and completes the authorization.
+
+* *Basic*
++
+Basic authentication enables the user to provide a username and password when logging in to an external system.
+
+* *Bearer*
++
+Bearer authentication sends a header named Authorization with a value of Bearer and a token with every request.
+
+* *OAuth2BrowserFlow* 
++
+OAuth2BrowserFlow authentication is the authorization code grant type, which is used to obtain both access tokens and refresh tokens and is optimized for confidential clients. Since this is a redirection-based flow, the client must be capable of interacting with the resource owner's user-agent (typically a web browser) and capable of receiving incoming requests (via redirection) from the authorization server. 
+
+* *OAuth2ClientCredentials*
++
+OAuth2ClientCredentials authentication obtains an access token from a user-defined path.
+
+include::partial$ui-versus-linkweave.adoc[]
+
+== Define Connections Using the UI
+
+When you xref:base-connectivity.adoc[generate base connectivity], if the authentication type specified in the API specification or by AI assistance is supported by Connector Builder, the authentication type and a connection for each endpoint are automatically defined for you.
+
+== Define Connections Using LinkWeave
+
+You can define connections using LinkWeave.  
+
+* <<connection-structure>>
+* <<authentication-types>>
+
+[[connection-structure]]
+==== Connection Structure
+
+In LinkWeave, connections are functions that transform requests into responses:
+
+[source]
+----
+(ConnectionRequest) -> ConnectionResponse
+----
+
+For HTTP-based connections, this becomes:
+
+[source]
+----
+(HttpRequester) -> HttpResponse
+----
+
+These types form the structure of connections.
+
+* <<connection>>: Connection function
+* <<connection-provider>>: Connection creation and configuration 
+* <<http-connection>>: Specialized connection for HTTP requests
+* <<http-connection-provider>>: HTTP-specific connection provider
+
+
+[[connection]]
+==== Connection
+
+[source]
+----
+Connection<ConnectionRequest <: Object, ConnectionResponse <: Object> =
+  (ConnectionRequest) -> ConnectionResponse
+----
+
+Parameters:
+
+* `ConnectionRequest`: Object sent to the target system
+* `ConnectionResponse`: Object returned from the target system
+
+[[connection-provider]]
+==== ConnectionProvider
+
+[source]
+----
+ConnectionProvider<ConnectionType <: Connection, InputType <: Object, AuthenticationType <: Object>
+----
+
+Parameters:
+
+* `ConnectionType`: Connection function itself
+* `InputType`: Input parameters required to create the connection
+* `AuthenticationType`: Authentication schema
+
+`ConnectionProvider` returns an object with these properties:
+
+[source]
+----
+{
+  connect: (InputType) -> ConnectionType,
+  authenticationType: AuthenticationType,
+  validate?: (ConnectionType) -> ConnectionValidationResult
+}
+----
+
+Properties:
+
+* `connect`: Creates a connection from input parameters
+* `authenticationType`: Defines the authentication schema
+* `validate`: (Optional) Tests the connection and returns validation results
+
+[[http-connection]]
+==== HTTPConnection
+
+[source]
+----
+HttpConnection = Connection<HttpRequester, HttpResponse>
+----
+
+[[http-connection-provider]]
+==== HTTPConnectionProvider
+
+[source]
+----
+HttpConnectionProvider<InputType <: Object, HttpAuthenticationType> =
+  ConnectionProvider<HttpConnection, InputType, HttpAuthenticationType>
+----
+
+`HTTPConnectionProvider` also supports an optional `extensions` attribute for customizing connection behavior. Use extensions to add custom headers, query parameters, or other modifications to requests. 
+
+[source]
+----
+extensions?: (InputType) -> Array<ConnectionProviderExtensions | ConnectionProviderOAuthExtensions>
+----
+
+The definitions for these types are:
+
+[source]
+----
+type ConnectionProviderExtensions = {
+  in: "query" | "header" | "body" | "path",
+  name: String,
+  value: String
+}
+
+type ConnectionProviderOAuthExtensions = {
+  inDance: true | false,
+} & ConnectionProviderExtensions
+----
+
+You can also enhance any authentication type with extensions. This example adds a static header to a Basic authentication type.
+
+[source]
+----
+@ConnectionElement()
+  var basicAuth = defineBasicHttpConnectionProvider<BasicAuthSchema & { baseUri: String }>((schema) -> {
+    username: schema.username,
+    password: schema.password
+  }, (schema) -> {
+    baseUri: schema.baseUri
+  }),
+  (schema) -> [
+                  {in: "header", name:"customHeaderStatic", value: "myValue"}
+                ] //This extensions attribute is optional
+----
+
+=== Authentication Types
+
+You can define the connections for authentication types.
+
+* <<apikey>>
+* <<basic>>
+* <<bearer>>
+* <<oauth2>>
+
+[[apikey]]
+==== ApiKey
+
+[source]
+----
+@ConnectionElement()
+  var apiKeyAuth = defineApiKeyHttpConnectionProvider<ApiKeyAuthSchema & { baseUri: String }>((schema) -> {
+    apiKey: schema.apiKey
+  }, (schema) -> {
+    baseUri: schema.baseUri
+  }, {
+    in: "header",
+    name: "X-ApiKey"
+  })
+----
+
+The APIKey connection is defined and created using `ApiKeyAuthSchema`, which is the input connection type definition and the connection parameters.
+
+The `defineApiKeyHttpConnectionProvider` function requires these parameters.
+
+* `schemaMapper`
++
+From an input, `schemaMapper` returns `ApiKeyAuthSchema`.
++
+[source]
+----
+type ApiKeyAuthSchema = {|
+      apiKey: @SemanticTerms(value = ["apiKey"]) String
+  |}
+----
+
+* `connectionProviderSchemaMapper`
++
+From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
++
+[source]
+----
+type HttpConnectionProviderSchema = {
+  baseUri?: String
+}
+----
+
+* `attributes`
++
+`attributes` returns `ApiKeyAuthAttributesSchema`.
++
+[source]
+----
+type ApiKeyAuthAttributesSchema = {
+  in: 'header' | 'cookie' | 'query',
+  name: String
+}
+----
+
+NOTE: LinkWeave supports a schema based on a single API key. 
+
+[[basic]]
+==== Basic
+
+[source]
+----
+@ConnectionElement()
+  var basicAuth = defineBasicHttpConnectionProvider<BasicAuthSchema & { baseUri: String }>((schema) -> {
+    username: schema.username,
+    password: schema.password
+  }, (schema) -> {
+    baseUri: schema.baseUri
+  })
+----
+
+The Basic connection is defined and created using `BasicAuthDefinition`, which is the input connection type definition and the connection parameters.
+
+The `defineBasicHttpConnectionProvider` function requires these parameters.
+
+* `schemaMapper`
++
+From an input, `schemaMapper` returns `BasicAuthSchema`.
++
+[source]
+----
+type BasicAuthSchema = {
+  username: @SemanticTerms(value = ["username"]) String,
+  password: @SemanticTerms(value = ["password"]) String
+}
+----
+
+* `connectionProviderSchemaMapper`
++
+From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
++
+[source]
+----
+type HttpConnectionProviderSchema = {
+  baseUri?: String
+}
+----
+
+[[bearer]]
+==== Bearer
+
+[source]
+----
+@ConnectionElement()
+  var bearerAuth = defineBearerHttpConnectionProvider<BearerAuthSchema & { baseUri: String }>((schema) -> {
+    token: schema.token
+  }, (schema) -> {
+    baseUri: schema.baseUri
+  })
+----
+
+The Bearer connection is defined and created using `BearerAuthSchema`, which is the input connection type definition and the connection parameters.
+
+The `defineBearerHttpConnectionProvider` function requires these parameters.
+
+* `schemaMapper`
++
+From an input, `schemaMapper` returns `BearerAuthSchema`.
++
+[source]
+----
+type BearerAuthSchema = {
+  token: @SemanticTerms(value = ["secretToken"]) String
+}
+----
+
+* `connectionProviderSchemaMapper`
++
+From an input, `connectionProviderSchemaMapper` returns `HttpConnectionProviderSchema`.
++
+[source]
+----
+type HttpConnectionProviderSchema = {
+  baseUri?: String
+}
+----
+
+[[oauth2]]
+==== OAuth2
+
+[source]
+----
+@ConnectionElement()
+type OAuthAuthDefinition = {
+       baseUri: String,
+       accessToken: @SemanticTerms(value = ["password"]) String
+}
+
+var oAuth: defineOAuth2Connection<OAuthAuthDefinition>(
+       (parameter) -> {accessToken: parameter.accessToken},
+       (parameter) -> {baseUri: parameter.baseUri},
+       {
+           grantType: 'authorizationCode',
+           authorizationUrl: "http://localhost/authorize",
+           tokenUrl: "http://localhost/token",
+           scopes: ["test"]
+       }
+     )
+----
+
+The OAuth2 connection is defined and created using `OAuthAuthDefinition`, which is the input connection type definition and the connection parameters.
+
+The `defineOAuth2Connection` function requires these parameters.
+
+* `schemaMapper`
++
+From an input, `schemaMapper` returns `OAuth2AuthSchema`.
++
+[source]
+----
+type OAuth2AuthSchema = {|
+  accessToken: @SemanticTerms(value = ["password"]) String
+|}
+----
+
+* `connectionSchemaMapper`
++
+From an input, `connectionSchemaMapper` returns `HttpConnectionProviderSchema`.
++
+[source]
+----
+type HttpConnectionProviderSchema = {|
+  baseUri?: String
+|}
+----
+
+* `attributes`
++
+`attributes` returns `OAuth2Schema`.
++
+[source]
+----
+type OAuth2Schema<OAuthGrantType <: AuthorizationCodeGrantType | ClientCredentialsGrantType | PasswordGrantType | ImplicitGrantType> = OAuthGrantType
+----
+
+OAuth2 supports these grant types.
+
+* `authorizationCode`
+* `clientCredentials` 
+
+Each grant type has specific configuration requirements. For example, for `authorizationCode`:
+
+[source]
+----
+type GrantType = 'authorizationCode' | 'clientCredentials' | 'password' | 'implicit'
+
+type CommonOAuth2GrantTypeSchema<GrantType> = {|
+  "grantType": GrantType,
+  refreshUrl?: String,
+  scopes: Array<String>
+|}
+
+type AuthorizationCodeGrantType = CommonOAuth2GrantTypeSchema<'authorizationCode'> & {|
+  authorizationUrl: String,
+  tokenUrl: String
+|}
+----

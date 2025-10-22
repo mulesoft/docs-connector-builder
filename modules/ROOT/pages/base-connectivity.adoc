@@ -1,0 +1,68 @@
+= Base Connectivity
+
+Learn how to generate the base connectivity for your connector. Base connectivity is the foundation of your connector and it defines the basic structure of your connector. 
+
+The base connectivity includes:
+
+* `{projectname}-connectivity-model` 
++
+This is the canonical connectivity model (CCM). This package contains the code that directly reflects the structure of the API specification from which a project is generated. This is written in LinkWeave, and is the base from which all connectors will be built.
+
+* `{projectname}-{platformname}-connector-model` 
++
+This package represents a platform-specific connector, such as for Anypoint Platform, which takes the connectivity model as a base and adds customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
+
+You can generate base connectivity either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor).
+
+[[generate-base-connectivity-from-an-api-specification]]
+== Generate Base Connectivity from an API Specification
+
+. Open the Connector Builder extension in VS Code or Cursor.
+. Select *New Project from API Spec*.
+. Enter the required information in *Project Details*.
++
+[%header%autowidth.spread]
+|===
+|Field|Description
+|*Name* |Enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
+|*Description* |Enter a description for your project.
+|===
+. Optionally, click *Select Icon* to upload an icon for your project.
+. In *Connectivity Platforms*, select the *Anypoint Platform* checkbox.
+. Click *Next*.
+. Click *Select API Spec file* and then select the API specification (OAS 3.0) to upload to create your connector.
+. Click *Open Spec*.
+. Select the API endpoints that you want your project to include.
+. Click *Next*.
+. Select the folder where your project is contained. A subfolder is automatically created within this folder.
+. Click *Select containing folder*. Your project is created, and VS Code opens the newly created project. 
+
+[[generate-base-connectivity-with-ai-assistance]]
+== Generate Base Connectivity with AI Assistance (Cursor)
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Ai Assisted Workflows* is enabled.
+. Select *New Project with AI*. 
+. Enter the required information in *AI Project Details*.
++
+[%header%autowidth.spread]
+|===
+|Field|Description
+|*Name of SaaS Platform* |Enter the name of the SaaS platform you want to create a connector for.
+|*Top Use Cases* |Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD (Create, Read, Update, Delete) behavior, you must explicitly mention each one.
+|*Official API Documentation or Reference Sources* |Enter the URLs of the official API documentation or reference sources for the connector.
+|*Project Folder* |Select the root directory of your project. All project files will be created here (a subfolder will not be created in this case).
+|===
+. Click *Submit*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
+. Open the Cursor chat window (if not already open) and paste the copied prompt.
+. Optionally (but recommended), copy your provided URLs from the `apiDocs` section of the prompt and paste them just before the final line. Be sure to add an `@` symbol in front of each URL so that Cursor recognizes them as resources. When done correctly, the URLs are highlighted in blue.
+. Ensure you're in Agent mode. You can optionally choose which LLM that Cursor sends your prompt to. 
++
+NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model performs differently and might yield different results.
+. Click *Send*.
+. Wait for the agent to complete its work. AI by nature is non-deterministic, so running the same prompt multiple times might yield different results each time. The expected outcome is:
++
+* `{projectroot}/discovery/discovery.json` is generated, capturing the LLM’s recommendations for implementing the requested use cases.
+* `{projectroot}/discovery/{saasname}.yaml` is created, containing the discovered endpoints, required schemas, and related details.
+* The extension detects the new API specification and automatically generates a project based on it. This process may take several seconds.
+* Cursor closes and reopens in the root directory of the newly created project.

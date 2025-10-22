@@ -1,1 +1,86 @@
-= Universal Connectivity
+= Connector Builder Overview
+
+Use Connector Builder to create your own Anypoint Connectors easily. Connector Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
+
+Connector Builder creates connectors by using LinkWeave, which is a connectivity language built on top of DataWeave. Connector Builder is UI-first, so you don't need LinkWeave knowledge to create connectors. However, for advanced use cases, you can use LinkWeave to extend and enhance functionality by adding custom capabilities.
+
+== Key Advantages
+
+Some key advantages of using Connector Builder are:
+
+* *Speed*
++
+Reduce development time from months to days or even minutes.
+
+* *Simplicity*
++
+Eliminate system-specific code, static assets, and scripting.
+
+* *Scalability*
++
+Build scalable connectivity that handles thousands of APIs with unique implementations.
+
+* *Quality*
++
+Maximize consistency and reliability by reducing manual input and enforcing reusable design patterns.
+
+* *Usability*
++
+Get a unified, intuitive design experience for both developers and non-developers.
+
+* *Customization*
++
+Create your own connectors if they don't already exist, and tailor them to your requirements.
+
+== Supported Features
+
+Connectors built with Connector Builder can support:
+
+* xref:base-connectivity.adoc[Base Connectivity]
+* xref:connections.adoc[Connections]
+* xref:operations.adoc[Operations]
+* xref:pagination.adoc[Pagination]
+* xref:triggers.adoc[Triggers]
+* xref:value-providers.adoc[Value Providers]
+
+After you create your connector, you can xref:testing-connectors.adoc[test], xref:packaging-connectors.adoc[package], xref:releasing-connectors.adoc[release], and xref:running-connectors.adoc[run] your connector. 
+
+== Use Cases
+
+Use Connector Builder to create a wide range of connectors. Some use cases include:
+
+* *CRM*
++
+Sync customer data, manage leads, and automate sales processes.
+
+* *ERP*
++
+Integrate financials, manage inventory, and streamline supply chain operations.
+
+* *Marketing*
++
+Plan campaigns, track customer interactions, and automate outreach workflows.
+
+* *E-commerce*
++
+Manage product catalogs, process orders, and handle customer data.
+
+* *HR Management*
++
+Handle employee data, run payroll, and administer benefits.
+
+* *Collaboration*
++
+Automate notifications, manage tasks, and streamline project workflows.
+
+* *Social Media*
++
+Publish content, track analytics, and enable social engagement.
+
+* *Payment Gateways*
++
+Process payments, manage transactions, and handle financial data.
+
+== Next Steps
+
+For information about prerequisites, installations, and upgrades, refer to xref:getting-started.adoc[Getting Started].

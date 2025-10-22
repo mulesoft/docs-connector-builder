@@ -1,0 +1,303 @@
+= Operations
+:connector-component-name: operations
+
+Learn how to define operations for your connector. Operations are the actions that your connector can perform, for example, CRUD (Create, Read, Update, Delete) operations. Platform-specific operations are defined as transformations of the canonical connectivity model (CCM) operations.
+
+include::partial$ui-versus-linkweave.adoc[]
+
+== Define Operations Using the UI
+
+When you xref:base-connectivity.adoc[generate base connectivity], the operations defined in your API specification or AI assistance are automatically displayed as API endpoints. You can choose which operations to include in your connector by selecting or deselecting them.
+
+If you have already generated base connectivity and want to modify the set of operations included from your API specification or AI assistance, select *Generate* > *Regenerate Project* and choose which operations to add or remove.
+
+If you have already generated base connectivity and want to add operations that aren't present in the API specification or AI assistance, update the API specification or AI input with the new operations, and then regenerate base connectivity.
+
+== Define Operations Using LinkWeave
+
+You can define operations using LinkWeave. 
+
+* <<operation-structure>>
+* <<operation-decorators>>
+* <<http-operations>>
+* <<operation-errors>>
+
+[[operation-structure]]
+=== Operation Structure
+
+Each operation consists of:
+
+* `name`: An internal identifier for the operation.
+* `displayName`: The user-facing name shown in the UI.
+* `executor`: The function that implements the operation logic.
+
+Operation invocations can either succeed or fail. A successful invocation returns `ResultSuccess`, while a failure returns `ResultFailure`. The meaning of "failure" depends on the external service you're integrating with.
+
+[NOTE]
+====
+Most HTTP services indicate errors using `4XX` or `5XX` status codes, which the HTTP library interprets as failures. However, some APIs always return `2XX` status codes and instead signal errors within the response body. For these APIs, you must inspect the response and explicitly signal failure in your executor.
+====
+
+Operations have the `Operation<ArgsT, OkT, ErrorT <: ResultFailure, ConnT>` type.
+
+* `ArgsT`: The type of arguments required for invocation. It must be an `Object` type.
+* `OkT`: The type of the successful result (`ResultSuccess<OkT>`).
+* `ErrorT`: The type of the failure result (`ResultFailure<ErrorValueType, ErrorType>`), in which `ErrorValueType` is the error payload and `ErrorType` describes the error kind and categories.
+* `ConnT`: The connection type, which is an `Object` type that describes the context required to invoke the operation.
+
+Here's an example of an operation:
+
+[source]
+----
+type DuplicateParams = {
+    x: Number
+}
+
+var myOperation: Operation<DuplicateParams, Number, ResultFailure<Nothing, Error>, {}> = {
+    name: "duplicate",
+    displayName: "2 times X",
+    executor: (args: DuplicateParams, connectionInstance) ->
+      success(args.x * 2)
+}
+----
+
+[[operation-decorators]]
+=== Operation Decorators
+
+The `com::mulesoft::connectivity::decorator::Operation` module provides decorators to append additional code before or after an operation invocation. These decorators include:
+
+* `mapInputOperation(operation, mapper)`: Transforms the input before invoking the operation, adapting it to the type expected by the operation.
+* `mapInputPaginatedOperation(operation, mapper)`: Transforms the input before invoking a paginated operation, adapting it to the type expected by the operation.
+* `mapOutputSuccessOperation(operation, mapper)`: Transforms the output of successful invocations into a more suitable shape.
+* `mapOutputFailureOperation(operation, mapper)`: Transforms the output of failed invocations into a more suitable shape.
+* `mapOutputFailurePaginatedOperation(operation, mapper)`: Transforms the output of failed invocations of paginated operations into a more suitable shape.
+* `paginate(operation, strategy)`: Applies a pagination strategy to the output of successful invocations, using a function that receives both the original parameters and the successful result to create a `Page`.
+
+[[http-operations]]
+=== HTTP Operations
+
+HTTP operations are the most common type of operation, so they have the `com::mulesoft::connectivity::transport::Http` dedicated module. This module standardizes HTTP operation shapes and provides utilities for parameter encoding and request execution. Here's a summary of the module.
+
+* `HttpRequestBuilder`: The base type for HTTP connection instances.
+* `HttpResponse<T>`: The type representing an HTTP response with a body of type `T`.
+* `HttpAuthenticationType`: The type representing authentication for HTTP connections.
+* `HttpConnection<ArgsT, AuthenticationType>`: The type describing an HTTP connection that requires parameters of type `ArgsT` and uses the specified `AuthenticationType`.
+* `BasicHttpConnection<ArgsT>`: The type describing an HTTP connection using the Basic authentication scheme, requiring parameters of type `ArgsT`.
+* `defineBasicHttpConnection(validate, mapper)`: Defines `BasicHttpConnection` by providing a `validate` function to check credential validity and a `mapper` function to extract the authentication schema from the connection parameters.
+* `defineBearerHttpConnection(validate, mapper)`: Defines `BearerHttpConnection` by providing a `validate` function to check credential validity and a `mapper` function to extract the authentication schema from the connection parameters.
+* `BaseAuthSchema`: The base type for all authentication schemas.
+* `BasicAuthSchema`: The type describing the information required for the Basic authentication scheme.
+* `basicAuth(schema)`: Creates an HTTP connection instance (`HttpRequestBuilder`) from `BasicAuthSchema`.
+* `BearerAuthSchema`: The type describing the information required for the Bearer authentication scheme.
+* `bearerAuth(schema)`: Creates an HTTP connection instance (`HttpRequestBuilder`) from `BearerAuthSchema`.
+* `HttpOperation<ArgsT, OkT, ErrorT, ConnT>`: The type representing an HTTP operation.
+* `parseQueryParameters(uri)`: Parses query parameters from the given URI.
+* `addQueryParameters(resource, queryParams, config?)`: Serializes `queryParams` (using the optional `config`) and adds them to the specified resource.
+
+HTTP operations have the `HttpOperation<ArgsT, OkT, ErrorT, ConnT>` type, in which:
+
+* `ArgsT` must extend `HttpRequestType`.
+* `OkT` and `ErrorT` must extend `HttpResponse`.
+* `ConnT` must extend `HttpConnection`.
+
+The `HttpRequestType` object defines these parameters for all HTTP operations.
+
+* Query parameters (required, can be empty)
+* URI/path parameters (optional)
+* Header parameters (required, can be empty)
+* Cookie parameters (required, can be empty)
+* Body (optional)
+
+Here's an example of an HTTP operation with the `\http://www.mulesoft.com/user/{userId}` endpoint:
+
+[source]
+----
+type GetUserByIdRequest = HttpRequestType<{|
+  uri: { userId: Number },
+  query: {},
+  headers: {},
+  cookie: {}
+|}>
+
+@OperationElement()
+var GetUserByIdEndpoint: HttpOperation<GetUserByIdRequest, Any, Any, HttpConnection> = {
+  name: "getUserByIdEndpoint",
+  displayName: "Get user by id",
+  executor: (parameter, connection) ->
+    success(connection({method: "GET", path: "/user/" ++ parameter.uri.userId}) as HttpResponse<Any>)
+}
+----
+
+The `parameter` variable is of type `GetUserByIdRequest`. To access individual parameter values, reference their corresponding attributes, as shown with `parameter.uri.userId` in the example.
+
+To perform HTTP requests, use the `request` function from `dw::io::http::Client`. To serialize complex values for query parameters, use the `addQueryParameters` function.
+
+==== Encoding Parameters in HTTP Operations
+
+Before sending parameters in an HTTP request, they often need to be converted into an appropriate string format. Specify the encoding configuration for each parameter that requires it. For example, array query parameters must be encoded into a string when constructing the final URI, as arrays can't be transmitted directly. The same principle applies to URI, header, and cookie parameters, though each type might have different encoding options. For more information about the available encoding configurations for each parameter type, refer to https://spec.openapis.org/oas/latest.html#style-values[Style Values].
+
+Here's an example of encoding parameters in an HTTP operation:
+
+[source]
+----
+type GetUsersByCompaniesIdEndpointRequest = HttpRequestType<{|
+  uri: { companiesId: Array<Number> },
+  query: { users: Array<Number> },
+  headers: { customHeader: CustomAuth },
+  cookie: { customCookie: CustomAuth }
+|}>
+
+type CustomAuth = { username: String, pass: String }
+
+@OperationElement()
+var getUsersByCompaniesIdEndpoint: HttpOperation<GetUsersByCompaniesIdEndpointRequest, Any, Any, HttpConnection> = {
+  name: "getUserByIdEndpoint",
+  displayName: "Get user by id",
+  executor: (parameter, connection) ->
+    success(connection({
+      method: "GET",
+      path: "/usersByCompaniesId/" ++ serializeUriParam(parameter.uri.companiesId, config: { style: "simple", explode: false }),
+      queryParams: parameter.query update {
+        case users at .users -> users <~ { style: "form", explode: true }
+      },
+      headers: parameter.headers update {
+        case customHeader at .customHeader -> serializeHeaders(customHeader, config: { style: "simple", explode: false })
+        case Cookie at .Cookie! -> serializeCookies(parameter.cookie update {
+          case customCookie at .customCookie -> customCookie <~ { style: "form", explode: false }
+        })
+      }
+    }) as HttpResponse<GetUsersByCompanyIdEndpointResponse>)
+}
+----
+
+* *Query parameter encoding*
++
+To encode query parameters, add metadata to each parameter within the `queryParams` object of the HTTP request. The encoding is performed automatically before the request is sent.
++
+[source]
+----
+queryParams: parameter.query update {
+    case users at .users -> users <~ { style: "form", explode: true }
+}
+----
+
+* *URI/path parameter encoding*
++
+To encode URI parameters, call the `serializeUriParam` function for each parameter, passing the parameter and its encoding configuration.
++
+[source]
+----
+path: "/usersByCompaniesId/" ++ serializeUriParam(parameter.uri.companiesId, config: { style: "simple", explode: false }),
+----
+
+* *Header and cookie encoding*
++
+To encode headers, call the `serializeHeaders` function for each header (except for the `Cookie` header), providing the parameter and encoding configuration. To encode cookies, call the `serializeCookies` function with the cookie object and encoding information for each parameter.
++
+[source]
+----
+headers: parameter.headers update {
+    case customHeader at .customHeader -> serializeHeaders(customHeader, config: {style: "simple", explode: false})
+    case Cookie at .Cookie! -> serializeCookies(parameter.cookie update {
+        case customCookie at .customCookie -> customCookie <~ { style: "form", explode: false }
+    })
+}
+----
+
+[[operation-errors]]
+=== Operation Errors
+
+Operations can fail in different ways, especially when interacting with HTTP endpoints that might return various status codes.
+
+This approach only signals that a failure occurred, without providing specific error kinds or categories:
+
+[source]
+----
+var getUsers: Operation<{}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+  name: "getUsers",
+  displayName: "Get Users",
+  executor: (parameter, connection) -> do {
+    var response = connection({method: 'GET', path: "/users"})
+    ---
+    if (response.status == 200)
+      success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>)
+    else
+      failure(response)
+  }
+}
+----
+
+==== Example: Error Types
+
+To allow users to handle specific error types, such as `404 Not Found`, define error types and return them accordingly:
+
+[source]
+----
+type Error404 = Error<"404", "CLIENT_ERROR">
+
+var Error404Instance: Error404 = {
+  kind: "404",
+  categories: ["CLIENT_ERROR"]
+}
+
+var getUsers: Operation<{}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<String, Error404 | Error>, HttpConnection> = {
+  name: "getUsers",
+  displayName: "Get Users",
+  executor: (parameter, connection) -> do {
+    var response = connection({method: 'GET', path: "/users"})
+    ---
+    if (response.status == 200)
+      success(response)
+    else if (response.status == 404)
+      failure("404", Error404Instance)
+    else
+      failure("unknown error")
+  }
+}
+----
+
+With this pattern, users can distinguish and handle specific error kinds at runtime.
+
+==== Example: Multiple Error Values
+
+Some external systems return different error payloads for different error types. For example, `4XX` and `5XX` return different messages:
+
+[source]
+----
+type Error404 = Error<"404", "CLIENT_ERROR">
+var Error404Instance: Error404 = {
+  kind: "404",
+  categories: ["CLIENT_ERROR"]
+}
+
+type Error500 = Error<"500", "SERVER_ERROR">
+var Error500Instance: Error500 = {
+  kind: "500",
+  categories: ["SERVER_ERROR"]
+}
+
+type 404ErrorMessage = {
+  message: String
+}
+
+type 500ErrorMessage = {
+  errorCode: Number
+}
+
+var getUsers: Operation<{}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<404ErrorMessage, Error404> | ResultFailure<500ErrorMessage, Error500>, HttpConnection> = {
+  name: "getUsers",
+  displayName: "Get Users",
+  executor: (parameter, connection) -> do {
+    var response = connection({method: 'GET', path: "/users"})
+    ---
+    if (response.status == 200)
+      success(response)
+    else if (response.status == 404)
+      failure({message: "404 Not Found"}, Error404Instance)
+    else
+      failure({errorCode: 500}, Error500Instance)
+  }
+}
+----
+
+In this example, a `4XX` error returns a `{message: String}` payload, while a `5XX` error returns `{errorCode: Number}`. This allows users to handle and inspect error payloads based on the error kind.

@@ -1,0 +1,86 @@
+= Value Providers
+
+Learn how to define value providers for your connector. Value providers are functions that show a list of valid options for a given field. This enhances the user experience by presenting selectable choices instead of requiring users to remember or manually enter valid values. For example, you can define a value provider to show a list of ISO country codes.
+
+Connector Builder supports:
+
+* Static value providers (String enums, Numeric enums)
+* Dynamic value providers
+* Value provider pagination
+
+== Define Value Providers Using LinkWeave
+
+Attaching value providers to types allows the platform to automatically retrieve and display possible values for fields that use those types. 
+
+For example, suppose you have a connector with an operation that retrieves the population for a given country:
+
+[source]
+----
+var getPopulation : Operation<{country: CountryIsoCode}> = {
+    // ...
+}
+----
+
+Here, the `country` parameter expects an ISO country code (for example, `AR`, `US`, or `BR`). Instead of asking users to remember these codes, you can define a value provider to supply the list of valid countries.
+
+. Define an operation to fetch the list of countries:
++
+[source]
+----
+var getCountries = // ...
+----
+. Create the value provider using `defineValueProvider`. This function takes two arguments: the executor for fetching the data, and a transformation function to map the response to the required format:
++
+[source]
+----
+var countriesValueProvider = defineValueProvider(
+    getCountries.executor,
+    (response: HttpResponse<{items: Array<Country>}>) ->
+        response.body.items map ((item, index) -> {
+            value: item.isoCode,
+            displayValue: { label: item.name }
+        })
+)
+----
++
+The transformation function must return an array of objects with this structure:
++
+[source]
+----
+{
+    value: VALUE, // The actual value to be used as input
+    displayValue: {
+        label: LABEL // The label shown to the user for this value
+    }
+}
+----
++
+. Add the value provider to your connector declaration:
++
+[source]
+----
+@FlowConnectorElement()
+var connector = {
+    name: "WorldInfo",
+    // ...
+    operations: {
+        getPopulation: getPopulation,
+        getCountries: getCountries
+    },
+    valueProviders: {
+        countriesValueProvider: countriesValueProvider
+    }
+}
+----
++
+Now, the value provider can be referenced by any operation that requires a country input.
+. Annotate the parameter in your operation to use the value provider:
++
+[source]
+----
+var getPopulation : Operation<{country: @ValuesFrom(value = { name: countriesValueProvider }) CountryIsoCode}> = {
+    // ...
+}
+----
++
+With this setup, users see a dropdown of country names when selecting a country, and the corresponding ISO code is used as the input value.

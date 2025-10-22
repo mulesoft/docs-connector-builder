@@ -1,0 +1,287 @@
+= Pagination
+:connector-component-name: pagination
+
+Learn how to define pagination for your connector. Pagination is the process of dividing a large dataset into smaller subsets, called pages, to make it easier to manage and display.
+
+include::partial$ui-versus-linkweave.adoc[]
+
+== Define Pagination Using the UI
+
+You can define pagination without or with AI assistance (available when using Cursor).
+
+[[define-pagination-without-ai-assistance]]
+=== Define Pagination Without AI Assistance
+
+To define pagination for a single operation:
+
+. Under *Operations Explorer*, select the operation.
+. Select *Add pagination*.
+. Click *Generate Anypoint Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
+
+To define pagination for multiple operations:
+
+. Under *Project Settings*, select *Pagination*.
+. Under *Configure Pagination for Multiple Operations*, select the operations to configure pagination for.
+. Click *Generate Anypoint Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
+
+[[define-pagination-with-ai-assistance]]
+=== Define Pagination With AI Assistance (Cursor)
+
+. Ensure *Enable Ai Assisted Workflows* is enabled.
+. Under *Operations Explorer*, select the operation.
+. Click *Add pagination*, then click *Help me with this*. This copies a prepared prompt to your clipboard, which you can manually paste into the Cursor chat window.
+. Open the Cursor chat window (if not already open) and paste the copied prompt. Ensure you're in Agent mode. If the API documentation or API specification isn't already included in the prompt, provide it now.
++
+The agent analyzes the provided resources, suggests a pagination strategy, and recommends parameters.
+. Review the suggested pagination strategy and fill in the parameters as recommended.
+. Click *Apply*. Connector Builder generates a paginated operation.
+
+== Define Pagination Using LinkWeave
+
+You can define pagination for an operation by decorating it with a pagination strategy. The decorated operation returns results of type `Page`.
+
+Connector Builder supports these pagination strategies.
+
+* <<page-number-pagination>>
+* <<offset-pagination>>
+* <<marker-pagination>>
+* <<hypermedia-pagination>>
+
+[[page-number-pagination]]
+=== Page Number Pagination
+
+Page number pagination is a strategy for APIs that use a query parameter to specify the page number, for example, `?page=2`.
+
+Suppose your API endpoint is `\http://www.mulesoft.com/users?page=X`.
+
+Define the operation:
+
+[source]
+----
+var getUsers : Operation<{page: Number}, HttpResponse<{items: Array<{id: String, name: String, email: String}>}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getUsers",
+    displayName: "Get Users",
+    executor: (parameter, connection) -> do {
+        var response = connection({method: 'GET', path: "/users?page=" ++ parameter.page})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>}>)
+        else
+          failure(response)
+    }
+}
+----
+
+Decorate it for pagination:
+
+[source]
+----
+@OperationElement()
+var getUsersPaginated = pageNumberPaginated(
+  getUsers,
+  (page) -> page.body.items default [],
+  (param) -> param.page default 0,
+  (param, pageNumber) -> (param update { case page at .page! -> pageNumber })
+)
+----
+
+[[offset-pagination]]
+=== Offset Pagination
+
+Offset pagination is a strategy for APIs that use an offset parameter to indicate the starting point of results, for example, `?offset=10&limit=20`.
+
+Suppose your API endpoint is `\http://www.mulesoft.com/users?offset=X&limit=Y`.
+
+Define the operation:
+
+[source]
+----
+var getUsers : Operation<{from: Number, limit: Number}, HttpResponse<{items: Array<{id: String, name: String, email: String}>}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getUsers",
+    displayName: "Get Users",
+    executor: (parameter, connection) -> do {
+        var response = connection({method: 'GET', path: "/users?from=" ++ parameter.from ++ "&limit=" ++ parameter.limit})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>}>)
+        else
+          failure(response)
+    }
+}
+----
+
+Decorate it for pagination:
+
+[source]
+----
+@OperationElement()
+var getUsersPaginated = offsetPaginated(
+  getUsers,
+  (page) -> page.body.items default [],
+  (param) -> param.from default 0,
+  (param, offset) -> (param update { case from at .from! -> offset })
+)
+----
+
+[[marker-pagination]]
+=== Marker Pagination
+
+Marker pagination is a strategy for APIs that use a marker or token to indicate the position in the dataset, for example, `?markerToken=abc123&limit=20`.
+
+Suppose your API endpoint is `\http://www.mulesoft.com/users?markerToken=X&limit=Y`.
+
+Define the operation:
+
+[source]
+----
+var getUsers : Operation<{markerToken?: String, limit: Number}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, markerToken?: String}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getUsers",
+    displayName: "Get Users",
+    executor: (parameter, connection) -> do {
+        var markerParams = if (!isEmpty(parameter.markerToken)) 
+            ("?markerToken=" ++ parameter.markerToken! ++ "&limit=" ++ parameter.limit) 
+            else ("?limit=" ++ parameter.limit)
+        var response = connection({method: 'GET', path: "/users" ++ markerParams})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>, markerToken?: String}>)
+        else
+          failure(response)
+    }
+}
+----
+
+Decorate it for pagination:
+
+[source]
+----
+@OperationElement()
+var getUsersPaginated = markerPaginated(
+  getUsers,
+  (page) -> page.body.items default [],
+  (page) -> page.body.markerToken default "",
+  (param, marker) -> (param update { case markerToken at .markerToken! -> marker })
+)
+----
+
+If you want to expose only a subset of the input parameters, for example, only `limit`, you can use `mapInputOperation`:
+
+[source]
+----
+// Expose only 'limit' as input, but propagate markerToken internally
+var getUsersPaginatedCustom = getUsersPaginated mapInputOperation (param: {limit: Number}) -> param
+----
+
+[[hypermedia-pagination]]
+=== Hypermedia Pagination
+
+Hypermedia pagination is a strategy for APIs that provide the URL for the next page in the response body or headers. This strategy is supported when the next URL shares the same host and path as the current URL but with different query parameters, for example, `\http://www.mulesoft.com/users?pageMarker=X&limit=Y` and the response body contains a `nextUrl` field.
+
+==== Same Endpoint for All Pages
+
+Suppose your API endpoint is `\http://www.mulesoft.com/users?pageMarker=X&limit=Y` and the response body contains a `nextUrl` field.
+
+Define the operation:
+
+[source]
+----
+var getUsers : Operation<{pageMarker?: String, limit?: Number}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getUsers",
+    displayName: "Get Users",
+    executor: (parameter, connection) -> do {
+        var response = connection({method: 'GET', path: "/users?pageMarker=" ++ (parameter.pageMarker default "") ++ "&limit=" ++ (parameter.limit default "")})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>)
+        else
+          failure(response)
+    }
+}
+----
+
+Decorate it for pagination:
+
+[source]
+----
+@OperationElement()
+var getUsersPaginated = hypermediaPaginated(
+   getUsers,
+   (page) -> page.body.items default [],
+   (page) -> page.body.nextUrl default "",
+   (param, nextUrl) -> parseQueryParameters(nextUrl)
+)
+----
+
+If your operation input is a complex object, you can adjust the last lambda accordingly:
+
+[source]
+----
+type OperationInputType = {uri: Object, query: Object}
+
+@OperationElement()
+var getUsersPaginated = hypermediaPaginated(
+   getUsers,
+   (page) -> page.body.items default [],
+   (page) -> page.body.nextUrl default "",
+   (param, nextUrl) -> {uri: param.uri, query: parseQueryParameters(nextUrl)}
+)
+----
+
+==== Different Endpoint for Next Page
+
+Suppose your API uses two endpoints and the response body contains a `nextUrl` field.  
+
+* First page: `\http://www.mulesoft.com/users`  
+* Next pages: `\http://www.mulesoft.com/more/{queryLocator}`  
+
+Define the operations:
+
+[source]
+----
+var getUsers : Operation<{}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getUsers",
+    displayName: "Get Users",
+    executor: (parameter, connection) -> do {
+        var response = connection({method: 'GET', path: "/users"})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>)
+        else
+          failure(response)
+    }
+}
+
+var getMore : Operation<{queryLocator: String}, HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>, ResultFailure<HttpResponse, Error>, HttpConnection> = {
+    name: "getMore",
+    displayName: "Get More",
+    executor: (parameter, connection) -> do {
+        var response = connection({method: 'GET', path: "/more/" ++ parameter.queryLocator})
+        ---
+        if (response.status == 200)
+          success(response as HttpResponse<{items: Array<{id: String, name: String, email: String}>, nextUrl?: String}>)
+        else
+          failure(response)
+    }
+}
+----
+
+Decorate them for pagination:
+
+[source]
+----
+// Paginate the 'getMore' operation
+var getMorePaginated = getMore paginated (param, page) -> {
+    items: page.body.items default [],
+    (nextPage: {
+        args: {queryLocator: (splitBy(page.body.nextUrl, "/")[-1] default "")}
+    }) if (!isEmpty(page.body.items) and !isEmpty(page.body.nextUrl))
+}
+
+// Use 'paginatedWithNextPageOp' to combine the first and next-page operations
+var getUsersPaginated = paginatedWithNextPageOp(getUsers, getMorePaginated, (param, page) -> {
+    items: page.body.items default [],
+    (nextPage: {
+        args: {queryLocator: (splitBy(page.body.nextUrl, "/")[-1] default "")}
+    }) if (!isEmpty(page.body.items) and !isEmpty(page.body.nextUrl))
+})
+----

@@ -1,0 +1,12 @@
+= Best Practices for Connector Builder
+
+Learn about the best practices for using Connector Builder.
+
+== Best Practices
+
+* Keep conversations concise and use `@Conversation`. After about 10 interactions, most models begin to lose context and might start hallucinating.
+* Make use of `@Docs`.
+* Use `·@` to reference files in the codebase whenever possible.
+* Commit frequently and don't hesitate to discard changes: If Cursor (especially in Agent mode) introduces an error, avoid asking it to roll back. Instead, use the *Restore Checkpoint* feature or revert the changes yourself using git.
+* Enable and configure Auto-run mode. When enabled, the Cursor agent can execute tools (such as running `mvn compile`) without asking for confirmation, and use the output to fix errors or address warnings. You can also define prompts to control the actions the Cursor agent is permitted to take.
+* Plan before you implement. Use `.markdown` files to track progress and break work into small, manageable tasks.

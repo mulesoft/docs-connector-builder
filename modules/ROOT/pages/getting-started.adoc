@@ -1,0 +1,72 @@
+= Getting Started
+
+Learn about Connector Builder prerequisites, installations, and upgrades. 
+
+== Prerequisites
+
+To create connectors with Connector Builder, your system must meet these prerequisites.
+
+=== OS Platforms
+
+Your OS must be one of these:
+
+* macOS (Intel or Apple Silicon) versions with Apple security update support. This is typically the latest release and the two previous versions. 
+* Windows 10 or 11 (64-bit)
++
+NOTE: Windows 10 is deprecated on https://support.microsoft.com/en-us/windows/windows-10-support-ends-on-october-14-2025-2ca8b313-1946-43d3-b55c-2b95b107f281[October 14, 2025].
+
+=== Hardware
+
+* Minimum system requirements: 
+** 10 GB of free storage space
+** 8 GB of RAM
+* Recommended system requirements:
+** 20 GB of free storage space
+** 16 GB of RAM
+
+=== Software
+
+* Required software:
+** https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://docs.cursor.com/en/get-started/installation[Cursor] 1.5.9 and later
++
+Cursor offers several advantages, specifically using AI for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], xref:testing-connectors.adoc#generate-tests-with-ai-assistance[generating tests], and xref:testing-connectors.adoc#run-tests-with-ai-assistance[running tests].
+** https://marketplace.visualstudio.com/items?itemName=salesforce.connectivity-tooling-ic-vscode-extension[Connector Builder VS Code extension] 
+** Dependent VS Code extensions
++
+You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the Connector Builder extension. If you use Cursor, you must update your user settings, and then install the Connector Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
++
+*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-vscode[Anypoint Code Builder - Platform Extension] version 5.7.2 and later
+*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-data-weave-client[Anypoint Code Builder - DataWeave Extension] version 2.10.6 and later
+*** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-dependencies[Anypoint Code Builder - Dependencies Extension] version 1.6.0 and later
+* Recommended software:
+** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-extension-pack[Anypoint Extension Pack]
+** https://marketplace.visualstudio.com/items?itemName=salesforce.mule-dx-api-component[Anypoint Code Builder - API Extension]
+** Anypoint Studio or Anypoint Code Builder
+
+[[install-uc-builder]]
+== Install Connector Builder
+
+Install Connector Builder in VS Code or Cursor.
+
+=== Install Connector Builder in VS Code
+
+. In VS Code, select the Extensions icon in the Activity Bar.
+. Search for `Connector Builder` in the marketplace.
+. Click *Install* on the extension.
+
+=== Install Connector Builder in Cursor
+
+. Go to *View* > *Command Palette*.
+. Enter `Preferences: Open User Settings`.
+. Go to *Features* > *Extensions* > *Gallery: Service Url*.
+. Enter `\https://marketplace.visualstudio.com/_apis/public/gallery`.
++
+NOTE: If you skip this step, you must install the dependent extensions manually.
+. Restart Cursor. 
+. Go to *View* > *Extensions*.
+. Search for `Connector Builder` in the marketplace.
+. Click *Install* on the extension.
+
+== Upgrade Connector Builder
+
+To ensure you're using the latest version of Connector Builder, select the Connector Builder extension in VS Code or Cursor and then select the *Auto Update* checkbox.

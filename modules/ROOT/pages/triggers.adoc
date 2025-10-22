@@ -1,0 +1,441 @@
+= Triggers
+:connector-component-name: triggers
+
+Learn how to define triggers for your connector. A trigger is a function that is automatically executed in response to specific events. For example, when a new contact is created, you can trigger an operation to send an email to the contact. Triggers help automate business processes by eliminating manual intervention.
+
+include::partial$ui-versus-linkweave.adoc[]
+
+== Define Triggers Using the UI
+
+. Under *Operations Explorer*, select the operation.
+. Under *Operation Components*, select *Triggers*.
+. Enter the required information for your trigger. 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Name* |The variable name for the trigger, used as its identifier in your code.
+|*Display Name* |The user-friendly name shown in the UI.
+|*Operation Output Type* |The data type returned by the operation, typically an array or collection.
+|*Operation Result Item Type* |The type of each item in the operation output.
+|*Trigger Result Item Type* |The type of each item the trigger emits. This is usually the same as the Operation Result Item Type unless you transform the data.
+|*Order* |The order in which items are processed or emitted, such as Ascending (oldest to newest) or Descending (newest to oldest).
+|*Input Records* |The path to the array of items in the operation response.
+|*Item* |The path to a single item within the array. Leave blank if items are at the root of the array.
+|*Identity Field* |The unique identifier for each item.
+|*Watermark Field* |The field used to track the last processed item, often for incremental sync.
+|*Watermark Type* |The data type of the watermark field.
+|*Initial Watermark* |The starting value for the watermark, such as the earliest date to start processing from. Leave blank to process all records.
+|===
++
+For example, let's say you want to create a trigger for when a new contact is created. Suppose your operation response looks like this:
++
+[source]
+----
+type OperationResponse = {
+  value: {
+    contacts: Array<Contact>
+    // ... other fields
+  }
+  // ... other fields
+}
+----
++
+And the `Contact` type is defined as:
++
+[source]
+----
+type Contact = {
+  id: String
+  name: String
+  lastModifiedDate: DateTime
+  // ... other fields
+}
+----
++
+The required information for your trigger looks like this: 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Name* |`newContactCreatedTrigger`
+|*Display Name* |`New Contact Created Trigger`
+|*Operation Output Type* |`Contact[]` (if your operation returns a list of contacts)
+|*Operation Result Item Type* |`Contact`
+|*Trigger Result Item Type* |`Contact`
+|*Order* |Ascending (oldest to newest) or Descending (newest to oldest)
+|*Input Records* |`value.contacts`
+|*Item* |(Leave blank if items are at the root of the array)
+|*Identity Field* |`id`
+|*Watermark Field* |`lastModifiedDate`
+|*Watermark Type* |`DateTime`
+|*Initial Watermark* |`2023-01-01T00:00:00Z`
+|===
+
+. Optionally, you can add parameters to your trigger to further customize its behavior. Enter the required information for your parameters. 
++
+[%header%autowidth.spread]
+|===
+|Field |Value
+|*Trigger Input Param Type* |The parameter type of the trigger input.
+|*Parameter Name* |The parameter name.
+|*Type* |The parameter type.
+|===
++
+These parameters are used to generate the trigger’s `inputMapper`. Depending on your parameter choices, the generated `inputMapper` code will look like one of these:
++
+[%header%autowidth.spread]
+|===
+|Parameter Scenario |Example `inputMapper` Code
+
+|*No parameters defined*
+a|
+[source]
+----
+inputMapper: (
+    param: {}, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+
+|*Simple parameters defined*
+a|
+[source]
+----
+inputMapper: (
+    param: { param1: String, param2: Number }, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+
+|*Only a complex type parameter defined*
+a|
+[source]
+----
+inputMapper: (ti: T_Complex, w) -> ti
+----
+
+|*Complex type with additional parameters*
+a|
+[source]
+----
+inputMapper: (
+    param: { param1: String, param2: Number } && T_Complex, 
+    watermark: ${watermarkType}
+  ) -> { 
+    query: {}, 
+    headers: {}, 
+    cookie: {} 
+  },
+----
+|===
+
+. Click *Create Trigger*. 
++
+This generates a new `.dwl` file in the `triggers` directory, containing both the trigger and its corresponding trigger strategy. The generated code follows this template:
++
+[source]
+----
+var <%= trigger.triggerStrategy.name %>: TriggerStrategy<<%- trigger.triggerStrategy.operationOutputType %>, <%- trigger.triggerStrategy.triggerResultItemType %>, <%- trigger.triggerStrategy.operationResultItemType %>, <%- trigger.watermarkType %>> = {
+  items: (result) -> result<%- trigger.triggerStrategy.result === '' ? '' : `.${trigger.triggerStrategy.result}` %>!,
+  item: (item) -> item<%- trigger.triggerStrategy.item === '' ? '' : `.${trigger.triggerStrategy.item}` %>,
+  watermark: (result, item) -> item.<%- trigger.triggerStrategy.watermarkField %>! as <%- trigger.watermarkType %>,
+  identity: (item) -> item.<%- trigger.triggerStrategy.identityField %>! as String,
+  watermarkCompareTo: DefaultWatermarkComparison
+}
+
+var <%= trigger.name %>Trigger  = {
+  name: "<%= trigger.name %>",
+  displayName: "<%= trigger.displayName %>",
+  metadata: {
+    order: "<%= trigger.order %>",
+    paginated: <%= trigger.isPaginated %>,
+  },
+  strategy: <%= trigger.triggerStrategy.name %>,
+  operation: <%= srcModuleName %>,
+  inputMapper: <%- trigger.inputMapper %>,
+  initialWatermark: (triggerInput, connection) -> <%- trigger.initialWatermark || 'Null' %>
+}
+----
+
+. Import your trigger and add it to the `triggers` section of your `Connector.dwl` file:
++
+[source]
+----
+@FlowConnectorElement()
+var connector = {
+...,
+triggers: {
+  myTrigger: myTrigger,
+},
+...
+}
+----
+
+== Define Triggers Using LinkWeave
+
+To add a trigger to the connector, you must add the trigger to the connector definition:
+
+[source]
+----
+@FlowConnectorElement()
+var connector = {
+    name: "ReferenceConnector",
+    displayName: "Reference Connector",
+    connections: connections,
+    testConnection: testConnection,
+    operations: {
+        findCategoriesOperation: findCategoriesOperation
+    },
+    triggers: {
+        onNewCategoryTrigger: triggers.onNewCategoryTrigger
+    }
+}
+----
+
+Defining a trigger in LinkWeave is similar to defining an operation. Here's an example of a trigger definition:
+
+[source]
+----
+// Declare the trigger
+var onNewCategoryTrigger = {
+    name: "onNewCategoryTrigger",
+    displayName: "On new category Trigger",
+    metadata: {
+        order: "ASC",         // "ASC", "DESC", or "NO_ORDER"
+        paginated: false      // Set to true if the response is paginated
+    },
+    strategy: onNewCategoryTriggerStrategy,
+    operation: findCategoriesOperation,
+    inputMapper: (ti: PaginatedOperationTypes.findPets.request, w) -> ti,
+    initialWatermark: (triggerInput, connection) -> now()
+}
+----
+
+There are four attributes specific to triggers that are different from operations. 
+
+* <<strategy>>
+* <<operation>>
+* <<inputmapper>>
+* <<initialwatermark>>
+
+
+[[strategy]]
+=== strategy
+
+The trigger extraction strategy determines how to obtain each event from the operation's response. This includes how to extract the list of events, determine if each event must be transformed before it's returned, retrieve the watermark from each event, determine each event's unique identity, and compare watermarks between events (in almost all cases, this is a simple comparison such as A > B). For example, here's the definition of the trigger extraction strategy for this trigger:
+
+[source]
+----
+// Declare the trigger strategy.
+var onNewCategoryTriggerStrategy: TriggerStrategy<HttpResponse<findCategorySuccessResponse>, Types.Category, Types.Category, Number> = {
+    // Extract the list of items from the SaaS response.
+    items: (result) -> result.body!,
+    // Transform each item if needed.
+    item: (item) -> item,
+    // Extract the watermark from each item.
+    watermark: (result, item) -> item.id,
+    // Extract the identity from each item.
+    identity: (item) -> item.id as String,
+    // Compare two watermarks (default: A > B).
+    watermarkCompareTo: DefaultWatermarkComparison
+}
+----
+
+The `TriggerStrategy` type parameters are:
+
+* `OperationOutputType`: The operation output type that the trigger is based on. In this example, it's `HttpResponse<findCategorySuccessResponse>`.   
+* `TriggerResultItemType`: The final item or event type to show as a result of the trigger. In this example, it's `Types.Category`. It's the same as `OperationResultItemType`, which means no transformation. 
+* `OperationResultItemType`: The item or event type that the operation execution returns. In this example, it's `Types.Category`.  
+* `Watermark`: The item or event watermark type. In this example, it's `Number`.  
+
+You can also define a non-typed strategy as long as the trigger is typed:
+
+[source]
+----
+var onNewCategoryTriggerStrategy = {
+    items: (result) -> result.body!,
+    item: (item) -> item,
+    watermark: (result, item) -> item.id,
+    identity: (item) -> item.id as String,
+    watermarkCompareTo: DefaultWatermarkComparison
+}
+----
+
+[[operation]]
+=== operation
+
+A trigger always executes an operation. The operation it's based on becomes an attribute of the trigger. For example, here's the definition of the operation for this trigger:
+
+[source]
+----
+type findCategoryRequest: HttpRequestType<{|
+    query: { company: Number },
+    headers: Object,
+    cookie: Object
+|}>
+
+type findCategorySuccessResponse: Array<Types.Category>
+type findCategoryErrorResponse: Types.Error
+
+var findCategoriesOperation = {
+    name: "findCategories",
+    displayName: "findCategories",
+    executor: (parameter: findCategoryRequest, connection: HttpConnection): Result<HttpResponse<findCategorySuccessResponse>, HttpResponse<findCategoryErrorResponse>> -> do {
+        var uri = parameter.uri
+        var query = parameter.query default {}
+        var headers = parameter.headers default {}
+        var cookie = parameter.cookie default {}
+        var response = connection({
+            method: "GET",
+            path: "/categories",
+            queryParams: query,
+            headers: headers,
+            cookie: cookie,
+            (body: parameter.body) if (parameter.body?)
+        })
+        ---
+        response.status match {
+            case 200 -> success(response as HttpResponse<findCategorySuccessResponse>)
+            else -> failure(response as HttpResponse<findCategoryErrorResponse>)
+        }
+    }
+}
+----
+
+Triggers can be based on operations that return either paginated or non-paginated responses, as specified by the API. This affects the trigger's metadata and strategy.
+
+* For non-paginated operations, the output type is typically `HttpResponse<findCategorySuccessResponse>`, and items are accessed via `result.body!` or `result.body!.items`.
+* For paginated operations, the output type is a `Page` type (such as `Page<Types.Category, findCategoryRequest>`), and items are accessed via `result.items`. 
+
+From the user's perspective, a trigger exposes a single event type as its output metadata. However, the actual result of a poll is more complex, typically returning a `Page` type along with information for the next poll cycle.
+
+[[inputmapper]]
+=== inputMapper
+
+The `inputMapper` function maps the trigger's input and the current watermark to the operation's input type. For example, here's the definition of `inputMapper` for this trigger:
+
+[source]
+----
+inputMapper: (TriggerInputType, Watermark) -> OperationInputType
+----
+
+When a trigger is executed, it receives input parameters that must ultimately be mapped to the request parameters expected by the underlying operation. The `inputMapper` function is responsible for transforming the trigger’s input (which might differ in shape or content from the operation’s input) into the format required by the operation. This function is a required attribute of the trigger.
+
+Suppose <<operation,`findCategoriesOperation`>> defines this input:
+
+[source]
+----
+  type findCategoryRequest: HttpRequestType<{|
+      query: {
+        company: Number,
+      },
+      headers: Object,
+      cookie: Object
+  |}>
+----
+  
+Suppose the `company` value is fixed for the connector, and the trigger itself doesn't require any input parameters. In this case, the `inputMapper` function can ignore its input and simply return the required structure for the operation:
+
+[source]
+----
+  type NewEmptyInputType = {| |}
+
+  // declare the trigger
+  var onNewCategoryTrigger = {
+      ...
+      operation: findCategoriesOperation,
+      inputMapper: (myNewTriggerInput: NewEmptyInputType, watermark: Number) ->
+          { query: { company: "mulesoft" }, headers: {}, cookie: {} }
+  }
+----
+
+The `inputMapper` is a lambda that takes the trigger's input type and the watermark, and returns the operation's input type (`findCategoryRequest`). In this case, the trigger input isn't used, but in other scenarios, it might be necessary. Common use cases for `inputMapper` include:
+
+* *Reshaping the input*  
++
+Sometimes, the operation's input type (such as `HttpRequestType`) isn't ideal for the trigger's user experience. You can define a new, simpler input type for the trigger and use `inputMapper` to convert it to the operation's expected input:
++
+[source]
+----
+  type NewInputType = { company: Number }
+
+  // declare the trigger
+  var onNewCategoryTrigger = {
+      ...
+      operation: findCategoriesOperation,
+      inputMapper: (myNewTriggerInput: NewInputType, watermark: Number) ->
+          { query: { company: myNewTriggerInput.company }, headers: {}, cookie: {} }
+  }
+----
++
+The trigger input is now an object that contains the `company` parameter only and at root level.
++
+* *Using the last stored watermark*  
++
+Another common scenario is a date-based trigger, in which the operation’s input includes a date field (such as `since` or `from`) to fetch results from a certain point in time. This value is often used as the watermark. For example, you might want the trigger to hide the `since` parameter from the user and instead use the last stored watermark value:
++
+[source]
+----
+  type findCategoryRequest: HttpRequestType<{|
+      query: {
+        company: Number,
+        since: LWDate
+      },
+      headers: Object,
+      cookie: Object
+  |}>
+----
++
+The new input type and the `inputMapper` function is:
++
+[source]
+----
+  type NewInputType = { company: Number }
+
+  // declare the trigger
+  var onNewCategoryTrigger = {
+      ...
+      operation: findCategoriesOperation,
+      inputMapper: (myNewTriggerInput: NewInputType, watermark: String) ->
+          { 
+              query: {
+                  company: myNewTriggerInput.company,
+                  since: watermark
+              },
+              headers: {}, cookie: {} 
+          }
+  }
+----
+
+* *Optional starting point*  
++
+A related pattern is to allow the user to optionally specify a starting point, falling back to the watermark if not provided:
++
+[source]
+----
+  type CustomGetUsersRequestPaginated = {| startDate? : Number |}
+
+  // Example inputMapper
+  (ti: CustomGetUsersRequestPaginated, w: Number) -> { since: ti.startDate default w }
+----
++
+In this case, the trigger input includes an optional `startDate`. If the user doesn't provide a value, the mapper uses the watermark. This approach is often combined with annotations to hide the parameter in certain platforms, so the watermark is used automatically. In platforms that don't recognize the annotation, the parameter remains visible and can be set by the user.
+
+[[initialwatermark]]
+=== initialWatermark
+
+The `initialWatermark` function determines the starting watermark for the polling cycle. This can be a fixed value, a dynamic value (such as `now()`), or calculated by executing an operation. For example, here's the definition of `initialWatermark` for this trigger:
+
+[source]
+----
+initialWatermark: (TriggerInputType, ConnectionType) -> Watermark
+----

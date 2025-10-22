@@ -1,0 +1,19 @@
+= Running Connectors
+
+Learn how to run your connector. Running a connector involves configuring and deploying the connector.
+
+Connector Builder supports running your connector in Anypoint Platform.
+
+== Run Connectors in Anypoint Platform
+
+You can run a connector in Anypoint Studio or Anypoint Code Builder.
+
+=== Run Connectors in Anypoint Studio
+
+. xref:connectors::introduction/intro-config-use-studio.adoc[Configure your connector in Anypoint Studio].
+. xref:studio::deploy-mule-application-task.adoc[Deploy your connector in Anypoint Studio].
+
+=== Run Connectors in Anypoint Code Builder
+
+. xref:connectors::introduction/intro-config-use-acb.adoc[Configure your connector in Anypoint Code Builder].
+. xref:anypoint-code-builder::int-deploy-mule-apps.adoc[Deploy your connector in Anypoint Code Builder].
