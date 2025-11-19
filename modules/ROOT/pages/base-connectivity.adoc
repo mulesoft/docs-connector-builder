@@ -12,7 +12,7 @@ This is the canonical connectivity model (CCM). This package contains the code t
 +
 This package represents a platform-specific connector, such as for Anypoint Platform, which takes the connectivity model as a base and adds customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
 
-You can generate base connectivity either from an API specification (OAS 3.0) or with AI assistance (available when using Cursor).
+You can generate base connectivity either from an API specification (OAS 3.0), AI assistance (available when using Cursor), or MCP tools (available when using Cursor).
 
 [[generate-base-connectivity-from-an-api-specification]]
 == Generate Base Connectivity from an API Specification
@@ -66,3 +66,17 @@ NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model perfo
 * `{projectroot}/discovery/{saasname}.yaml` is created, containing the discovered endpoints, required schemas, and related details.
 * The extension detects the new API specification and automatically generates a project based on it. This process may take several seconds.
 * Cursor closes and reopens in the root directory of the newly created project.
+
+[[generate-base-connectivity-with-mcp-tools]]
+== Generate Base Connectivity with MCP Tools (Cursor)
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Mcp Tools* is enabled.
+. Open the Cursor chat window (if not already open).
+. Ask the agent to create a connector. For example, enter `Create an Eventbrite connector`. This calls the `uc_create_connector_workflow` MCP tool, which creates the connector.
+. Enter the required inputs when prompted.
+. Confirm your inputs. This calls the `uc_generate_api_spec` MCP tool, which generates the API specification.
+. Enter the required inputs when prompted.
+. Confirm your inputs. Review the API specification and make any needed changes. Then, instruct the agent to continue.
+. Enter the required inputs when prompted.
+. Confirm your inputs. This calls the `uc_generate_connector` MCP tool, which generates the Anypoint Connector. Then, instruct the agent to continue. Your connector is now created. 
