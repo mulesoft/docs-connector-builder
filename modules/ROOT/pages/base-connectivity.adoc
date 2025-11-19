@@ -80,3 +80,5 @@ NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model perfo
 . Confirm your inputs. Review the API specification and make any needed changes. Then, instruct the agent to continue.
 . Enter the required inputs when prompted.
 . Confirm your inputs. This calls the `uc_generate_connector` MCP tool, which generates the Anypoint Connector. Then, instruct the agent to continue. Your connector is now created. 
+
+For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].
