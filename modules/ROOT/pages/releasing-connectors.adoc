@@ -11,7 +11,7 @@ To make your connector available on Anypoint Platform, release it to Anypoint Ex
 To release a connector to Anypoint Exchange:
 
 . Open your IDE and go to *Connector Builder - Editor*.
-. Click *Publish Connector*.
+. Click *Publish...*.
 . In the UI, complete all checklist items to ensure you meet the release requirements.
 . Click *Publish to Anypoint Exchange*. This runs `mvn deploy` from the `{projectname}-anypoint-connector-model` directory.
 
