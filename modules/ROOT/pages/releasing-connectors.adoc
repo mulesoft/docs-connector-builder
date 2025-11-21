@@ -6,6 +6,13 @@ Connector Builder supports releasing your connector to Anypoint Platform.
 
 == Release Connectors to Anypoint Platform 
 
-To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. To release a connector to Anypoint Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. Run `mvn deploy` from the `{projectname}-anypoint-connector-model` directory.
+To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. 
 
-After you release your connector, you should see your published connector in Anypoint Exchange. If you're unable to see the published connector, click *Back to legacy search* to switch the search mode. 
+To release a connector to Anypoint Exchange:
+
+. Open your IDE and go to *Connector Builder - Editor*.
+. Click *Publish...*.
+. In the UI, complete all checklist items to ensure you meet the release requirements.
+. Click *Publish to Anypoint Exchange*. This runs `mvn deploy` from the `{projectname}-anypoint-connector-model` directory.
+
+After you release your connector, you should see your published connector in Anypoint Exchange. If you're unable to see the published connector, click *Back to legacy search* to switch the search mode. For more information about publishing to Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
