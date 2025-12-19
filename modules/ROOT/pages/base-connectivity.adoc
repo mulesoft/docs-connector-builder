@@ -24,7 +24,7 @@ You can generate base connectivity either from an API specification (OAS 3.0), A
 [%header%autowidth.spread]
 |===
 |Field|Description
-|*Name* |Enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces.
+|*Name* |Enter a name for your project. The name must be lowercase, alphanumeric, and contain no spaces. The name can't exceed 20 characters.
 |*Description* |Enter a description for your project.
 |===
 . Optionally, click *Select Icon* to upload an icon for your project.
@@ -48,7 +48,7 @@ You can generate base connectivity either from an API specification (OAS 3.0), A
 [%header%autowidth.spread]
 |===
 |Field|Description
-|*Name of SaaS Platform* |Enter the name of the SaaS platform you want to create a connector for.
+|*Name of SaaS Platform* |Enter the name of the SaaS platform you want to create a connector for. The name can't exceed 20 characters.
 |*Top Use Cases* |Enter the top use cases for the connector, from most important to least important. Use natural language to describe the use cases. Keep the use cases succinct, such as `List invoices`, `Create an invoice`, or `Create an order`. If you want full CRUD (Create, Read, Update, Delete) behavior, you must explicitly mention each one.
 |*Official API Documentation or Reference Sources* |Enter the URLs of the official API documentation or reference sources for the connector.
 |*Project Folder* |Select the root directory of your project. All project files will be created here (a subfolder will not be created in this case).
@@ -76,7 +76,7 @@ NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model perfo
 . Ask the agent to create a connector. For example, enter `Create an Eventbrite connector`. This calls the `uc_create_connector_workflow` MCP tool, which creates the connector.
 . Enter the required inputs when prompted.
 . Confirm your inputs. This calls the `uc_generate_api_spec` MCP tool, which generates the API specification.
-. Enter the required inputs when prompted.
+. Enter the required inputs when prompted. Note that the connector name can't exceed 20 characters.
 . Confirm your inputs. Review the API specification and make any needed changes. Then, instruct the agent to continue.
 . Enter the required inputs when prompted.
 . Confirm your inputs. This calls the `uc_generate_connector` MCP tool, which generates the Anypoint Connector. Then, instruct the agent to continue. Your connector is now created. 
