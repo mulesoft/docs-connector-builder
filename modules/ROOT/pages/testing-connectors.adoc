@@ -147,7 +147,7 @@ If you generate tests without AI assistance, the test data will have placeholder
 . Open your IDE and go to *Connector Builder - Editor*.
 . If you haven't generated your connector yet, click *Generate* > *Generate Anypoint Connector*. 
 . Click *Generate* > *Generate Tests*.
-. Select the connection types to use to test your CCM and Anypoint Connector. You can:
+. Select the connection types to use to test your connectivity model and Anypoint Connector. You can:
 +
 * Use a real connection to the API (requires authentication)
 * Use a mocked connection
