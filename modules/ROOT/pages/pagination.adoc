@@ -7,7 +7,7 @@ include::partial$ui-versus-linkweave.adoc[]
 
 == Define Pagination Using the UI
 
-You can define pagination without or with AI assistance (available when using Cursor).
+You can define pagination without AI assistance, or with AI assistance or MCP tools (available when using Cursor).
 
 [[define-pagination-without-ai-assistance]]
 === Define Pagination Without AI Assistance
@@ -35,6 +35,18 @@ To define pagination for multiple operations:
 The agent analyzes the provided resources, suggests a pagination strategy, and recommends parameters.
 . Review the suggested pagination strategy and fill in the parameters as recommended.
 . Click *Apply*. Connector Builder generates a paginated operation.
+
+[[define-pagination-with-mcp-tools]]
+=== Define Pagination with MCP Tools (Cursor)
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Mcp Tools* is enabled.
+. Open the Cursor chat window (if not already open).
+. Ask the agent to add pagination. For example, enter `Add pagination to this operation`. This calls the `uc_add_pagination` MCP tool, which adds pagination to the operation.
+. Enter the required inputs when prompted.
+. Confirm your inputs. Connector Builder generates paginated operations.
+
+For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].
 
 == Define Pagination Using LinkWeave
 
