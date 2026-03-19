@@ -17,6 +17,7 @@ After you release your connector, you should see your published connector in Any
 . In the UI, complete all checklist items to ensure you meet the release requirements.
 . Click *Publish to Anypoint Exchange*. This runs `mvn deploy` from the `{projectname}-anypoint-connector-model` directory. 
 
+[[release-connectors-to-anypoint-platform-with-mcp-tools]]
 === Release Connectors to Anypoint Platform with MCP Tools (Cursor)
 
 . Open the Connector Builder extension in Cursor.

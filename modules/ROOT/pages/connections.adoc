@@ -34,7 +34,7 @@ When you xref:base-connectivity.adoc[generate base connectivity], if the authent
 [[use-connection-profiles]]
 === Use Connection Profiles 
 
-Use connection profiles to create, edit, and manage reusable connection profiles with secure credential storage. 
+Create, edit, and manage reusable connection profiles with secure credential storage. 
 
 . Open the Connector Builder extension in VS Code or Cursor.
 . Select *Connection Profiles*.
@@ -45,8 +45,9 @@ Use connection profiles to create, edit, and manage reusable connection profiles
 |===
 |Field|Description
 |*Profile Name* |Enter the name of the connection profile. For example, `Salesforce Developer`.
-|*Description* |Enter the optionaldescription of the connection profile. 
-|*Authentication Type* |Select the authentication type for the connection profile. Values are: 
+|*Description* |Enter the optional description of the connection profile. 
+|*Authentication Type* a|Select the authentication type for the connection profile. Values are: 
+
 * `BEARER`
 * `BASIC`
 * `OAUTH`
@@ -59,7 +60,7 @@ There's also a *Try It* panel that allows you to create or test the connection p
 [[list-connection-profiles-with-mcp-tools]]
 ==== List Connection Profiles with MCP Tools
 
-In some cases, you might need a list of your connection profiles. For example, to use the `uc_manage_operations` MCP tool to xref:operations.adoc#manage-operations-with-mcp-tools[execute operations], you'll need the connection profile ID, which can be obtained by listing your connection profiles.
+In some cases, you might need a list of your connection profiles. For example, to use the `uc_manage_operations` MCP tool to xref:operations.adoc#manage-operations-with-mcp-tools[execute operations], you need the connection profile ID, which can be obtained by listing your connection profiles.
 
 . Open the Connector Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Mcp Tools* is enabled.

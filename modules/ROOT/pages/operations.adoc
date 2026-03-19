@@ -21,7 +21,7 @@ If you have already generated base connectivity and want to add operations that 
 . Open the Cursor chat window (if not already open).
 . Ask the agent to manage operations. For example, enter `List operations`, `Get operation details`, or `Execute an operation`. 
 +
-If you want to execute an operation, you'll need your connection profile ID. Use the `uc_list_connection_profiles` MCP tool first to xref:connections.adoc#list-connection-profiles-with-mcp-tools[list connection profiles] to retrieve the ID.
+If you want to execute an operation, you need the connection profile ID. Use the `uc_list_connection_profiles` MCP tool first to xref:connections.adoc#list-connection-profiles-with-mcp-tools[list connection profiles] to retrieve the ID.
 . Enter the required inputs when prompted.
 . Confirm your inputs. Connector Builder performs the requested action.
 
