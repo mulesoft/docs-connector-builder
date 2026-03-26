@@ -8,11 +8,23 @@ Connector Builder supports releasing your connector to Anypoint Platform.
 
 To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. 
 
-To release a connector to Anypoint Exchange:
+After you release your connector, you should see your published connector in Anypoint Exchange. If you're unable to see the published connector, click *Back to legacy search* to switch the search mode. For more information about publishing to Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
+
+=== Release Connectors to Anypoint Platform Using the UI
 
 . Open your IDE and go to *Connector Builder - Editor*.
 . Click *Publish...*.
 . In the UI, complete all checklist items to ensure you meet the release requirements.
-. Click *Publish to Anypoint Exchange*. This runs `mvn deploy` from the `{projectname}-anypoint-connector-model` directory.
+. Click *Publish to Anypoint Exchange*. This runs `mvn deploy` from the `{projectname}-anypoint-connector-model` directory. 
 
-After you release your connector, you should see your published connector in Anypoint Exchange. If you're unable to see the published connector, click *Back to legacy search* to switch the search mode. For more information about publishing to Exchange, see xref:exchange::to-publish-assets-maven.adoc[]. 
+[[release-connectors-to-anypoint-platform-with-mcp-tools]]
+=== Release Connectors to Anypoint Platform with MCP Tools (Cursor)
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Mcp Tools* is enabled.
+. Open the Cursor chat window (if not already open).
+. Ask the agent to release the connector. For example, enter `Release the connector to Anypoint Exchange`. This calls the `uc_publish_connector` MCP tool, which releases the connector to Anypoint Exchange.
+. Enter the required inputs when prompted.
+. Confirm your inputs. Connector Builder releases the connector to Anypoint Exchange.
+
+For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].

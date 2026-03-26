@@ -31,6 +31,46 @@ include::partial$ui-versus-linkweave.adoc[]
 
 When you xref:base-connectivity.adoc[generate base connectivity], if the authentication type specified in the API specification or by AI assistance is supported by Connector Builder, the authentication type and a connection for each endpoint are automatically defined for you.
 
+[[use-connection-profiles]]
+=== Use Connection Profiles 
+
+Create, edit, and manage reusable connection profiles with secure credential storage. 
+
+. Open the Connector Builder extension in VS Code or Cursor.
+. Select *Connection Profiles*.
+. Click *New Profile*.
+. Enter the required information.
++
+[%header%autowidth.spread]
+|===
+|Field|Description
+|*Profile Name* |Enter the name of the connection profile. For example, `Salesforce Developer`.
+|*Description* |Enter the optional description of the connection profile. 
+|*Authentication Type* a|Select the authentication type for the connection profile. Values are: 
+
+* `BEARER`
+* `BASIC`
+* `OAUTH`
+* `APIKEY`
+|===
+. Click *Save*.
+
+There's also a *Try It* panel that allows you to create or test the connection profile. You can select the connection profile or add inline credentials to test your connection. 
+
+[[list-connection-profiles-with-mcp-tools]]
+==== List Connection Profiles with MCP Tools
+
+In some cases, you might need a list of your connection profiles. For example, to use the `uc_manage_operations` MCP tool to xref:operations.adoc#manage-operations-with-mcp-tools[execute operations], you need the connection profile ID, which can be obtained by listing your connection profiles.
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Mcp Tools* is enabled.
+. Open the Cursor chat window (if not already open).
+. Ask the agent to list connection profiles. For example, enter `List connection profiles`. This calls the `uc_list_connection_profiles` MCP tool, which lists the connection profiles.
+. Enter the required inputs when prompted.
+. Confirm your inputs. Connector Builder lists the connection profiles.
+
+For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].
+
 == Define Connections Using LinkWeave
 
 You can define connections using LinkWeave.  
