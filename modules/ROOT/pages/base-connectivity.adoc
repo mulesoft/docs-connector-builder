@@ -27,8 +27,9 @@ You can generate base connectivity either from an API specification (OAS 3.0), A
 |*Connector Name* |Enter a name for your connector. The name must be lowercase, alphanumeric, and contain no spaces. The name can't exceed 20 characters.
 |*Connector Description* |Enter a description for your connector.
 |===
+. Optionally, expand *Advanced Settings* to override the Maven group ID, base package, and connector vendor defaults.
 . Optionally, click *Select Icon* to upload an icon for your project.
-. In *Connectivity Platforms*, select the *Anypoint Platform* checkbox.
+. In *Connectivity Platforms*, select *Anypoint Platform*, *Salesforce Flow*, or both.
 . Click *Next*.
 . Click *Select API Spec* and then select the API specification (OAS 3.0) to upload to create your connector.
 . Click *Open Spec*.
@@ -42,7 +43,7 @@ You can generate base connectivity either from an API specification (OAS 3.0), A
 
 . Open the Connector Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Ai Assisted Workflows* is enabled.
-. Select *New Project*. 
+. Select *New Project*.
 . Enter the required information in *Project Details*.
 +
 [%header%autowidth.spread]
@@ -51,8 +52,9 @@ You can generate base connectivity either from an API specification (OAS 3.0), A
 |*Connector Name* |Enter a name for your connector. The name must be lowercase, alphanumeric, and contain no spaces. The name can't exceed 20 characters.
 |*Connector Description* |Enter a description for your connector.
 |===
+. Optionally, expand *Advanced Settings* to override the Maven group ID, base package, and connector vendor defaults.
 . Optionally, click *Select Icon* to upload an icon for your project.
-. In *Connectivity Platforms*, select the *Anypoint Platform* checkbox.
+. In *Connectivity Platforms*, select *Anypoint Platform*, *Salesforce Flow*, or both.
 . Click *Next*.
 . In *Don't have an API spec?*, click *Generate with AI*.
 . Enter the required information.
@@ -85,12 +87,12 @@ NOTE: Connector Builder has been tested with `claude-sonnet-4`. Each model perfo
 . Open the Connector Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Mcp Tools* is enabled.
 . Open the Cursor chat window (if not already open).
-. Ask the agent to create a connector. For example, enter `Create an Eventbrite connector`. This calls the `uc_create_connector_workflow` MCP tool, which creates the connector.
+. Ask the agent to create a connector. For example, enter `Create an Eventbrite connector`. This calls the `uc_create_connector_workflow` MCP tool, which plans an end-to-end connector build and returns a numbered workflow plan for sequential execution.
 . Enter the required inputs when prompted.
-. Confirm your inputs. This calls the `uc_generate_api_spec` MCP tool, which generates the API specification.
+. Confirm your inputs. This calls the `uc_manage_api_spec` MCP tool, which researches the API and generates the API specification (OAS 3.0). The same tool also supports `type='research'` to produce only an `api-reference.md` research artifact, and `type='validate'` to validate an existing OpenAPI spec against a live API.
 . Enter the required inputs when prompted. Note that the connector name can't exceed 20 characters.
 . Confirm your inputs. Review the API specification and make any needed changes. Then, instruct the agent to continue.
 . Enter the required inputs when prompted.
-. Confirm your inputs. This calls the `uc_generate_connector` MCP tool, which generates the Anypoint Connector. Then, instruct the agent to continue. Your connector is now created. 
+. Confirm your inputs. This calls the `uc_generate_connector` MCP tool, which generates the connector layers. The tool supports multi-phase generation including `ccm` (Canonical Connectivity Model), `anypoint` (Anypoint connector module), and `flow` (Flow connector module). Your connector is now created.
 
 For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].

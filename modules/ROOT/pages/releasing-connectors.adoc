@@ -2,9 +2,9 @@
 
 Learn how to release your connector. Releasing is the process of making your connector available to others.
 
-Connector Builder supports releasing your connector to Anypoint Platform.
+Connector Builder supports releasing your connector to Anypoint Platform and to Salesforce Flow.
 
-== Release Connectors to Anypoint Platform 
+== Release Connectors to Anypoint Platform
 
 To make your connector available on Anypoint Platform, release it to Anypoint Exchange. Connector Builder supports private releases to Anypoint Exchange only. The connector can still be shared with other accounts or teams. 
 
@@ -23,8 +23,12 @@ After you release your connector, you should see your published connector in Any
 . Open the Connector Builder extension in Cursor.
 . Select *Settings* and ensure *Enable Mcp Tools* is enabled.
 . Open the Cursor chat window (if not already open).
-. Ask the agent to release the connector. For example, enter `Release the connector to Anypoint Exchange`. This calls the `uc_publish_connector` MCP tool, which releases the connector to Anypoint Exchange.
+. Ask the agent to release the connector. For example, enter `Publish this connector to Anypoint Exchange`. This calls the `uc_connector_lifecycle` MCP tool with `type='publish'`, which releases the connector to Anypoint Exchange. The same tool with `type='build'` builds the connector locally.
 . Enter the required inputs when prompted.
 . Confirm your inputs. Connector Builder releases the connector to Anypoint Exchange.
 
 For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].
+
+== Release Connectors to Salesforce Flow
+
+To make a Flow connector available, deploy it directly to a Salesforce org. Marketplace release through AppExchange isn't supported. For the steps to deploy the connector to an org, see xref:running-connectors.adoc#run-connectors-in-salesforce-flow[Run Connectors in Salesforce Flow].

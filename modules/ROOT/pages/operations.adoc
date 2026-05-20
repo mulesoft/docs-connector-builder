@@ -13,6 +13,21 @@ If you have already generated base connectivity and want to modify the set of op
 
 If you have already generated base connectivity and want to add operations that aren't present in the API specification or AI assistance, update the API specification or AI input with the new operations, and then regenerate base connectivity.
 
+[[execute-operations-try-it]]
+=== Execute Operations Using the Try It Panel
+
+The Try It panel lets you execute any operation directly from the editor at design time, without packaging or deploying the connector. The Try It panel is available for all operations, regardless of platform and regardless of whether they're associated with a generated connector.
+
+. In the *Operations Explorer*, select an operation. The *Try It* panel appears on the right.
+. Select the authentication to use. You can either:
++
+* Use a *connection profile* (reusable credentials). Select an existing profile, or create a new one. See xref:connections.adoc#use-connection-profiles[Use Connection Profiles].
+* Use *inline credentials* (fire-and-forget). The Credentials Editor appears, pre-populated with the expected JSON schema for the selected authentication scheme. Fill in the values. Inline credentials are discarded when you select a different operation.
+. In the *Input* editor, provide input for the operation. The Input editor is pre-populated with the expected JSON schema, including all fields. Required and optional fields are both shown. Modify the values you need and remove any optional fields you don't want to send.
+. Click *Run*.
+. After the operation completes, the panel displays the result status and the response body.
+. If the operation supports pagination and additional pages are available, *Previous* and *Next* buttons appear. Click them to re-execute the operation against the corresponding page.
+
 [[manage-operations-with-mcp-tools]]
 === Manage Operations with MCP Tools (Cursor)
 

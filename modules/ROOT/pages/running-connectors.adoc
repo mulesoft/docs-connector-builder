@@ -2,7 +2,7 @@
 
 Learn how to run your connector. Running a connector involves configuring and deploying the connector.
 
-Connector Builder supports running your connector in Anypoint Platform.
+Connector Builder supports running your connector in Anypoint Platform and in Salesforce Flow.
 
 == Run Connectors in Anypoint Platform
 
@@ -17,3 +17,58 @@ You can run a connector in Anypoint Studio or Anypoint Code Builder.
 
 . xref:connectors::introduction/intro-config-use-acb.adoc[Configure your connector in Anypoint Code Builder].
 . xref:anypoint-code-builder::int-deploy-mule-apps.adoc[Deploy your connector in Anypoint Code Builder].
+
+[[run-connectors-in-salesforce-flow]]
+== Run Connectors in Salesforce Flow
+
+To run a Flow connector built with Connector Builder, deploy the connector JAR to a Salesforce org as an `IntegArtifactDef` metadata component using Salesforce CLI. After deployment, the connector appears under *Automation* > *Integrations* in the org and is available as an action inside Flow Builder.
+
+=== Prerequisites
+
+* https://developer.salesforce.com/tools/salesforcecli[Salesforce CLI] installed.
+* A Salesforce org with the custom connectors feature enabled and Dev Hub turned on, with Unlocked Packages and Second-Generation Managed Packages enabled.
+* The Flow connector JAR produced by xref:packaging-connectors.adoc[Packaging Connectors]. The JAR file name follows the pattern `{projectname}-flow-connector-model-{version}-dw-library.jar`.
+
+=== Deploy the Flow Connector to a Salesforce Org
+
+. Log in to your org from Salesforce CLI:
++
+----
+sf org login web -r <org-url>
+----
++
+NOTE: Lightning URLs are not supported.
+. Generate a Salesforce project to host the connector metadata:
++
+----
+sf project generate --output-dir my-workspace --name my-project
+----
+. In `my-workspace/my-project/sfdx-project.json`, set `"sourceApiVersion": "66.0"`.
+. Inside the project folder, create a folder for the connector under `force-app/main/default/integArtifactDefs/`:
++
+----
+mkdir -p force-app/main/default/integArtifactDefs/<ConnectorName>/
+----
+. Inside that folder, create a `<ConnectorName>-meta.xml` file:
++
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<IntegArtifactDef xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>{description}</description>
+    <displayName>{displayName}</displayName>
+    <groupId>{groupId}</groupId>
+</IntegArtifactDef>
+----
+. Create a versioned subfolder for the connector JAR and place the JAR inside it:
++
+----
+mkdir -p force-app/main/default/integArtifactDefs/<ConnectorName>/<VersionString>/
+----
+. Deploy the connector to the org:
++
+----
+sf project deploy start -m "IntegArtifactDef:<ConnectorName>" --target-org <your-org-username>
+----
+
+The connector appears under *Automation* > *Integrations* in your org and can be selected as an action in Flow Builder.

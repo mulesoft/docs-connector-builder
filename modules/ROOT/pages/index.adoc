@@ -1,6 +1,17 @@
 = Connector Builder Overview
 
-Use Connector Builder to create your own Anypoint Connectors easily. Connector Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0), AI assistance (available when using Cursor), or MCP tools (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
+Use Connector Builder to create your own connectors easily. Connector Builder is an extension that streamlines and accelerates connector development by creating connectors either from an API specification (OAS 3.0), AI assistance (available when using Cursor), or MCP tools (available when using Cursor). These connectors integrate with SaaS applications that use HTTP-based connectivity.
+
+Connector Builder supports these connectivity platforms:
+
+* Anypoint Platform
++
+Anypoint Connectors that run in Mule applications
+* Salesforce Flow
++
+Flow connectors that run in Salesforce Flow
+
+The same connector project can target either platform. All Connector Builder features are available for both Anypoint and Flow connectors.
 
 Connector Builder creates connectors by using LinkWeave, which is a connectivity language built on top of DataWeave. Connector Builder is UI-first, so you don't need LinkWeave knowledge to create connectors. However, for advanced use cases, you can use LinkWeave to extend and enhance functionality by adding custom capabilities.
 
