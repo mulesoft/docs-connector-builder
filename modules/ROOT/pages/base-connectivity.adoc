@@ -10,7 +10,7 @@ This is the canonical connectivity model (CCM). This package contains the code t
 
 * `{projectname}-{platformname}-connector-model` 
 +
-This package represents a platform-specific connector, such as for Anypoint Platform, which takes the connectivity model as a base and adds customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
+This package represents a platform-specific connector (Anypoint Platform or Salesforce Flow) which takes the connectivity model as a base and adds customizations and transformations to address platform limitations or enhance the user experience. It also contains the `Connector.dwl` file, which defines the connector.
 
 You can generate base connectivity either from an API specification (OAS 3.0), AI assistance (available when using Cursor), or MCP tools (available when using Cursor).
 

@@ -7,7 +7,7 @@ include::partial$ui-versus-linkweave.adoc[]
 
 == Define Pagination Using the UI
 
-You can define pagination without AI assistance, or with AI assistance or MCP tools (available when using Cursor).
+You can define pagination without AI assistance, with AI assistance (available when using Cursor), or with MCP tools (available when using Cursor).
 
 [[define-pagination-without-ai-assistance]]
 === Define Pagination Without AI Assistance
