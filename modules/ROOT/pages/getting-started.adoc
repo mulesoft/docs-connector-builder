@@ -33,7 +33,10 @@ Cursor offers several advantages:
 +
 *** AI assistance for xref:base-connectivity.adoc#generate-base-connectivity-with-ai-assistance[base connectivity], xref:pagination.adoc#define-pagination-with-ai-assistance[pagination], xref:testing-connectors.adoc#generate-tests-with-ai-assistance[generating tests], and xref:testing-connectors.adoc#run-tests-with-ai-assistance[running tests]
 *** MCP tools for xref:base-connectivity.adoc#generate-base-connectivity-with-mcp-tools[base connectivity], xref:connections.adoc#list-connection-profiles-with-mcp-tools[connection profiles], xref:operations.adoc#manage-operations-with-mcp-tools[operations], xref:pagination.adoc#define-pagination-with-mcp-tools[pagination], xref:testing-connectors.adoc#generate-tests-with-mcp-tools[generating tests], xref:packaging-connectors.adoc#package-connectors-with-mcp-tools[packaging connectors], and xref:releasing-connectors.adoc#release-connectors-to-anypoint-platform-with-mcp-tools[releasing connectors]
-** https://marketplace.visualstudio.com/items?itemName=salesforce.connectivity-tooling-ic-vscode-extension[Connector Builder VS Code extension] 
+** https://marketplace.visualstudio.com/items?itemName=salesforce.connectivity-tooling-ic-vscode-extension[Connector Builder VS Code extension (Anypoint)]
+** https://marketplace.visualstudio.com/items?itemName=salesforce.connectivity-tooling-ic-vscode-extension[Connector Builder VS Code extension (Salesforce Flow)]
++
+Connector Builder VS Code extension (Salesforce Flow) is a pre-release version exclusively for building Flow connectors for Flow Integration.
 ** Dependent VS Code extensions
 +
 You must have these dependent extensions if you use your connector in Anypoint Code Builder or Anypoint Studio. If you use VS Code, the latest versions of these extensions are automatically installed when you install the Connector Builder extension. If you use Cursor, you must update your user settings, and then install the Connector Builder extension to have the latest versions of these extensions automatically installed. For more information, see <<install-uc-builder>>.
