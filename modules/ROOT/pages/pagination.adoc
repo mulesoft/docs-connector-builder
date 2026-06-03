@@ -7,7 +7,7 @@ include::partial$ui-versus-linkweave.adoc[]
 
 == Define Pagination Using the UI
 
-You can define pagination without AI assistance, or with AI assistance or MCP tools (available when using Cursor).
+You can define pagination without AI assistance, with AI assistance (available when using Cursor), or with MCP tools (available when using Cursor).
 
 [[define-pagination-without-ai-assistance]]
 === Define Pagination Without AI Assistance
@@ -16,13 +16,13 @@ To define pagination for a single operation:
 
 . Under *Operations Explorer*, select the operation.
 . Select *Add pagination*.
-. Click *Generate Anypoint Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
+. Click *Generate Anypoint Connector* or *Generate Flow Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
 
 To define pagination for multiple operations:
 
 . Under *Project Settings*, select *Pagination*.
 . Under *Configure Pagination for Multiple Operations*, select the operations to configure pagination for.
-. Click *Generate Anypoint Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
+. Click *Generate Anypoint Connector* or *Generate Flow Connector* (or *Regenerate Project* if you've already generated the connector). To enable the pagination feature, you must regenerate the connector where the paginated operations will be used. If you skip this step, the paginated operations will only exist in the underlying model and won't be available in the connector itself.
 
 [[define-pagination-with-ai-assistance]]
 === Define Pagination With AI Assistance (Cursor)

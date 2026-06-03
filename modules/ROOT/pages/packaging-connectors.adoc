@@ -2,7 +2,7 @@
 
 Learn how to package your connector. Packaging is the process of compiling and preparing your connector for release. 
 
-You can package your connector via the UI or the terminal. 
+You can package your connector via the UI, MCP tools, or the terminal. 
 
 == Package Connectors via the UI
 
@@ -11,11 +11,23 @@ You can package your connector via the UI or the terminal.
 
 If the build completes successfully, a success message appears. If the build doesn't complete successfully, an error message appears. In either case, you can click *View output* to review the output.
 
+[[package-connectors-with-mcp-tools]]
+== Package Connectors with MCP Tools (Cursor)
+
+. Open the Connector Builder extension in Cursor.
+. Select *Settings* and ensure *Enable Mcp Tools* is enabled.
+. Open the Cursor chat window (if not already open).
+. Ask the agent to build the connector. For example, enter `Build this connector`. This calls the `uc_connector_lifecycle` MCP tool with `type='build'`, which runs `mvn install` using the extension's bundled Maven.
+. Enter the required inputs when prompted.
+. Confirm your inputs. Connector Builder builds the connector.
+
+For more information, see xref:mulesoft-mcp-server::reference-mcp-tools.adoc[].
+
 == Package Connectors via the Terminal
 
 . Open your IDE and ensure that you have opened the root folder of your connector project.
 +
-If necessary, go to *File* > *Open Folder* and select the appropriate folder. The Explorer view should display top-level items. Make sure you aren't inside the `connectivity-model` or `anypoint-connector-model` subfolders.
+If necessary, go to *File* > *Open Folder* and select the appropriate folder. The Explorer view should display top-level items. Make sure you aren't inside the `connectivity-model`, `anypoint-connector-model`, or `flow-connector-model` subfolders.
 . Go to *Terminal* > *New Terminal*.
 . In the terminal, run this command:
 +
