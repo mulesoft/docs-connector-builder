@@ -67,7 +67,7 @@ To install and use a custom Flow connector, a customer org needs:
 
 NOTE: When you author DataWeave transformations in Connector Builder, follow the guidelines in Secure Coding for Custom Flow Connectors. The AgentExchange Security Review checks for the issues described there, so addressing them during authoring avoids submission rejection later.
 
-To build and package a custom Flow connector for AgentExchange, you need:
+To build and deploy a custom Flow connector for AgentExchange, you need:
 
 * https://code.visualstudio.com/download[VS Code] 1.99.3 and later, or https://cursor.com/docs[Cursor] 1.5.9 and later
 +
