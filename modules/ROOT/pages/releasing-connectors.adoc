@@ -48,7 +48,7 @@ In both cases, the connector runs in the customer org and requires the MuleSoft 
 
 . Package Your Connector as a Standalone Managed 2GP Solution
 +
-Package your custom connector as a standalone 2GP managed package, one package per connector, with no other app content. This is the format AgentExchange requires for distribution and installation in subscriber orgs. For more information, see <URL TBD by Joanna>.
+Package your custom connector as a standalone 2GP managed package, one package per connector, with no other app content. This is the format AgentExchange requires for distribution and installation in subscriber orgs. For more information, see https://developer.salesforce.com/docs/atlas.en-us.pkg2_dev.meta/pkg2_dev/dev2gp_package_custom_flow_connector.htm[Package a Custom Flow Connector as a 2GP Managed Package].
 . Check Listing Readiness
 +
 Before submitting your custom Flow connector for security review, verify that your package version is ready to be listed. For more information, see https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/security_review_create_secure_solution.htm[Security Requirements for AppExchange Partners and Solutions].
