@@ -65,7 +65,7 @@ To install and use a custom Flow connector, a customer org needs:
 
 ===== Partner Requirements (For ISVs Publishing to AgentExchange)
 
-NOTE: When you author DataWeave transformations in Connector Builder, follow the guidelines in https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/security_review_create_secure_solution.htm[Secure Coding for Custom Flow Connectors]. The AgentExchange Security Review checks for the issues described there, so addressing them during authoring avoids submission rejection later.
+NOTE: When you author DataWeave transformations in Connector Builder, follow the guidelines in https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/secure_code_secure_your_flow_connectors.htm?_gl=1*1uebz97*_gcl_au*MTM3MjI0OTYwMi4xNzgyNzQ1NDg1&_ga=2.125517833.262923442.1782745486-378704745.1773886412[Secure Your Flow Connectors]. The AgentExchange Security Review checks for the issues described there, so addressing them during authoring avoids submission rejection later.
 
 To build and deploy a custom Flow connector for AgentExchange, you need:
 
