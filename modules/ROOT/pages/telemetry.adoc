@@ -1,0 +1,57 @@
+= Telemetry in Connector Builder
+
+Connector Builder can send a small amount of usage telemetry that helps improve the product. Telemetry helps Salesforce understand which features are most useful and where to invest. It's limited to product-usage signals and doesn't collect the content you work on.
+
+Telemetry runs in the background and never affects your work. If telemetry can't be collected or sent for any reason, Connector Builder skips it and continues normally.
+
+== Telemetry Data
+
+This table shows what Connector Builder reports and what it doesn't.
+
+[cols="1,1", options="header"]
+|===
+| What Connector Builder Reports | What Connector Builder Doesn't Collect
+
+a|
+* That a connector project was successfully created.
+* Where you started the action: the Connector Builder UI in VS Code or the `uc_generate_connector` MCP tool. Connector Builder records this as a category, not free-form text.
+* The installed version of the Connector Builder extension, so that Salesforce can understand usage for each release.
+
+a|
+* Source code or connector definitions, including generated project contents and draft project contents beyond how the project was started.
+* API specification contents, including source code, schemas, and examples.
+* Names and identifiers from your project, including connector names, vendor names, package names, and group IDs.
+* API endpoint URLs written into the generated project.
+* File or folder paths, including project, workspace, and output locations.
+* Personal, company, or account identifiers, including your identity, your Salesforce org, your user account, and your machine.
+* Credentials or secrets, including tokens, keys, and passwords.
+* Error details or free-form text, including error messages, stack traces, log output, and text that you type.
+|===
+
+Connector Builder counts only successful actions. If a project isn't created because the operation fails or is interrupted, Connector Builder reports nothing. It doesn't count attempts or failures as usage.
+
+== Enable or Disable Telemetry
+
+Connector Builder follows the standard VS Code telemetry setting (`telemetry.telemetryLevel`) and checks it before sending anything. Connector Builder has no separate telemetry switch, so this setting is the single control. To enable or disable telemetry, set the telemetry level to one of these values:
+
+* `off`: Connector Builder sends nothing.
+* `crash`, `error`, or `all`: VS Code sends increasingly detailed telemetry. Connector Builder sends its usage signals at any of these levels.
+
+Set the telemetry level in the Settings UI or in `settings.json`. The change applies immediately. You don't need to reload or restart VS Code. For more information, see the https://code.visualstudio.com/docs/configure/telemetry[VS Code telemetry documentation].
+
+=== Use the Settings UI
+
+. Go to VS Code Settings.
+. Search for `Telemetry`.
+. Set *Telemetry: Telemetry Level* to your preferred value.
+
+=== Use settings.json
+
+To set the telemetry level in `settings.json`, add the `telemetry.telemetryLevel` property:
+
+[source,json]
+----
+{
+  "telemetry.telemetryLevel": "off"
+}
+----

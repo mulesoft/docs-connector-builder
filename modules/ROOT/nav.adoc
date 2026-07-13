@@ -13,6 +13,7 @@
 * xref:packaging-connectors.adoc[Packaging Connectors]
 * xref:releasing-connectors.adoc[Releasing Connectors]
 * xref:running-connectors.adoc[Running Connectors]
+* xref:telemetry.adoc[Telemetry]
 * xref:troubleshooting.adoc[Troubleshooting]
 * xref:limitations.adoc[Limitations]
 * xref:best-practices.adoc[Best Practices]
