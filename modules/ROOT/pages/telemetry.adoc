@@ -2,7 +2,7 @@
 
 Connector Builder can send a small amount of usage telemetry that helps Salesforce understand which features are most useful and where to invest. It's limited to product-usage signals and doesn't collect the content you work on.
 
-Telemetry runs in the background and never affects your work. If telemetry can't be collected or sent for any reason, Connector Builder skips it and continues normally.
+Telemetry runs in the background and never affects your work. If Connector Builder can't collect or send telemetry for any reason, Connector Builder skips it and continues normally.
 
 == Telemetry Data
 
