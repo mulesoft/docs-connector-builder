@@ -25,6 +25,8 @@ OAuth2BrowserFlow authentication is the authorization code grant type, which is 
 +
 OAuth2ClientCredentials authentication obtains an access token from a user-defined path.
 
+NOTE: Custom Flow connectors support only the *ApiKey*, *Basic*, and *Bearer* authentication types.
+
 include::partial$ui-versus-linkweave.adoc[]
 
 == Define Connections Using the UI
